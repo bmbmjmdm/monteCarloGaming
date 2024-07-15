@@ -45,6 +45,10 @@ export type GoalHistoryType =  Record<string, {
     scoreFromGamesWhenPassed: number,
     average?: number,
   }> 
+  relationships?: Record<string, {
+    positiveTogether: number,
+    negativeTogether: number
+  }>
 }>
 
 export type BoardHistoryType = Record<Entity, BoardEntity>[]

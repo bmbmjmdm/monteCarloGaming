@@ -39,7 +39,6 @@ if (isMainThread) {
 
 
 
-
 function gatherResults(goalHistoryArr: GoalHistoryType[], boardHistoryArr:BoardHistoryType[]) {
   // combine all goal history into one object
   const goalHistory: GoalHistoryType = goalHistoryArr.reduce((acc, curHistory) => {
@@ -69,79 +68,127 @@ function gatherResults(goalHistoryArr: GoalHistoryType[], boardHistoryArr:BoardH
     return acc;
   }, [] as BoardHistoryType);
 
-
-  const eventNames = new Set<string>()
+  const eventNames = new Set<string>();
   // go through goalHistory and add the average score for each goal and event
   for (const goal of Object.values(goalHistory)) {
-    goal.average = goal.points / goal.played
-    console.log(goal.played)
+    goal.average = goal.points / goal.played;
     for (const event of Object.values(goal.events)) {
-      event.average = event.scoreFromGamesWhenPassed / event.seenPassed
-      eventNames.add(event.name)
+      event.average = event.scoreFromGamesWhenPassed / event.seenPassed;
+      eventNames.add(event.name);
     }
   }
   
-  // now go through and make an object where the keys are event names and the values are how many times that event appears in the top 5 events for each goal
-  // first initialize the object with all the event names set to 0
-  const topEvents: Record<string, {positiveGoals: number, negativeGoals: number, positiveSignificance: number, negativeSignificance: number}> = {}
+  // now go through and make an object where the keys are event names and the values are how many times that event appears in the top events for each goal
+  const topEvents: Record<string, {positiveGoals: Record<string, number>, negativeGoals: Record<string, number>, positiveSignificance: number, negativeSignificance: number}> = {};
   for (const eventName of eventNames) {
     topEvents[eventName] = {
-      positiveGoals: 0,
-      negativeGoals: 0,
+      positiveGoals: {},
+      negativeGoals: {},
       positiveSignificance: 0,
       negativeSignificance: 0
-    }
+    };
   }
+
+  // for each goal, go through the events and add the significance of the event to the topEvents object
+  // significance is how much an event impacts a goal's score.
+  // positive significance is how much the event helps the goal
+  // negative significance is how much the event hurts the goal
+  // positiveGoals and negativeGoals keep track of how much this goal is helped/hurt by each event
   for (const goal of Object.values(goalHistory)) {
-    // sort events within each goal from highest score to lowest
-    const sortedEvents = Object.values(goal.events).sort((a, b) => b.average! - a.average!)
-    // ok each goal can distribute 0-1 to each event
-    // this is based on its position in the list (higher events are worth more)
-    // and its average score difference from the goal's average score (higher events are worth more)
+    const sortedEvents = Object.values(goal.events).sort((a, b) => b.average! - a.average!);
+    const [maxEvent, minEvent] = sortedEvents.reduce((acc, event) => [Math.max(acc[0], event.average!), Math.min(acc[1], event.average!)], [-Infinity, Infinity]);
+    const range = maxEvent - minEvent;
 
-    const [maxEvent, minEvent] = sortedEvents.reduce((acc, event) => { 
-      return [Math.max(acc[0], event.average!), Math.min(acc[1], event.average!)]
-    }, [-Infinity, Infinity])
-
-    for (let i = 0; i < sortedEvents.length; i++) {
-      const event = sortedEvents[i]
-      /*goal average score 10
-      event average scores 0 3 7 10 13
-      0 should give a "significance" of -1
-      3 should give a "significance" of around -0.7
-      7 should give around -0.3
-      10 should give 0
-      13 should give 0.3
-      so on. It should never return more than 1 or less than -1
-      */
-      const range = maxEvent - minEvent;
+    for (const event of sortedEvents) {
       const scaledValue = (event.average! - goal.average!) / (range / 2);
       const significance = Math.tanh(scaledValue);
-      topEvents[event.name] = {
-        positiveGoals: topEvents[event.name].positiveGoals + (significance > 0 ? 1 : 0),
-        negativeGoals: topEvents[event.name].negativeGoals + (significance < 0 ? 1 : 0),
-        positiveSignificance: topEvents[event.name].positiveSignificance + (significance > 0 ? significance : 0),
-        negativeSignificance: topEvents[event.name].negativeSignificance + (significance < 0 ? significance : 0)        
+      if (significance > 0) {
+        topEvents[event.name].positiveGoals[goal.name] = significance;
+        topEvents[event.name].positiveSignificance += significance;
+      } else {
+        topEvents[event.name].negativeGoals[goal.name] = significance;
+        topEvents[event.name].negativeSignificance += significance;
       }
     }
   }
-  const topEventsArray = Object.entries(topEvents).sort((a, b) => b[1].significance - a[1].significance)
+
+  const topEventsArray = Object.entries(topEvents).sort((a, b) => (b[1].positiveSignificance + b[1].negativeSignificance) - (a[1].positiveSignificance + a[1].negativeSignificance));
   for (const event of topEventsArray) {
-    const [eventName, {positiveGoals, negativeGoals, positiveSignificance, negativeSignificance}] = event
+    const [eventName, {positiveGoals, negativeGoals, positiveSignificance, negativeSignificance}] = event;
     const lines =[
       eventName,
       "{",
-      "positiveGoals = " + positiveGoals,
-      "negativeGoals = " + negativeGoals,
+      "positiveGoals = " + Object.entries(positiveGoals).join(', '),
+      "negativeGoals = " + Object.entries(positiveGoals).join(', '),
       "positiveSignificance = " + positiveSignificance,
       "negativeSignificance = " + negativeSignificance,
       "}"
-    ].join("\n")
-    console.log(lines)
+    ].join("\n");
+    console.log(lines);
   }
-  // print the average score for each goal
-  const topGoals = Object.values(goalHistory).sort((a, b) => b.average! - a.average!)
+
+  // Initialize goal relationships
+  for (const goal of Object.values(goalHistory)) {
+    goal.relationships = {};
+    for (const otherGoal of Object.values(goalHistory)) {
+      if (goal.name !== otherGoal.name) {
+        goal.relationships[otherGoal.name] = { positiveTogether: 0, negativeTogether: 0 };
+      }
+    }
+  }
+
+  // Update goal relationships:
+  // Each goal sees how much they want to team up with another goal for each event
+  // aka if we both want this event to happen, how important is it for me? therefore, I can update how much this shared interest strengthens our relationship
+  // this works in the negative direction too; how much does this shared event hurt us both?
+  for (const event of topEventsArray) {
+    const [eventName, {positiveGoals, negativeGoals}] = event;
+    for (const posGoal in positiveGoals) {
+      for (const otherGoal in positiveGoals) {
+        if (posGoal !== otherGoal) {
+          goalHistory[posGoal].relationships![otherGoal].positiveTogether += positiveGoals[posGoal];
+        }
+      }
+    }
+    for (const negGoal in negativeGoals) {
+      for (const otherGoal in negativeGoals) {
+        if (negGoal !== otherGoal) {
+          goalHistory[negGoal].relationships![otherGoal].negativeTogether  += negativeGoals[negGoal];
+        }
+      }
+    }
+  }
+
+  // Print the average score and relationships for each goal
+  const topGoals = Object.values(goalHistory).sort((a, b) => b.average! - a.average!);
   for (const goal of topGoals) {
-    console.log(goal.name, goal.average)
+    console.log(goal.name, goal.average);
+    console.log("Relationships:");
+    for (const [otherGoal, {positiveTogether, negativeTogether}] of Object.entries(goal.relationships!)) {
+      console.log(`  ${otherGoal}: { positiveTogether: ${positiveTogether}, negativeTogether: ${negativeTogether} }`);
+    }
   }
 }
+
+/*
+==========BALANCING GOALS
+
+so in an ideal world:
+- each event has positiveGoals === negativeGoals
+- each event has positiveSignificance === negativeSignificance
+- each event has similar, but doesn't need to be equal, positiveSignificance
+- each event has similar, but doesn't need to be equal, negativeSignificance
+- each goal has the same or similar number for positiveTogether and negativeTogether for each other goal
+
+
+
+=========Balancing notes
+
+a very high positiveTogether and/or very low negativeTogether mean that goals are allies
+the closer to 0 these are the closer those goals are enemies
+positive/negative doesnt matter here, just how far it is from 0
+
+a very high positiveSignificance indicates what? 
+that these events are aiding their supported goals more than others
+vice versa for negative
+*/
