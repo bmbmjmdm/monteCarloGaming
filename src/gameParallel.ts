@@ -119,7 +119,7 @@ function gatherResults(goalHistoryArr: GoalHistoryType[], boardHistoryArr:BoardH
       eventName,
       "{",
       "positiveGoals = " + Object.entries(positiveGoals).join(', '),
-      "negativeGoals = " + Object.entries(positiveGoals).join(', '),
+      "negativeGoals = " + Object.entries(negativeGoals).join(', '),
       "positiveSignificance = " + positiveSignificance,
       "negativeSignificance = " + negativeSignificance,
       "}"
