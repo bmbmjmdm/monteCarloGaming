@@ -1,6 +1,6 @@
 import { Worker, isMainThread, parentPort } from 'worker_threads';
 import os from 'os';
-import { BoardHistoryType, game, GoalHistoryType } from './game';
+import { BoardHistoryType, Entity, game, GoalHistoryType } from './game';
 
 if (isMainThread) {
   const numCPUs = os.cpus().length;
@@ -64,9 +64,29 @@ function gatherResults(goalHistoryArr: GoalHistoryType[], boardHistoryArr:BoardH
 
   // combine all board history into one object
   const boardHistory: BoardHistoryType = boardHistoryArr.reduce((acc, curHistory) => {
-    acc.push(...curHistory)
+      for(const entity of Object.keys(curHistory) as Entity[]) {
+        if (!acc[entity]) {
+          acc[entity] = {
+            points: 0,
+            games: 0,
+            absolutePoint: 0,
+          }
+        }
+        const currenPoints = curHistory[entity].points
+        const currentAbsolutePoint = curHistory[entity].absolutePoint
+        const currentGames = curHistory[entity].games
+        const accumulatedEntity = acc[entity]
+        accumulatedEntity.points += currenPoints
+        accumulatedEntity.games += currentGames
+        accumulatedEntity.absolutePoint += currentAbsolutePoint
+      }
     return acc;
-  }, [] as BoardHistoryType);
+  }, {} as BoardHistoryType);
+
+  for (const entity of Object.keys(boardHistory) as Entity[]) {
+    const entityHistory = boardHistory[entity]
+    console.log(`${entity} has an average score/absoluteScore of \n${entityHistory.points/entityHistory.games}\n${entityHistory.absolutePoint/entityHistory.games}`)
+  }
 
   const eventNames = new Set<string>();
   // go through goalHistory and add the average score for each goal and event
@@ -179,7 +199,7 @@ so in an ideal world:
 - each event has similar, but doesn't need to be equal, positiveSignificance
 - each event has similar, but doesn't need to be equal, negativeSignificance
 - each goal has the same or similar number for positiveTogether and negativeTogether for each other goal
-
+- each entity has an average score of 0 and an average absolute of 2.5
 
 
 =========Balancing notes

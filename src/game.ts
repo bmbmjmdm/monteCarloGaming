@@ -5,7 +5,7 @@ function log (message:string) {
   if (DEBUG) console.log(message)
 }
 
-type Entity = "Scientists" | "Priests" | "Philosophers" | "Trees" | "Animals" | "Druids" | "Wizards" | "Dragons" | "Dwarves" | "Water" | "Fire" | "Earth" | "Sky"
+export type Entity = "Scientists" | "Priests" | "Philosophers" | "Trees" | "Animals" | "Druids" | "Wizards" | "Dragons" | "Dwarves" | "Water" | "Fire" | "Earth" | "Sky"
 
 type GameEvent = {
   name: string,
@@ -51,7 +51,11 @@ export type GoalHistoryType =  Record<string, {
   }>
 }>
 
-export type BoardHistoryType = Record<Entity, BoardEntity>[]
+export type BoardHistoryType = Record<Entity, {
+  games: number,
+  points: number,
+  absolutePoint: number,
+}>
 
 
 export function game() {
@@ -64,7 +68,7 @@ let pile1: GameEvent[] = []
 let pile2: GameEvent[] = []
 let goalDeck: Goal[]
 const goalHistory: GoalHistoryType = {}
-let boardHistory: BoardHistoryType = []
+let boardHistory: BoardHistoryType = {} as BoardHistoryType
 let eventHistory: string[] = []
 
 // example of board
@@ -1127,6 +1131,73 @@ function createBoard() {
       enemies: []
     },
   }
+  if(!boardHistory.Scientists) boardHistory = {
+    'Scientists': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Priests': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Philosophers': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Trees': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Animals': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Druids': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Wizards': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Dragons': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Dwarves': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Water': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Fire': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Earth': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    },
+    'Sky': {
+      games: 0,
+      points: 0,
+      absolutePoint: 0
+    }
+  }
 }
 
 // ==================== History ====================
@@ -1170,7 +1241,13 @@ function recordGoalHistory() {
     }
   }
   // also record board history
-  //boardHistory.push({...board})
+  for(const entity of Object.keys(board) as Entity[]) {
+    const entityValue = board[entity].value
+    const entityHistory = boardHistory[entity]
+    entityHistory.games++
+    entityHistory.points += entityValue
+    entityHistory.absolutePoint += Math.abs(entityValue)
+  }
   // TODO uncomment the above and fix it so we arent keeping track of millions of boards
   // clear events for next game
   eventHistory = []
