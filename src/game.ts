@@ -367,7 +367,7 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A draught plagues the forest, sparks lurk",
+    name: "A drought plagues the forest, prompting druids to seek help from the water god. Sparks lurk...",
     effects: [
       {
         plus: [],
@@ -377,13 +377,21 @@ log("==Creating new deck")
         enemy: []
       },
       {
-        condition: () => board["Fire"].value > 0,
+        condition: () => board["Fire"].value > 0 && (board["Water"].value < 1 || board["Druids"].value < 1),
         plus: [],
         minus: ["Animals", "Druids"],
         attachTo: [],
         ally: [],
         enemy: []
-      }
+      },
+      {
+        condition: () => board["Druids"].value > 0 && board["Water"].value > 0,
+        plus: ["Trees"],
+        minus: [],
+        attachTo: ["Druids"],
+        ally: ["Water"],
+        enemy: []
+      },
     ]
   },
   {
@@ -831,6 +839,378 @@ log("==Creating new deck")
         enemy: []
       }
     ]
+  },
+  {
+    name: "If dwarves dig deep enough, the Earth's belly will beome upset, erupting in volcanoes",
+    effects: [
+      {
+        condition: () => board["Dwarves"].value > 1,
+        plus: ["Fire"],
+        minus: ["Trees", "Druids", "Scientists", "Animals", "Priests", "Philosophers", "Earth", "Wizards"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Philosophers devise a new form of city government, challenging existing power structures.",
+    effects: [
+      {
+        plus: ["Philosophers"],
+        minus: ["Scientists", "Priests"],
+        attachTo: ["Scientists", "Priests"],
+        ally: [],
+        enemy: ["Philosophers"]
+      }
+    ]
+  },
+  {
+    name: "Scientists' inventions make them extremely wealthy, letting them buy the city government",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Philosophers", "Priests"],
+        attachTo: ["Philosophers", "Priests"],
+        ally: [],
+        enemy: ["Scientists"]
+      }
+    ]
+  },
+  {
+    name: "Priests hold a coup with their many followers, taking control of the city government",
+    effects: [
+      {
+        plus: ["Priests"],
+        minus: ["Philosophers", "Scientists"],
+        attachTo: ["Philosophers", "Scientists"],
+        ally: [],
+        enemy: ["Priests"]
+      }
+    ]
+  },
+  {
+    name: "Druidic rituals empower the forest, causing it to expand into nearby territories.",
+    effects: [
+      {
+        plus: ["Trees"],
+        minus: [],
+        attachTo: ["Druids"],
+        ally: ["Trees"],
+        enemy: []
+      },
+      {
+        condition: () => board["Trees"].value > 1,
+        plus: [],
+        minus: ["Scientists", "Priests", "Dwarves", "Wizards"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Druids pray to the water god to heal the forest with rain.",
+    effects: [
+      {
+        condition: () => board["Druids"].value > 0 && board["Water"].value > 0,
+        plus: ["Trees", "Water", "Druids"],
+        minus: [],
+        attachTo: ["Water"],
+        ally: ["Trees"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Scientists develop a strange vaccine, seemingly saving the city and many wild animals.",
+    effects: [
+      {
+        condition: () => Math.random() < 0.5,
+        plus: ["Scientists", "Animals", "Priests", "Philosophers"],
+        minus: [],
+        attachTo: ["Scientists"],
+        ally: ["Animals", "Priests", "Philosophers"],
+        enemy: []
+      },
+      {
+        plus: ["Scientists", "Scientists"],
+        minus: ["Animals", "Priests", "Philosophers"],
+        attachTo: ["Animals", "Priests", "Philosophers"],
+        ally: [],
+        enemy: ["Scientists"]
+      }
+    ]
+  },
+  {
+    name: "Wizards summon a benign comet, causing the sky to light up with strange colors and mystical energy.",
+    effects: [
+      {
+        plus: ["Wizards", "Druids", "Sky"],
+        minus: [],
+        attachTo: ["Sky"],
+        ally: ["Wizards"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship. ",
+    effects: [
+      {
+        plus: [],
+        minus: ["Trees", "Earth", "Druids"],
+        attachTo: ["Earth", "Druids"],
+        ally: ["Druids", "Earth"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Dragons hoard mystical artifacts, drawing the ire of the wizards and the interest of the city.",
+    effects: [
+      {
+        plus: ["Dragons"],
+        minus: [],
+        attachTo: ["Wizards", "Priests"],
+        ally: [],
+        enemy: ["Dragons"]
+      }
+    ]
+  },
+  {
+    name: "Wild animals form a pack and raid the city, driven by hunger and desperation.",
+    effects: [
+      {
+        plus: ["Animals"],
+        minus: ["Priests", "Philosophers", "Scientists"],
+        attachTo: ["Priests", "Philosophers", "Scientists"],
+        ally: [],
+        enemy: ["Animals"]
+      }
+    ]
+  },
+  {
+    name: "The sky god and the fire god clash, causing thunderstorms and wildfires.",
+    effects: [
+      {
+        condition: () => board["Sky"].value > board["Fire"].value,
+        plus: ["Sky"],
+        minus: ["Fire", "Dragons"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Sky"]
+      },
+      {
+        condition: () => board["Fire"].value > board["Sky"].value,
+        plus: ["Fire"],
+        minus: ["Sky", "Trees"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Fire"]
+      },
+      {
+        plus: [],
+        minus: ["Sky", "Fire"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Philosophers write a treatise on the interconnectedness of all mortal beings, influencing various societies.",
+    effects: [
+      {
+        plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
+        minus: [],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control.",
+    effects: [
+      {
+        plus: ["Wizards", "Wizards"],
+        minus: [],
+        attachTo: ["Wizards"],
+        ally: [],
+        enemy: ["Druids", "Dragons"]
+      }
+    ]
+  },
+  {
+    name: "Druids and wizards collaborate to create a protective barrier around the forest.",
+    effects: [
+      {
+        plus: ["Trees", "Animals", "Druids"],
+        minus: [],
+        attachTo: ["Druids"],
+        ally: ["Wizards"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "The water god creates a new river, altering the landscape and the flow of trade.",
+    effects: [
+      {
+        plus: ["Water", "Trees", "Animals", "Priests"],
+        minus: ["Earth"],
+        attachTo: ["Earth"],
+        ally: [],
+        enemy: ["Water"]
+      }
+    ]
+  },
+  {
+    name: "Druids discover ancient texts in the forest, revealing forgotten knowledge about the gods.",
+    effects: [
+      {
+        plus: ["Druids"],
+        minus: [],
+        attachTo: ["Druids"],
+        ally: ["Sky", "Fire", "Water", "Earth"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "A magical storm engulfs the mountain, battering anyone in the sky",
+    effects: [
+      {
+        condition: () => board["Wizards"].value > 1 && board["Dragons"].value > 0,
+        plus: [],
+        minus: ["Dragons", "Wizards"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      },
+      {
+        condition: () => board["Wizards"].value > 1,
+        plus: [],
+        minus: ["Wizards"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      },
+      {
+        condition: () => board["Dragons"].value > 0,
+        plus: [],
+        minus: ["Dragons"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Dwarves uncover an ancient relic that can control dragons, attracting the attention of many",
+    effects: [
+      {
+        plus: ["Dwarves"],
+        minus: ["Dragons"],
+        attachTo: ["Priests", "Wizards", "Druids"],
+        ally: [],
+        enemy: ["Dwarves"]
+      }
+    ]
+  },
+  {
+    name: "Druids casts a spell for nice weather if they're strong enough",
+    effects: [
+      {
+        condition: () => board["Druids"].value > 0,
+        plus: ["Sky", "Druids"],
+        minus: ["Fire", "Water"],
+        attachTo: ["Druids"],
+        ally: ["Sky"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Philosophers and druids form an alliance to protect the forest from industrial expansion by the city.",
+    effects: [
+      {
+        plus: ["Philosophers", "Druids"],
+        minus: ["Scientists"],
+        attachTo: ["Druids", "Philosophers"],
+        ally: ["Trees"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "The water god’s rage causes the city to flood; only the priests can quell them ",
+    effects: [
+      {
+        condition: () => board["Priests"].value < 1,
+        plus: ["Water"],
+        minus: ["Priests", "Philosophers", "Scientists"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      },
+      {
+        plus: [],
+        minus: [],
+        attachTo: ["Water"],
+        ally: ["Priests"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Dwarves, wizards, and dragons compete to harvest a rare magical ore, leading to conflict and sabotage.",
+    effects: [
+      {
+        condition: () => board["Dwarves"].value > board["Wizards"].value && board["Dwarves"].value > board["Dragons"].value,
+        plus: ["Dwarves", "Dwarves"],
+        minus: [],
+        attachTo: ["Dragons", "Wizards"],
+        ally: [],
+        enemy: ["Dwarves"]
+      },
+      {
+        condition: () => board["Dragons"].value > board["Wizards"].value && board["Dragons"].value > board["Dwarves"].value,
+        plus: ["Dragons", "Dragons"],
+        minus: [],
+        attachTo: ["Wizards", "Dwarves"],
+        ally: [],
+        enemy: ["Dragons"]
+      },
+      {
+        condition: () => board["Wizards"].value > board["Dragons"].value && board["Wizards"].value > board["Dwarves"].value,
+        plus: ["Wizards", "Wizards"],
+        minus: [],
+        attachTo: ["Dwarves", "Dragons"],
+        ally: [],
+        enemy: ["Wizards"]
+      },
+      {
+        plus: [],
+        minus: ["Dragons", "Wizards", "Dwarves"],
+        attachTo: [],
+        ally: [],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Scientists discover a way to harness energy from the grand oaks, sparking controversy and protest from druids.",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Trees"],
+        attachTo: ["Druids"],
+        ally: [],
+        enemy: ["Scientists"]
+      }
+    ]
   }
  ]
 }
@@ -944,7 +1324,57 @@ function createGoalDeck() {
       name: "Unrestrained Flames",
       plus: ["Fire"],
       minus: ["Water", "Druids", "Trees"]
-    }
+    },
+    {
+      name: "Orgy",
+      plus: ["Earth", "Water", "Sky"],
+      minus: ["Priests", ]
+    },
+    {
+      name: "Control everything",
+      plus: ["Priests", "Scientists", "Wizards"],
+      minus: ["Animals", "Dragons", "Fire"]
+    },
+    {
+      name: "Grow Nature",
+      plus: ["Earth", "Animals", "Water", "Trees", "Druids"],
+      minus: ["Fire"]
+    },
+    {
+      name: "Screw the old ways",
+      plus: ["Scientists"],
+      minus: ["Dwarves", "Dragons", "Priests", "Animals"]
+    },
+    {
+      name: "Clouds Cloud Minds",
+      plus: [],
+      minus: ["Sky", "Philosophers", "Scientists", "Wizards"]
+    },
+    {
+      name: "Overpowering the weak",
+      plus: ["Priests", "Dragons"],
+      minus: ["Philosophers","Animals"]
+    },
+    {
+      name: "Be Free",
+      plus: ["Philosophers", "Animals"],
+      minus: ["Dwarves", "Priests"]
+    },
+    {
+      name: "Down with hippies and their friends",
+      plus: [],
+      minus: ["Philosophers", "Animals", "Druids", "Trees"]
+    },
+    {
+      name: "New Creatures",
+      plus: ["Animals", "Wizards", "Scientists", "Druids"],
+      minus: []
+    },
+    {
+      name: "Dull Darkness",
+      plus: ["Dwarves",],
+      minus: ["Sky", "Wizards", "Fire"]
+    },
   ]
 }
 
@@ -965,6 +1395,7 @@ function resolveEvents(pile: GameEvent[]) {
   for (const event of pile) {
     //most events have 1 effect without a condition. however if it does have a condition, check that before applying it:
     // If that condition fails, go to the next effect. Otherwise, resolve that effect and dont go to the next effect(s)
+    // Non-conditional effects will always resolve and try to continue to the next effect
     for (const effect of event.effects) {
       if (effect.condition) {
         if (effect.condition()) {
