@@ -1211,7 +1211,307 @@ log("==Creating new deck")
         enemy: ["Scientists"]
       }
     ]
-  }
+  },
+  {
+    name: "Wizards discover an ancient ritual binding them with dragons, granting them shared knowledge and power",
+    effects: [
+      {
+        plus: ["Wizards", "Dragons"],
+        minus: [],
+        attachTo: ["Wizards", "Dragons"],
+        ally: ["Wizards", "Dragons"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Scientists create a new technology that inadvertently causes nearby groves to wither, drawing the ire of druids.",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Trees", "Druids"],
+        attachTo: ["Trees", "Druids"],
+        ally: [],
+        enemy: ["Scientists"]
+      }
+    ]
+  },
+  {
+    name: "Dragons share ancient wisdom with philosophers, enlightening them with the secrets of fire's destructive and creative forces.",
+    effects: [
+      {
+        plus: ["Philosophers", "Fire"],
+        minus: [],
+        attachTo: ["Philosophers"],
+        ally: ["Dragons"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Priests and Wizards join forces in a powerful ritual, channeling the divine and arcane together, while curious creatures join.",
+    effects: [
+      {
+        plus: ["Priests", "Wizards", "Animals"],
+        minus: [],
+        attachTo: ["Priests", "Wizards"],
+        ally: ["Priests", "Wizards"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Dragons, in pursuit of a hidden treasure, invade the forest, clashing with druids and their animal allies.",
+    effects: [
+      {
+        plus: ["Dragons"],
+        minus: ["Trees", "Druids", "Animals"],
+        attachTo: ["Trees", "Druids", "Animals"],
+        ally: [],
+        enemy: ["Dragons"]
+      }
+    ]
+  },
+  {
+    name: "A comet foretold by Wizards illuminates the sky, filling it and philosophers with cosmic wisdom.",
+    effects: [
+      {
+        plus: ["Philosophers", "Sky"],
+        minus: [],
+        attachTo: ["Sky"],
+        ally: ["Wizards", "Philosophers"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "In a desperate act, priests invoke the fire god to smite the earth, causing devastation but granting them divine favor.",
+    effects: [
+      {
+        plus: ["Priests", "Fire"],
+        minus: ["Earth"],
+        attachTo: ["Earth"],
+        ally: [],
+        enemy: ["Fire"]
+      }
+    ]
+  },
+  {
+    name: "Wizards conduct a dangerous ritual to harness the power of the fire god, enhancing their spells with fiery potency.",
+    effects: [
+      {
+        plus: ["Wizards", "Fire"],
+        minus: [],
+        attachTo: ["Wizards"],
+        ally: ["Fire"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Philosophers restore ancient, sacred groves, bringing new life to the earth.",
+    effects: [
+      {
+        plus: ["Earth", "Trees"],
+        minus: [],
+        attachTo: ["Earth", "Trees"],
+        ally: ["Philosophers"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Dragons fly into the heart of a tempest, eating the raging elements of sky and fire.",
+    effects: [
+      {
+        plus: ["Dragons"],
+        minus: ["Sky", "Fire"],
+        attachTo: ["Sky", "Fire"],
+        ally: [],
+        enemy: ["Dragons"]
+      }
+    ]
+  },
+  {
+    name: "Priests assemble their congregation to clean the polluted waters, restoring balance to the seas.",
+    effects: [
+      {
+        plus: ["Water"],
+        minus: [],
+        attachTo: ["Water"],
+        ally: ["Priests"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "The earth churns in its sleep, uprooting trees and dwarven tunnels",
+    effects: [
+      {
+        plus: [],
+        minus: ["Dwarves", "Trees"],
+        attachTo: ["Dwarves", "Trees"],
+        ally: [],
+        enemy: ["Earth"]
+      }
+    ]
+  },
+  {
+    name: "A fierce battle erupts between wizards and dragons in the sky, scarring the ozone.",
+    effects: [
+      {
+        plus: [],
+        minus: ["Wizards", "Dragons", "Sky"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Wizards", "Dragons"]
+      }
+    ]
+  },
+  {
+    name: "Dwarves grow bold and venture out of the mountains, clearing vast swaths of forest and their druid protectors",
+    effects: [
+      {
+        plus: ["Dwarves"],
+        minus: ["Trees", "Druids"],
+        attachTo: ["Trees", "Druids"],
+        ally: [],
+        enemy: ["Dwarves"]
+      }
+    ]
+  },
+  {
+    name: "Priests chant down the fire god, protecting the forest from a consuming blaze.",
+    effects: [
+      {
+        plus: ["Priests", "Trees"],
+        minus: ["Fire"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Priests"]
+      }
+    ]
+  },
+  {
+    name: "Wizards create brews in the bellies of great oaks, fueling their spells with primal energy, which fuel the trees in turn. ",
+    effects: [
+      {
+        plus: ["Wizards", "Trees"],
+        minus: [],
+        attachTo: ["Trees"],
+        ally: ["Wizards"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home.",
+    effects: [
+      {
+        plus: ["Water"],
+        minus: ["Dwarves"],
+        attachTo: ["Dwarves"],
+        ally: [],
+        enemy: ["Water"]
+      }
+    ]
+  },
+  {
+    name: "Philosophers and Scientists collaborate on a study of the stars, unlocking new knowledge and flattering the sky. ",
+    effects: [
+      {
+        plus: ["Philosophers", "Scientists"],
+        minus: [],
+        attachTo: ["Sky"],
+        ally: ["Philosophers", "Scientists"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "After years of conflict, dwarves and dragons agree to a truce, sharing the mountain’s resources.",
+    effects: [
+      {
+        plus: ["Dwarves", "Dragons"],
+        minus: [],
+        attachTo: ["Earth"],
+        ally: [],
+        enemy: ["Dwarves", "Dragons"]
+      }
+    ]
+  },
+  {
+    name: "The fire and earth gods churn the planet's core, making hot and hard love",
+    effects: [
+      {
+        plus: ["Fire", "Earth"],
+        minus: [],
+        attachTo: ["Earth"],
+        ally: ["Fire"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "A torrential storm washes over the world, filling the rivers, lakes, and clouds. ",
+    effects: [
+      {
+        plus: ["Sky", "Water"],
+        minus: [],
+        attachTo: ["Water"],
+        ally: ["Sky"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "Philosophers hold a grand debate on the ethics of using fire’s destructive power, challenging the influence of the Fire God",
+    effects: [
+      {
+        plus: ["Philosophers"],
+        minus: ["Fire"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Philosophers"]
+      }
+    ]
+  },
+  {
+    name: "Wizards imbue wild animals with magical abilities, because why not",
+    effects: [
+      {
+        plus: ["Animals"],
+        minus: [],
+        attachTo: ["Animals"],
+        ally: ["Wizards"],
+        enemy: []
+      }
+    ]
+  },
+  {
+    name: "As a catastrophic storm approaches, Priests and Philosophers join forces to combat the sky's madness",
+    effects: [
+      {
+        plus: ["Priests", "Philosophers"],
+        minus: ["Sky"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Philosophers"]
+      }
+    ]
+  },
+  {
+    name: "The mountain residents grow restless in the sweltering heat, curse the sun, and erupt in aimless violence",
+    effects: [
+      {
+        plus: [],
+        minus: ["Dragons", "Dwarves", "Wizards"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Dragons", "Dwarves", "Wizards"]
+      }
+    ]
+  },
  ]
 }
 

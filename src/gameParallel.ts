@@ -211,4 +211,7 @@ positive/negative doesnt matter here, just how far it is from 0
 a very high positiveSignificance indicates what? 
 that these events are aiding their supported goals more than others
 vice versa for negative
+
+THIS DOES A GREAT JOB BALANCING:
+https://chatgpt.com/c/b36dce43-c6ba-4092-a06f-5b9291a097fb
 */
