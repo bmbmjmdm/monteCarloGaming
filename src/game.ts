@@ -367,29 +367,29 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A drought plagues the forest, prompting druids to seek help from the water god. Sparks lurk...",
+    name: "A drought plagues the forest, prompting druids to seek help from the water god. The fire god licks its lips with sparks on dry wood",
     effects: [
       {
         plus: [],
-        minus: ["Trees"],
+        minus: ["Trees", "Water"],
         attachTo: [],
         ally: [],
         enemy: []
       },
       {
         condition: () => board["Fire"].value > 0 && (board["Water"].value < 1 || board["Druids"].value < 1),
-        plus: [],
+        plus: ["Fire"],
         minus: ["Animals", "Druids"],
-        attachTo: [],
+        attachTo: ["Druids", "Animals", "Trees"],
         ally: [],
-        enemy: []
+        enemy: ["Fire"]
       },
       {
         condition: () => board["Druids"].value > 0 && board["Water"].value > 0,
-        plus: ["Trees"],
+        plus: ["Trees", "Water"],
         minus: [],
-        attachTo: ["Druids"],
-        ally: ["Water"],
+        attachTo: [],
+        ally: [],
         enemy: []
       },
     ]
@@ -451,36 +451,36 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Dwarves pray to distant gods for new ore",
+    name: "As the Earth turns its back on the Dwarves in their time of need, the dwarves pray to distant gods for new ore and revenge.",
     effects: [
       {
         condition: () => Math.random() > 0.5,
-        plus: ["Dwarves", "Dwarves", "Earth", "Earth"],
-        minus: [],
-        attachTo: [],
+        plus: ["Dwarves"],
+        minus: ["Earth"],
+        attachTo: ["Dwarves"],
         ally: [],
-        enemy: []
+        enemy: ["Earth"]
       },
       {
         plus: [],
         minus: ["Dwarves", "Earth"],
-        attachTo: [],
+        attachTo: ["Dwarves"],
         ally: [],
-        enemy: []
+        enemy: ["Earth"]
       }
     ]
   },
   {
-    name: "If things are warm enough, iceburgs melt, raising the sea",
+    name: "During the winter solstice, druids call forth a powerful snow, freezing the lakes and kindling.",
     effects: [
       {
-        condition: () => board["Fire"].value > 0,
-        plus: ["Water"],
-        minus: [],
-        attachTo: [],
+        plus: [],
+        minus: ["Water", "Fire"],
+        attachTo: ["Water", "Fire"],
         ally: [],
-        enemy: []
-      }
+        enemy: ["Druids"]
+      },
+
     ]
   },
   {
@@ -532,14 +532,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "The planets align, empowering all the gods",
+    name: "The planets align in the sky, demanding all other gods pay tribute. Druids curse it, call it an omen.",
     effects: [
       {
-        plus: ["Water", "Fire", "Earth", "Sky"],
-        minus: [],
-        attachTo: [],
+        plus: ["Sky"],
+        minus: ["Water", "Fire", "Earth"],
+        attachTo: ["Sky"],
         ally: [],
-        enemy: []
+        enemy: ["Druids"]
       }
     ]
   },
@@ -576,17 +576,17 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A strange disease spreads through the wild animals, threatening the city as well",
+    name: "A strange disease spreads through the wild animals, threatening the city as well. The scientists try to help",
     effects: [
       {
         plus: [],
         minus: ["Animals"],
-        attachTo: [],
-        ally: [],
+        attachTo: ["Animals"],
+        ally: ["Scientists"],
         enemy: []
       },
       {
-        condition: () => board["Animals"].allies.includes("Scientists") || board["Animals"].allies.includes("Priests") || board["Animals"].allies.includes("Philosophers"),
+        condition: () => board["Animals"].allies.filter(ally => ally === "Scientists").length > 1 || board["Animals"].allies.includes("Priests") || board["Animals"].allies.includes("Philosophers"),
         plus: [],
         minus: ["Scientists", "Priests", "Philosophers"],
         attachTo: [],
@@ -596,22 +596,22 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A draught plagues the city, sparks lurk",
+    name: "The water god is weakened by a nightmare of the fire god, causing a drought to plague the city. Sparks lurk",
     effects: [
       {
         condition: () => board["Fire"].value > 1,
         plus: [],
-        minus: ["Priests", "Philosophers", "Scientists"],
-        attachTo: [],
+        minus: ["Water", "Priests", "Philosophers", "Scientists"],
+        attachTo: ["Water"],
         ally: [],
-        enemy: []
+        enemy: ["Fire"]
       },
       {
         plus: [],
-        minus: [["Priests", "Philosophers", "Scientists"]],
-        attachTo: [],
+        minus: ["Water", ["Priests", "Philosophers", "Scientists"]],
+        attachTo: ["Water"],
         ally: [],
-        enemy: []
+        enemy: ["Fire"]
       }
     ]
   },
@@ -696,14 +696,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Solar flares stoke many flames, disrupt electronics",
+    name: "Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge... ",
     effects: [
       {
         plus: ["Fire"],
         minus: ["Scientists"],
-        attachTo: [],
+        attachTo: ["Scientists"],
         ally: [],
-        enemy: []
+        enemy: ["Fire"]
       }
     ]
   },
@@ -760,45 +760,45 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A solar eclipse weakens the fire god, frightens animals",
+    name: "A solar eclipse weakens the fire god, frightens animals. They're not so bright, so they think the trees are to blame.",
     effects: [
       {
         plus: [],
         minus: ["Fire", "Animals"],
-        attachTo: [],
+        attachTo: ["Animals"],
         ally: [],
-        enemy: []
+        enemy: ["Trees"]
       }
     ]
   },
   {
-    name: "A scientist's experiment goes wrong and erupts in flames in the city",
+    name: "A scientist's experiment goes wrong and erupts in flames in the city. Philosopher's endless critiqueing doesn't help.",
     effects: [
       {
         plus: ["Fire"],
         minus: ["Scientists"],
-        attachTo: [],
+        attachTo: ["Scientists"],
         ally: [],
-        enemy: []
+        enemy: ["Philosophers"]
       }
     ]
   },
   {
-    name: "Dwarves unearth a slumbering demon, trying to enslave it before it awakens",
+    name: "Dwarves unearth a slumbering demon, trying to enslave it before it awakens. They enlist the help of scientists, and promise them a favor.",
     effects: [
       {
-        condition: () => board["Dwarves"].value > 1,
-        plus: ["Dwarves", "Dwarves"],
+        condition: () => board["Dwarves"].value > 1 || board["Scientists"].value > 1,
+        plus: ["Dwarves"],
         minus: [],
-        attachTo: [],
-        ally: [],
+        attachTo: ["Dwarves"],
+        ally: ["Scientists"],
         enemy: []
       },
       {
         plus: [],
-        minus: ["Dwarves", "Dwarves"],
-        attachTo: [],
-        ally: [],
+        minus: ["Dwarves"],
+        attachTo: ["Dwarves"],
+        ally: ["Scientists"],
         enemy: []
       }
     ]
@@ -816,15 +816,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druids and priests pray to the planets",
+    name: "Druids and priests pray to to the Earth for harvest",
     effects: [
       {
-        condition: () => Math.random() < 0.5,
-        plus: ["Druids", "Priests", "Druids", "Priests"],
+        plus: ["Druids", "Priests"],
         minus: [],
-        attachTo: [],
+        attachTo: ["Druids", "Priests"],
         ally: [],
-        enemy: []
+        enemy: ["Earth"]
       }
     ]
   },
@@ -833,23 +832,23 @@ log("==Creating new deck")
     effects: [
       {
         plus: [],
-        minus: ["Trees", "Scientists", "Dwarves"],
-        attachTo: [],
+        minus: ["Trees", "Dwarves"],
+        attachTo: ["Trees", "Dwarves"],
         ally: [],
-        enemy: []
+        enemy: ["Earth"]
       }
     ]
   },
   {
-    name: "If dwarves dig deep enough, the Earth's belly will beome upset, erupting in volcanoes",
+    name: "If dwarves dig deep enough, they'll upset the Earth's belly, and the fire god will see their time to strike, causing it to erupt in volcanoes.",
     effects: [
       {
         condition: () => board["Dwarves"].value > 1,
         plus: ["Fire"],
         minus: ["Trees", "Druids", "Scientists", "Animals", "Priests", "Philosophers", "Earth", "Wizards"],
-        attachTo: [],
+        attachTo: ["Earth"],
         ally: [],
-        enemy: []
+        enemy: ["Fire"]
       }
     ]
   },
@@ -910,12 +909,12 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druids pray to the water god to heal the forest with rain.",
+    name: "Druids pray to the water god to douse fires and heal the forest with rain.",
     effects: [
       {
-        condition: () => board["Druids"].value > 0 && board["Water"].value > 0,
+        condition: () => board["Druids"].value > 0 || board["Water"].value > 0,
         plus: ["Trees", "Water", "Druids"],
-        minus: [],
+        minus: ["Fire"],
         attachTo: ["Water"],
         ally: ["Trees"],
         enemy: []
@@ -1012,9 +1011,9 @@ log("==Creating new deck")
       {
         plus: [],
         minus: ["Sky", "Fire"],
-        attachTo: [],
+        attachTo: ["Sky", "Fire"],
         ally: [],
-        enemy: []
+        enemy: ["Sky", "Fire"]
       }
     ]
   },
@@ -1024,8 +1023,8 @@ log("==Creating new deck")
       {
         plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
         minus: [],
-        attachTo: [],
-        ally: [],
+        attachTo: ["Dwarves", "Animals", "Priests"],
+        ally: ["Dwarves", "Animals", "Priests"],
         enemy: []
       }
     ]
@@ -1034,7 +1033,7 @@ log("==Creating new deck")
     name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control.",
     effects: [
       {
-        plus: ["Wizards", "Wizards"],
+        plus: ["Wizards"],
         minus: [],
         attachTo: ["Wizards"],
         ally: [],
@@ -1079,31 +1078,31 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A magical storm engulfs the mountain, battering anyone in the sky",
+    name: "A druid conjures a magical storm to engulf the mountain, battering anyone in the sky",
     effects: [
       {
         condition: () => board["Wizards"].value > 1 && board["Dragons"].value > 0,
         plus: [],
         minus: ["Dragons", "Wizards"],
-        attachTo: [],
+        attachTo: ["Dragons", "Wizards"],
         ally: [],
-        enemy: []
+        enemy: ["Druids"]
       },
       {
         condition: () => board["Wizards"].value > 1,
         plus: [],
         minus: ["Wizards"],
-        attachTo: [],
+        attachTo: ["Wizards"],
         ally: [],
-        enemy: []
+        enemy: ["Druids"]
       },
       {
         condition: () => board["Dragons"].value > 0,
         plus: [],
         minus: ["Dragons"],
-        attachTo: [],
+        attachTo: ["Dragons"],
         ally: [],
-        enemy: []
+        enemy: ["Druids"]
       }
     ]
   },
@@ -1151,9 +1150,9 @@ log("==Creating new deck")
         condition: () => board["Priests"].value < 1,
         plus: ["Water"],
         minus: ["Priests", "Philosophers", "Scientists"],
-        attachTo: [],
+        attachTo: ["Priests"],
         ally: [],
-        enemy: []
+        enemy: ["Water"]
       },
       {
         plus: [],
@@ -1465,7 +1464,7 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Philosophers hold a grand debate on the ethics of using fire’s destructive power, challenging the influence of the Fire God",
+    name: "Philosophers hold a grand debate on the ethics of using fire’s destructive power",
     effects: [
       {
         plus: ["Philosophers"],
