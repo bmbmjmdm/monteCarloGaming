@@ -255,112 +255,121 @@ with 13 entities, that means each entity should average out to:
 4 allies
 4 enemies
 8 attachTo
-these dont quite add up with the numbers from my script in that allies/enemies/attachTo it seems theres more than should be possible (should average 8 attachTo since only 100 attachments can happen, but the average is 9 or so I think), so have to look into that a bit 
+these dont quite add up with the numbers from my script in that allies/enemies/attachTo it seems theres more than should be possible (should average 8 attachTo since only 100 attachments can happen, but the average is 10), so have to look into that a bit 
 
 We should first focus on getting these internally balanced (each entity has a total score of 0), then focus on getting them balanced with each other (closer numbers to 10,10,5,5)
-
-=============================
-Scientists:
-  Plus: 12
-  Minus: 12
-  Ally: 4.5
-  Enemy: 7
-  AttachTo: 10
-  Total Score: -2.5
 =============================
 Earth:
-  Plus: 5
-  Minus: 8.5
-  Ally: 4.5
-  Enemy: 3
-  AttachTo: 12.5
-  Total Score: -2
-=============================
-Dwarves:
-  Plus: 8.5
-  Minus: 7.5
-  Ally: 1
-  Enemy: 6
-  AttachTo: 9
+  Plus: 6.1
+  Minus: 7.8
+  Ally: 2.1
+  Enemy: 4
+  AttachTo: 9.5
   Total Score: -3.5
 =============================
-Priests:
-  Plus: 13
-  Minus: 10
-  Ally: 5
-  Enemy: 7.5
-  AttachTo: 10.5
-  Total Score: -0.5
-=============================
-Dragons:
-  Plus: 9.5
-  Minus: 5
-  Ally: 3
-  Enemy: 7.5
-  AttachTo: 5
-  Total Score: 0
+Dwarves:
+  Plus: 9
+  Minus: 7.6
+  Ally: 0.3
+  Enemy: 4.8
+  AttachTo: 7
+  Total Score: -3.1
 =============================
 Druids:
-  Plus: 10
-  Minus: 7.5
-  Ally: 2
-  Enemy: 4
-  AttachTo: 12
-  Total Score: -0.5
+  Plus: 9
+  Minus: 7
+  Ally: 1
+  Enemy: 3.4
+  AttachTo: 8.3
+  Total Score: -0.4
 =============================
-Trees:
-  Plus: 10.5
-  Minus: 11
-  Ally: 3.5
-  Enemy: 1
-  AttachTo: 10.5
-  Total Score: 2
+Scientists:
+  Plus: 12.2
+  Minus: 11.7
+  Ally: 4.5
+  Enemy: 5.3
+  AttachTo: 7.3
+  Total Score: -0.3
 =============================
-Philosophers:
-  Plus: 12.5
-  Minus: 8.5
-  Ally: 5.5
-  Enemy: 7.5
-  AttachTo: 9
-  Total Score: 2
-=============================
-Fire:
+Water:
   Plus: 12
   Minus: 10.5
-  Ally: 6
-  Enemy: 5
-  AttachTo: 8
-  Total Score: 2.5
+  Ally: 3.1
+  Enemy: 4.5
+  AttachTo: 8.1
+  Total Score: 0.1
 =============================
-Sky:
-  Plus: 9
-  Minus: 7.5
-  Ally: 5
-  Enemy: 4
-  AttachTo: 12
-  Total Score: 2.5
+Trees:
+  Plus: 10.3
+  Minus: 11.8
+  Ally: 3
+  Enemy: 1
+  AttachTo: 6
+  Total Score: 0.5
 =============================
 Animals:
   Plus: 8.5
   Minus: 8.5
-  Ally: 3.5
+  Ally: 2.5
   Enemy: 2
-  AttachTo: 7.5
-  Total Score: 1.5
+  AttachTo: 5.5
+  Total Score: 0.5
 =============================
-Water:
-  Plus: 12.5
-  Minus: 10.5
-  Ally: 4
-  Enemy: 4.5
-  AttachTo: 11
-  Total Score: 1.5
+Priests:
+  Plus: 13.2
+  Minus: 9.4
+  Ally: 3.4
+  Enemy: 6.6
+  AttachTo: 6.2
+  Total Score: 0.6
+=============================
+Sky:
+  Plus: 8.8
+  Minus: 7.3
+  Ally: 3.3
+  Enemy: 3.9
+  AttachTo: 10.7
+  Total Score: 0.9
+=============================
+Dragons:
+  Plus: 9.5
+  Minus: 4.8
+  Ally: 2
+  Enemy: 5.1
+  AttachTo: 3.4
+  Total Score: 1.7
+=============================
+Fire:
+  Plus: 11.8
+  Minus: 9.8
+  Ally: 5.3
+  Enemy: 4.4
+  AttachTo: 8.1
+  Total Score: 2.9
+=============================
+Philosophers:
+  Plus: 12.7
+  Minus: 7.9
+  Ally: 3.4
+  Enemy: 4.8
+  AttachTo: 5
+  Total Score: 3.3
 =============================
 Wizards:
-  Plus: 9
-  Minus: 9
-  Ally: 7
-  Enemy: 4
-  AttachTo: 8.5
-  Total Score: 3
+  Plus: 8.8
+  Minus: 8.1
+  Ally: 5.5
+  Enemy: 2.5
+  AttachTo: 6.5
+  Total Score: 3.7
+=============================
+Average AttachTo: 7.1
+=============================
+Average Plus: 10.1
+=============================
+Average Minus: 8.6
+=============================
+Average Ally: 3
+=============================
+Average Enemy: 4
 */
