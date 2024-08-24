@@ -247,29 +247,34 @@ Then repeat as needed
 use countEntities to see what events need to be changed (add/remove entity +, -, allies, enemies)
 150ish + effects
 150ish - effects
-50+ allies
-50+ enemies
+50ish allies
+50ish enemies
 with 13 entities, that means each entity should average out to:
-10 +
-10 -
-5 allies
-5 enemies
+11 +
+11 -
+4 allies
+4 enemies
+8 attachTo
+these dont quite add up with the numbers from my script in that allies/enemies/attachTo it seems theres more than should be possible (should average 8 attachTo since only 100 attachments can happen, but the average is 9 or so I think), so have to look into that a bit 
+
+We should first focus on getting these internally balanced (each entity has a total score of 0), then focus on getting them balanced with each other (closer numbers to 10,10,5,5)
+
 =============================
 Scientists:
   Plus: 12
   Minus: 12
-  Ally: 2.5
-  Enemy: 9
+  Ally: 4.5
+  Enemy: 7
   AttachTo: 10
-  Total Score: -6.5
+  Total Score: -2.5
 =============================
 Earth:
-  Plus: 4
+  Plus: 5
   Minus: 8.5
   Ally: 4.5
   Enemy: 3
   AttachTo: 12.5
-  Total Score: -5
+  Total Score: -2
 =============================
 Dwarves:
   Plus: 8.5
@@ -283,24 +288,24 @@ Priests:
   Plus: 13
   Minus: 10
   Ally: 5
-  Enemy: 8.5
-  AttachTo: 11.5
-  Total Score: -1.5
+  Enemy: 7.5
+  AttachTo: 10.5
+  Total Score: -0.5
 =============================
 Dragons:
   Plus: 9.5
   Minus: 5
   Ally: 3
-  Enemy: 8.5
+  Enemy: 7.5
   AttachTo: 5
-  Total Score: -0.5
+  Total Score: 0
 =============================
 Druids:
   Plus: 10
   Minus: 7.5
   Ally: 2
   Enemy: 4
-  AttachTo: 13
+  AttachTo: 12
   Total Score: -0.5
 =============================
 Trees:
@@ -330,32 +335,32 @@ Fire:
 Sky:
   Plus: 9
   Minus: 7.5
-  Ally: 5.5
-  Enemy: 3.5
+  Ally: 5
+  Enemy: 4
   AttachTo: 12
-  Total Score: 3
+  Total Score: 2.5
 =============================
 Animals:
   Plus: 8.5
-  Minus: 6.5
-  Ally: 2.5
-  Enemy: 1
+  Minus: 8.5
+  Ally: 3.5
+  Enemy: 2
   AttachTo: 7.5
-  Total Score: 3.5
+  Total Score: 1.5
 =============================
 Water:
-  Plus: 11.5
-  Minus: 6.5
+  Plus: 12.5
+  Minus: 10.5
   Ally: 4
   Enemy: 4.5
   AttachTo: 11
-  Total Score: 5
+  Total Score: 1.5
 =============================
 Wizards:
   Plus: 9
-  Minus: 5
-  Ally: 8.5
-  Enemy: 2.5
-  AttachTo: 7.5
-  Total Score: 10.5
+  Minus: 9
+  Ally: 7
+  Enemy: 4
+  AttachTo: 8.5
+  Total Score: 3
 */

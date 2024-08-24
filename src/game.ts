@@ -183,11 +183,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Great Oaks bare fruit of wisdom for all forest dwellers",
+    name: "Great Oaks bare fruit of wisdom for all forest dwellers, but it takes a lot of water",
     effects: [
       {
         plus: ["Animals", "Druids"],
-        minus: [],
+        minus: ["Water"],
         attachTo: ["Trees"],
         ally: ["Animals"],
         enemy: []
@@ -268,16 +268,16 @@ log("==Creating new deck")
         plus: ["Wizards"],
         minus: ["Sky"],
         attachTo: ["Sky"],
-        ally: ["Wizards"],
-        enemy: []
+        ally: [],
+        enemy: ["Wizards"]
       },
       {
         condition: () => board["Wizards"].value <= board["Sky"].value,
         plus: ["Sky"],
         minus: ["Wizards"],
         attachTo: ["Wizards"],
-        ally: ["Sky"],
-        enemy: []
+        ally: [],
+        enemy: ["Sky"]
       }
     ]
   },
@@ -567,7 +567,7 @@ log("==Creating new deck")
     name: "The sky weeps, watering the forest and dousing flames",
     effects: [
       {
-        plus: ["Trees"],
+        plus: ["Trees", "Water"],
         minus: ["Sky", "Fire"],
         attachTo: ["Fire"],
         ally: [],
@@ -660,11 +660,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Dogs plunder amber from druids",
+    name: "Dogs plunder amber from druids, desecrating their sacred stream in the process.",
     effects: [
       {
         plus: ["Priests"],
-        minus: ["Druids"],
+        minus: ["Druids", "Water"],
         attachTo: ["Druids"],
         ally: [],
         enemy: ["Priests"]
@@ -748,11 +748,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Scientists design an aqueduct carving through the mountain",
+    name: "Scientists design an aqueduct carving through the mountain, draining precious water",
     effects: [
       {
         plus: ["Scientists"],
-        minus: ["Earth"],
+        minus: ["Earth", "Water"],
         attachTo: ["Earth"],
         ally: [],
         enemy: ["Scientists"]
@@ -772,19 +772,19 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A scientist's experiment goes wrong and erupts in flames in the city. Philosopher's endless critiqueing doesn't help.",
+    name: "A scientist's experiment goes wrong and erupts in flames, engulfing them and their animal subjects.",
     effects: [
       {
         plus: ["Fire"],
-        minus: ["Scientists"],
-        attachTo: ["Scientists"],
-        ally: [],
-        enemy: ["Philosophers"]
+        minus: ["Scientists", "Animals"],
+        attachTo: ["Fire"],
+        ally: ["Scientists"],
+        enemy: []
       }
     ]
   },
   {
-    name: "Dwarves unearth a slumbering demon, trying to enslave it before it awakens. They enlist the help of scientists, and promise them a favor.",
+    name: "Dwarves unearth a slumbering demon, trying to enslave it before it awakens. They enlist the help of scientists, promising to return the favor.",
     effects: [
       {
         condition: () => board["Dwarves"].value > 1 || board["Scientists"].value > 1,
@@ -816,10 +816,10 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druids and priests pray to to the Earth for harvest",
+    name: "Druids and priests pray to to the Earth for a healthy harvest",
     effects: [
       {
-        plus: ["Druids", "Priests"],
+        plus: ["Druids", "Priests", "Earth"],
         minus: [],
         attachTo: ["Druids", "Priests"],
         ally: [],
@@ -889,11 +889,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druidic rituals empower the forest, causing it to expand into nearby territories.",
+    name: "Druidic rituals empower the forest, causing it to expand into nearby territories, but use up all the water.",
     effects: [
       {
         plus: ["Trees"],
-        minus: [],
+        minus: ["Water"],
         attachTo: ["Druids"],
         ally: ["Trees"],
         enemy: []
@@ -966,14 +966,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Dragons hoard mystical artifacts, drawing the ire of the wizards and the interest of the city.",
+    name: "Dragons hoard mystical artifacts, so Wizards and Scientists work together to take them.",
     effects: [
       {
         plus: ["Dragons"],
         minus: [],
-        attachTo: ["Wizards", "Priests"],
-        ally: [],
-        enemy: ["Dragons"]
+        attachTo: ["Wizards"],
+        ally: ["Scientists"],
+        enemy: []
       }
     ]
   },
@@ -1066,11 +1066,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druids discover ancient texts in the forest, revealing forgotten knowledge about the gods.",
+    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards.",
     effects: [
       {
         plus: ["Druids"],
-        minus: [],
+        minus: ["Wizards"],
         attachTo: ["Druids"],
         ally: ["Sky", "Fire", "Water", "Earth"],
         enemy: []
@@ -1200,14 +1200,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Scientists discover a way to harness energy from the grand oaks, sparking controversy and protest from druids.",
+    name: "Scientists chop down oaks to fuel their machines. Propoganda turns the city against nature, animals and all.",
     effects: [
       {
         plus: ["Scientists"],
         minus: ["Trees"],
-        attachTo: ["Druids"],
+        attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Animals"]
       }
     ]
   },
@@ -1224,14 +1224,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Scientists create a new technology that inadvertently causes nearby groves to wither, drawing the ire of druids.",
+    name: "Scientists create a new technology that saps the life of nearby groves. They lie and blame the wizards for this, which works.",
     effects: [
       {
         plus: ["Scientists"],
-        minus: ["Trees", "Druids"],
-        attachTo: ["Trees", "Druids"],
+        minus: ["Trees", "Druids", "Animals"],
+        attachTo: ["Druids", "Animals"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Wizards"]
       }
     ]
   },
@@ -1404,11 +1404,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home.",
+    name: "The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home. Wizards are caught in the crossfire.",
     effects: [
       {
         plus: ["Water"],
-        minus: ["Dwarves"],
+        minus: ["Dwarves", "Wizards"],
         attachTo: ["Dwarves"],
         ally: [],
         enemy: ["Water"]
@@ -1428,7 +1428,7 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "After years of conflict, dwarves and dragons agree to a truce, sharing the mountain’s resources.",
+    name: "After years of conflict, dwarves and dragons agree to a truce, carving up the mountain’s resources.",
     effects: [
       {
         plus: ["Dwarves", "Dragons"],
@@ -1452,11 +1452,11 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "A torrential storm washes over the world, filling the rivers, lakes, and clouds. ",
+    name: "A torrential storm washes over the world, filling the rivers, lakes, and clouds. Many wizards' homes are washed away on the cliff sides.",
     effects: [
       {
         plus: ["Sky", "Water"],
-        minus: [],
+        minus: ["Wizards"],
         attachTo: ["Water"],
         ally: ["Sky"],
         enemy: []
@@ -1476,13 +1476,13 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Wizards imbue wild animals with magical abilities, because why not",
+    name: "Wizards imbue wild animals with magical abilities, but they can't be controlled. For some reason the wizards keep doing it...",
     effects: [
       {
         plus: ["Animals"],
-        minus: [],
-        attachTo: ["Animals"],
-        ally: ["Wizards"],
+        minus: ["Wizards"],
+        attachTo: ["Wizards"],
+        ally: ["Animals"],
         enemy: []
       }
     ]
