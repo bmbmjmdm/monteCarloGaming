@@ -318,14 +318,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Sirens steal technology",
+    name: "Dwarves pray and give tribute to the Earth, asking it to ground the wizards' magic.",
     effects: [
       {
-        plus: ["Water"],
-        minus: ["Scientists"],
-        attachTo: ["Scientists"],
-        ally: [],
-        enemy: ["Water"]
+        plus: ["Earth", "Dwarves"],
+        minus: ["Wizards"],
+        attachTo: ["Earth"],
+        ally: ["Dwarves"],
+        enemy: []
       }
     ]
   },
@@ -407,7 +407,7 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "The sky weeps, watering crops and dousing flames",
+    name: "The sky weeps, watering the city's crops and dousing flames",
     effects: [
       {
         plus: [["Priests", "Philosophers", "Scientists"]],
@@ -439,7 +439,7 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Mouse scientsits capture wild animals to use for experiments",
+    name: "Mouse scientists capture wild animals to use for experiments",
     effects: [
       {
         plus: ["Scientists"],

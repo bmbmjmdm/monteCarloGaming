@@ -245,57 +245,79 @@ Then repeat as needed
 
 /*
 use countEntities to see what events need to be changed (add/remove entity +, -, allies, enemies)
-150ish + effects
-150ish - effects
+125ish + effects
+125ish - effects
 50ish allies
 50ish enemies
-with 13 entities, that means each entity should average out to:
-11 +
-11 -
-4 allies
-4 enemies
-8 attachTo
-these dont quite add up with the numbers from my script in that allies/enemies/attachTo it seems theres more than should be possible (should average 8 attachTo since only 100 attachments can happen, but the average is 10), so have to look into that a bit 
+with 13 entities, that means each entity should have about:
+8-11 +
+8-11 -
+3-4 allies
+3-4 enemies
+7-8 attachTo
+
+best and worse synergy should be close to = 0
+least and most synergy should be close to = Average Absolute Synergy (currently 4)
 
 We should first focus on getting these internally balanced (each entity has a total score of 0), then focus on getting them balanced with each other (closer numbers to 10,10,5,5)
 =============================
 Earth:
-  Plus: 6.1
+  Plus: 7.1
   Minus: 7.8
   Ally: 2.1
   Enemy: 4
-  AttachTo: 9.5
-  Total Score: -3.5
+  BestSynergy: Water = 4.8
+  WorstSynergy: Dwarves = -3.5
+  MostSynergy: Water = 6.8
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 10.5
+  Total Score: -2.5
 =============================
 Dwarves:
-  Plus: 9
+  Plus: 10
   Minus: 7.6
-  Ally: 0.3
+  Ally: 1.3
   Enemy: 4.8
+  BestSynergy: Wizards = 2.5
+  WorstSynergy: Earth = -3.5
+  MostSynergy: Earth = 5.5
+  LeastSynergy: Sky = 0
   AttachTo: 7
-  Total Score: -3.1
+  Total Score: -1.1
 =============================
 Druids:
   Plus: 9
   Minus: 7
   Ally: 1
   Enemy: 3.4
+  BestSynergy: Trees = 10
+  WorstSynergy: Fire = -2.7
+  MostSynergy: Trees = 10
+  LeastSynergy: Philosophers = 2.5
   AttachTo: 8.3
   Total Score: -0.4
 =============================
 Scientists:
   Plus: 12.2
-  Minus: 11.7
+  Minus: 10.7
   Ally: 4.5
   Enemy: 5.3
-  AttachTo: 7.3
-  Total Score: -0.3
+  BestSynergy: Priests = 5.5
+  WorstSynergy: Water = -2
+  MostSynergy: Philosophers = 15
+  LeastSynergy: Dragons = 1.3
+  AttachTo: 6.3
+  Total Score: 0.7
 =============================
 Water:
-  Plus: 12
+  Plus: 11
   Minus: 10.5
   Ally: 3.1
-  Enemy: 4.5
+  Enemy: 3.5
+  BestSynergy: Earth = 4.8
+  WorstSynergy: Scientists = -2
+  MostSynergy: Sky = 7.5
+  LeastSynergy: Dragons = 0
   AttachTo: 8.1
   Total Score: 0.1
 =============================
@@ -304,6 +326,10 @@ Trees:
   Minus: 11.8
   Ally: 3
   Enemy: 1
+  BestSynergy: Druids = 10
+  WorstSynergy: Fire = -3.5
+  MostSynergy: Druids = 10
+  LeastSynergy: Dragons = 2
   AttachTo: 6
   Total Score: 0.5
 =============================
@@ -312,6 +338,10 @@ Animals:
   Minus: 8.5
   Ally: 2.5
   Enemy: 2
+  BestSynergy: Trees = 6.5
+  WorstSynergy: Scientists = -1
+  MostSynergy: Scientists = 9
+  LeastSynergy: Sky = 0
   AttachTo: 5.5
   Total Score: 0.5
 =============================
@@ -320,6 +350,10 @@ Priests:
   Minus: 9.4
   Ally: 3.4
   Enemy: 6.6
+  BestSynergy: Philosophers = 7.5
+  WorstSynergy: Sky = -2.4
+  MostSynergy: Scientists = 13.5
+  LeastSynergy: Sky = 2.6
   AttachTo: 6.2
   Total Score: 0.6
 =============================
@@ -328,6 +362,10 @@ Sky:
   Minus: 7.3
   Ally: 3.3
   Enemy: 3.9
+  BestSynergy: Druids = 0.8
+  WorstSynergy: Priests = -2.4
+  MostSynergy: Fire = 7.8
+  LeastSynergy: Dwarves = 0
   AttachTo: 10.7
   Total Score: 0.9
 =============================
@@ -336,6 +374,10 @@ Dragons:
   Minus: 4.8
   Ally: 2
   Enemy: 5.1
+  BestSynergy: Wizards = 3.3
+  WorstSynergy: Sky = -1.5
+  MostSynergy: Wizards = 6
+  LeastSynergy: Water = 0
   AttachTo: 3.4
   Total Score: 1.7
 =============================
@@ -344,6 +386,10 @@ Fire:
   Minus: 9.8
   Ally: 5.3
   Enemy: 4.4
+  BestSynergy: Earth = 0.5
+  WorstSynergy: Trees = -3.5
+  MostSynergy: Sky = 7.8
+  LeastSynergy: Dwarves = 1.5
   AttachTo: 8.1
   Total Score: 2.9
 =============================
@@ -352,16 +398,30 @@ Philosophers:
   Minus: 7.9
   Ally: 3.4
   Enemy: 4.8
+  BestSynergy: Priests = 7.5
+  WorstSynergy: Fire = -1.8
+  MostSynergy: Scientists = 15
+  LeastSynergy: Wizards = 1.5
   AttachTo: 5
   Total Score: 3.3
 =============================
 Wizards:
   Plus: 8.8
-  Minus: 8.1
+  Minus: 9.1
   Ally: 5.5
   Enemy: 2.5
+  BestSynergy: Dragons = 3.3
+  WorstSynergy: Water = -2
+  MostSynergy: Druids = 7.3
+  LeastSynergy: Earth = 1.5
   AttachTo: 6.5
-  Total Score: 3.7
+  Total Score: 2.7
+==
+==
+==
+==
+==
+==
 =============================
 Average AttachTo: 7.1
 =============================
@@ -372,4 +432,8 @@ Average Minus: 8.6
 Average Ally: 3
 =============================
 Average Enemy: 4
+=============================
+Average Total Synergy: 0.8
+=============================
+Average Absolute Synergy: 4.1
 */
