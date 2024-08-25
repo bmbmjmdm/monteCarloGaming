@@ -12,34 +12,25 @@ const events = [
     ]
   },
   {
-    name: "Priests try to catch a dragon for a ritual",
+    name: "When priests try to steal a baby dragon for their ritual, the plan goes awry and a battle ensues. Long after the priests leave, dragons lash out by fiesting on any animal in sight.",
     effects: [
       {
-        condition: () => board["Priests"].value > board["Dragons"].value,
-        plus: ["Priests", "Priests"],
-        minus: ["Dragons"],
-        attachTo: ["Dragons"],
-        ally: [],
-        enemy: ["Priests"]
-      },
-      {
-        condition: () => board["Priests"].value <= board["Dragons"].value,
         plus: [],
-        minus: ["Priests"],
+        minus: ["Dragons", "Priests"],
         attachTo: ["Dragons"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Animals"]
       },
     ]
   },
   {
-    name: "The fire god fills the bellies of dragons",
+    name: "The fire god finds comfort in the bellies of dragons",
     effects: [
       {
-        plus: ["Dragons", "Fire"],
+        plus: ["Fire"],
         minus: [],
-        attachTo: ["Dragons"],
-        ally: ["Fire"],
+        attachTo: ["Fire"],
+        ally: ["Dragons"],
         enemy: []
       }
     ]
@@ -180,14 +171,14 @@ const events = [
     ]
   },
   {
-    name: "Sirens steal technology",
+    name: "Dwarves pray and give tribute to the Earth, asking it to ground the wizards' magic.",
     effects: [
       {
-        plus: ["Water"],
-        minus: ["Scientists"],
-        attachTo: ["Scientists"],
-        ally: [],
-        enemy: ["Water"]
+        plus: ["Earth", "Dwarves"],
+        minus: ["Wizards"],
+        attachTo: ["Earth"],
+        ally: ["Dwarves"],
+        enemy: []
       }
     ]
   },
@@ -350,7 +341,7 @@ const events = [
     effects: [
       {
         plus: ["Sky", "Water"],
-        minus: [["Scientists", "Priests", "Philosophers"], ["Scientists", "Priests", "Philosophers"]],
+        minus: [["Scientists", "Priests", "Philosophers"]],
         attachTo: ["Sky", "Water"],
         ally: ["Sky", "Water"],
         enemy: []
@@ -828,13 +819,13 @@ const events = [
     ]
   },
   {
-    name: "Dragons hoard mystical artifacts, so Wizards and Scientists work together to take them.",
+    name: "Dragons hoard mystical artifacts, so wizards lay a plan. They decide to embolden the dwarves, teach them their magics, and see what happens...",
     effects: [
       {
         plus: ["Dragons"],
         minus: [],
         attachTo: ["Wizards"],
-        ally: ["Scientists"],
+        ally: ["Dwarves"],
         enemy: []
       }
     ]
@@ -1134,23 +1125,23 @@ const events = [
     ]
   },
   {
-    name: "A comet foretold by Wizards illuminates the sky, filling it and philosophers with cosmic wisdom.",
+    name: "Aggressive flooding robs the dens of dragons, causing untold riches to wash into the sea.",
     effects: [
       {
-        plus: ["Philosophers", "Sky"],
-        minus: [],
-        attachTo: ["Sky"],
-        ally: ["Wizards", "Philosophers"],
-        enemy: []
+        plus: ["Water"],
+        minus: ["Dragons"],
+        attachTo: ["Dragons"],
+        ally: [],
+        enemy: ["Water"]
       }
     ]
   },
   {
-    name: "In a desperate act, priests invoke the fire god to smite the earth, causing devastation but granting them divine favor.",
+    name: "In a desperate act, priests invoke the Earth to swollow the flames of the world whole, causing devastation but saving the priest's temples, and giving the Earth a taste for fire.",
     effects: [
       {
-        plus: ["Priests", "Fire"],
-        minus: ["Earth"],
+        plus: ["Priests", "Earth"],
+        minus: ["Fire"],
         attachTo: ["Earth"],
         ally: [],
         enemy: ["Fire"]
@@ -1254,14 +1245,14 @@ const events = [
     ]
   },
   {
-    name: "Wizards create brews in the bellies of great oaks, fueling their spells with primal energy, which fuel the trees in turn. ",
+    name: "Wizards create brews in the bellies of great oaks, fueling their spells with primal energy. The trees grow massive and wicked, skewering the wizards in time.",
     effects: [
       {
         plus: ["Wizards", "Trees"],
         minus: [],
         attachTo: ["Trees"],
-        ally: ["Wizards"],
-        enemy: []
+        ally: [],
+        enemy: ["Wizards"]
       }
     ]
   },
@@ -1350,11 +1341,11 @@ const events = [
     ]
   },
   {
-    name: "As a catastrophic storm approaches, Priests and Philosophers join forces to combat the sky's madness",
+    name: "As a catastrophic storm approaches, philosophers sacrifice themselves to quell the sky's madness. But priests sabatoge the effort for their own gain, tricking the sky into seeing the sacrifice as an insult.",
     effects: [
       {
-        plus: ["Priests", "Philosophers"],
-        minus: ["Sky"],
+        plus: ["Priests"],
+        minus: ["Sky", "Philosophers"],
         attachTo: ["Sky"],
         ally: [],
         enemy: ["Philosophers"]
