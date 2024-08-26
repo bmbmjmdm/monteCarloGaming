@@ -156,73 +156,21 @@ const makeEntityMap = () => (
     Druids: 0,
   }
 );
-const goalTracker = {
-  Dragons: {
+
+// inPlus and inMinus are how many times this entity has appeared in plus and in minus across all goals
+// plus is how many times this entity has appeared with another entity in plus
+// minus is how many times this entity has appeared with another entity in minus
+// opposite is how many times this entity has appeared with another entity on opposite sides of plus and minus
+const goalTracker = {};
+for (const entity of Object.keys(makeEntityMap())) {
+  goalTracker[entity] = {
+    inPlus: 0,
+    inMinus: 0,
     plus: makeEntityMap(),
     minus: makeEntityMap(),
     opposite: makeEntityMap(),
-  },
-  Dwarves: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Wizards: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Trees: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Animals: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Priests: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Philosophers: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Scientists: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Sky: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Water: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Fire: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Earth: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-  Druids: {
-    plus: makeEntityMap(),
-    minus: makeEntityMap(),
-    opposite: makeEntityMap(),
-  },
-};
+  }
+}
 
 const processGoal = (goal) => {
   for (const plus of goal.plus) {
@@ -301,13 +249,20 @@ while (createdGoals < 10) {
     plus = []
     minus = []
 
-    // first find a random entity
-    let randomEntity = Object.keys(goalTracker)[Math.floor(Math.random() * 13)]
+    // first find a random entity from the bottom 3 most represented entities
+    // NOTE THIS COULD CAUSE AN INFINITE LOOP. If it does, rerun program. If it's consistent, change the 3s to 13s. If it still hangs then its impossible to make more goals that satisfy the "pair random entity with its least opposite and least plus/minus" initiative
+    const isPlus = Math.random() < 0.5;
+    let randomEntity;
+    if (isPlus) {
+      randomEntity = Object.entries(goalTracker).sort((a, b) => a[1].inPlus - b[1].inPlus).slice(0, 3)[Math.floor(Math.random() * 3)][0]
+    } else {
+      randomEntity = Object.entries(goalTracker).sort((a, b) => a[1].inMinus - b[1].inMinus).slice(0, 3)[Math.floor(Math.random() * 3)][0]
+    }
 
     // then randomly add it to minus or plus 
     let ally;
     let enemy;
-    if (Math.random() < 0.5) {
+    if (isPlus) {
       plus.push(randomEntity)
       // then add its least represented plus entity with it 
       ally = constraintTracker[randomEntity].leastPlus[0]
@@ -363,6 +318,6 @@ while (createdGoals < 10) {
   processGoal({name: "Custom Goal", plus, minus})
   createdGoals++
   console.log("===================================")
-  console.log("plus: " + plus)
-  console.log("minus: " + minus)
+  console.log(plus)
+  console.log(minus)
 }
