@@ -137,6 +137,76 @@ const goals = [
     plus: ["Dwarves",],
     minus: ["Sky", "Wizards", "Fire"]
   },
+  {
+    name: "Old tall ones grow as their friends and distant foes fall",
+    plus: ["Trees"],
+    minus: ["Wizards", "Dwarves", "Earth", "Druids"]
+  },
+  {
+    name: "The hard are chipped by a gnawing, swinging world",
+    plus: ["Sky", "Animals", "Dwarves"],
+    minus: ["Dragons", "Trees"]
+  },
+  {
+    name: "Steamy beacors threaten the divine and arcane ",
+    plus: ["Scientists", "Fire", "Water"],
+    minus: ["Wizards", "Priests"]
+  },
+  {
+    name: "Fly into me, away from the core",
+    plus: ["Dragons", "Wizards", "Sky"],
+    minus: ["Fire", "Earth"]
+  },
+  {
+    name: "The squishy and fluid lose to the hard and hardened",
+    plus: ["Dwarves", "Dragons", "Earth"],
+    minus: ["Druids", "Water"]
+  },
+  {
+    name: "All those moral beings can shove it, I'm going to grow you unnatural",
+    plus: ["Wizards", "Trees"],
+    minus: ["Druids", "Priests", "Philosophers"]
+  },
+  {
+    name: "After lots of (great) debate and chaos, two godly parents consume their child flower child",
+    plus: ["Wizards", "Philosophers", "Water", "Earth"],
+    minus: ["Trees"]
+  },
+  {
+    name: "The city interferes with a world-wide ritual by powerful beings, coming out on top and striking them down ",
+    plus: ["Priests", "Philosophers"],
+    minus: ["Dragons", "Druids", "Sky"]
+  },
+  {
+    name: "DONT GIVE ME A SPEACH; DIE!",
+    plus: ["Wizards", "Fire"],
+    minus: ["Priests", "Philosophers"]
+  },
+  {
+    name: "The small triumph over the holier than though",
+    plus: ["Dwarves", "Animals"],
+    minus: ["Sky", "Priests"]
+  },
+  {
+    name: "Lovers day and night, forever. At the cost of wild and calm creators ",
+    plus: ["Sky", "Earth"],
+    minus: ["Wizards", "Dwarves", "Fire", "Scientists"]
+  },
+  {
+    name: "Run along the ground, wild and free, or fly across the heavens with untold powers. As long as you're not wet",
+    plus: ["Wizards", "Sky", "Earth", "Animals"],
+    minus: ["Water"]
+  },
+  {
+    name: "Just a boy in a sandbox vs ancient ungodly beings, and winning ",
+    plus: ["Scientists", "Earth"],
+    minus: ["Dragons", "Dwarves", "Druids"]
+  },
+  {
+    name: "My flock cannot be tamed. We rule the land. Cower low, stand to be burned, and no chanting or praying can help. ",
+    plus: ["Dragons"],
+    minus: ["Dwarves", "Trees", "Priests"]
+  },
 ]
 
 const makeEntityMap = () => (
@@ -174,6 +244,7 @@ for (const entity of Object.keys(makeEntityMap())) {
 
 const processGoal = (goal) => {
   for (const plus of goal.plus) {
+    goalTracker[plus].inPlus++;
     for (const otherPlus of goal.plus) {
       if (plus !== otherPlus) {
         goalTracker[plus].plus[otherPlus] += 1;
@@ -184,6 +255,7 @@ const processGoal = (goal) => {
     }
   }
   for (const minus of goal.minus) {
+    goalTracker[minus].inMinus++;
     for (const otherMinus of goal.minus) {
       if (minus !== otherMinus) {
         goalTracker[minus].minus[otherMinus] += 1;
@@ -200,11 +272,14 @@ for (const goal of goals) {
 }
 
 // to see a list of entity synergies and anti-synergies across goals, uncomment below
-/*
+
 for (const entity in goalTracker) {
   console.log("===============================")
   console.log(entity)
   const entityGoals = goalTracker[entity];
+  console.log("Total: " + (entityGoals.inPlus + entityGoals.inMinus));
+  console.log("In Plus: " + entityGoals.inPlus);
+  console.log("In Minus: " + entityGoals.inMinus);
   const highestPlus = Object.entries(entityGoals.plus).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1])[0];
   const lowestPlus = Object.entries(entityGoals.plus).filter((entry) => entry[0] != entity).sort((a, b) => a[1] - b[1])[0];
   console.log("Most Plus: " + highestPlus[0] + " = " + highestPlus[1]);
@@ -218,18 +293,18 @@ for (const entity in goalTracker) {
   console.log("Most Opposite: " + highestOpposite[0] + " = " + highestOpposite[1]);
   console.log("Least Opposite: " + lowestOpposite[0] + " = " + lowestOpposite[1]);
 }
-*/
 
+/*
 const constraintTracker ={}
 
 const updateConstraints = () => {
   for (const entity in goalTracker) {
     constraintTracker[entity] = {
-      mostPlus: Object.entries(goalTracker[entity].plus).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1])[0],
+      mostPlus: Object.entries(goalTracker[entity].plus).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1]).slice(0, 2),
       leastPlus: Object.entries(goalTracker[entity].plus).filter((entry) => entry[0] != entity).sort((a, b) => a[1] - b[1])[0],
-      mostMinus: Object.entries(goalTracker[entity].minus).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1])[0],
+      mostMinus: Object.entries(goalTracker[entity].minus).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1]).slice(0, 2),
       leastMinus: Object.entries(goalTracker[entity].minus).filter((entry) => entry[0] != entity).sort((a, b) => a[1] - b[1])[0],
-      mostOpposite: Object.entries(goalTracker[entity].opposite).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1])[0],
+      mostOpposite: Object.entries(goalTracker[entity].opposite).filter((entry) => entry[0] != entity).sort((a, b) => b[1] - a[1]).slice(0, 2),
       leastOpposite: Object.entries(goalTracker[entity].opposite).filter((entry) => entry[0] != entity).sort((a, b) => a[1] - b[1])[0],
     }
   }
@@ -239,7 +314,7 @@ const updateConstraints = () => {
 // it will also update the constraints as it goes to ensure the new goals are considered for representation
 
 let createdGoals = 0;
-while (createdGoals < 10) {
+while (createdGoals < 30) {
   let plus
   let minus
   // include our newly created goals in the constraints
@@ -296,12 +371,18 @@ while (createdGoals < 10) {
     // if constraints have been broken, restart
     let violation = false;
     for (const entity of plus) {
-      if (plus.includes(constraintTracker[entity].mostPlus[0])) violation = true
-      if (minus.includes(constraintTracker[entity].mostOpposite[0]))  violation = true
+      const constraints = constraintTracker[entity]
+      for (let i = 0; i < 2; i++) {
+        if (plus.includes(constraints.mostPlus[i][0])) violation = true
+        if (minus.includes(constraints.mostOpposite[i][0])) violation = true
+      }
     }
     for (const entity of minus) {
-      if (minus.includes(constraintTracker[entity].mostMinus[0]))  violation = true
-      if (plus.includes(constraintTracker[entity].mostOpposite[0]))  violation = true
+      const constraints = constraintTracker[entity]
+      for (let i = 0; i < 2; i++) {
+        if (minus.includes(constraints.mostMinus[i][0])) violation = true
+        if (plus.includes(constraints.mostOpposite[i][0])) violation = true
+      }
     }
     // check to make sure each entity is only represented once
     let allEntities = plus.concat(minus)
@@ -318,6 +399,6 @@ while (createdGoals < 10) {
   processGoal({name: "Custom Goal", plus, minus})
   createdGoals++
   console.log("===================================")
-  console.log(plus)
-  console.log(minus)
-}
+  console.log(plus.join(", "))
+  console.log(minus.join(", "))
+}*/

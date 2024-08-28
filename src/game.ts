@@ -1665,6 +1665,76 @@ function createGoalDeck() {
       plus: ["Dwarves",],
       minus: ["Sky", "Wizards", "Fire"]
     },
+    {
+      name: "Old tall ones grow as their friends and distant foes fall",
+      plus: ["Trees"],
+      minus: ["Wizards", "Dwarves", "Earth", "Druids"]
+    },
+    {
+      name: "The hard are chipped by a gnawing, swinging world",
+      plus: ["Sky", "Animals", "Dwarves"],
+      minus: ["Dragons", "Trees"]
+    },
+    {
+      name: "Steamy beacors threaten the divine and arcane ",
+      plus: ["Scientists", "Fire", "Water"],
+      minus: ["Wizards", "Priests"]
+    },
+    {
+      name: "Fly into me, away from the core",
+      plus: ["Dragons", "Wizards", "Sky"],
+      minus: ["Fire", "Earth"]
+    },
+    {
+      name: "The squishy and fluid lose to the hard and hardened",
+      plus: ["Dwarves", "Dragons", "Earth"],
+      minus: ["Druids", "Water"]
+    },
+    {
+      name: "All those moral beings can shove it, I'm going to grow you unnatural",
+      plus: ["Wizards", "Trees"],
+      minus: ["Druids", "Priests", "Philosophers"]
+    },
+    {
+      name: "After lots of (great) debate and chaos, two godly parents consume their child flower child",
+      plus: ["Wizards", "Philosophers", "Water", "Earth"],
+      minus: ["Trees"]
+    },
+    {
+      name: "The city interferes with a world-wide ritual by powerful beings, coming out on top and striking them down ",
+      plus: ["Priests", "Philosophers"],
+      minus: ["Dragons", "Druids", "Sky"]
+    },
+    {
+      name: "DONT GIVE ME A SPEACH; DIE!",
+      plus: ["Wizards", "Fire"],
+      minus: ["Priests", "Philosophers"]
+    },
+    {
+      name: "The small triumph over the holier than though",
+      plus: ["Dwarves", "Animals"],
+      minus: ["Sky", "Priests"]
+    },
+    {
+      name: "Lovers day and night, forever. At the cost of wild and calm creators ",
+      plus: ["Sky", "Earth"],
+      minus: ["Wizards", "Dwarves", "Fire", "Scientists"]
+    },
+    {
+      name: "Run along the ground, wild and free, or fly across the heavens with untold powers. As long as you're not wet",
+      plus: ["Wizards", "Sky", "Earth", "Animals"],
+      minus: ["Water"]
+    },
+    {
+      name: "Just a boy in a sandbox vs ancient ungodly beings, and winning ",
+      plus: ["Scientists", "Earth"],
+      minus: ["Dragons", "Dwarves", "Druids"]
+    },
+    {
+      name: "My flock cannot be tamed. We rule the land. Cower low, stand to be burned, and no chanting or praying can help. ",
+      plus: ["Dragons"],
+      minus: ["Dwarves", "Trees", "Priests"]
+    },
   ]
 }
 
