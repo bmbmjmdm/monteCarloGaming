@@ -1,4 +1,5 @@
 const DEBUG = false;
+const STRATEGY = true;
 const PLAYS = 2000000;
 
 function log (message:string) {
@@ -1716,7 +1717,7 @@ function createGoalDeck() {
       minus: ["Sky", "Priests"]
     },
     {
-      name: "Lovers day and night, forever. At the cost of wild and calm creators ",
+      name: "Lovers day and night, forever. At the cost of wild and calm creators",
       plus: ["Sky", "Earth"],
       minus: ["Wizards", "Dwarves", "Fire", "Scientists"]
     },
@@ -1726,14 +1727,44 @@ function createGoalDeck() {
       minus: ["Water"]
     },
     {
-      name: "Just a boy in a sandbox vs ancient ungodly beings, and winning ",
+      name: "Just a boy in a sandbox vs ancient ungodly beings, and winning",
       plus: ["Scientists", "Earth"],
       minus: ["Dragons", "Dwarves", "Druids"]
     },
     {
-      name: "My flock cannot be tamed. We rule the land. Cower low, stand to be burned, and no chanting or praying can help. ",
+      name: "My flock cannot be tamed. We rule the land. Cower low, stand to be burned, and no chanting or praying can help.",
       plus: ["Dragons"],
       minus: ["Dwarves", "Trees", "Priests"]
+    },
+    {
+      name: "pray to the wet claws, discard the dirt ",
+      plus: ["Water", "Dragons", "Animals", "Priests"],
+      minus: ["Earth"]
+    },
+    {
+      name: "We pray that the clouds dry up and wither, that picks and thoughts grow dull, yet we stay strong",
+      plus: ["Priests"],
+      minus: ["Water", "Dwarves", "Sky", "Philosophers"]
+    },
+    {
+      name: "lab or wild, the rats go thirsty, but they teach us about meaning of life",
+      plus: ["Philosophers"],
+      minus: ["Animals", "Water", "Scientists"]
+    },
+    {
+      name: "Mind and breath grow, spastic beings stumble, just live naturally",
+      plus: ["Philosophers", "Dragons", "Druids"],
+      minus: ["Animals", "Wizards"]
+    },
+    {
+      name: "you were supposed to protect them you selfish magic hobo",
+      plus: ["Druids"],
+      minus: ["Earth", "Animals", "Trees"]
+    },
+    {
+      name: "Sun temples, ruined theses, and heavenly crying",
+      plus: ["Fire", "Priests"],
+      minus: ["Scientists", "Sky", "Philosophers"]
     },
   ]
 }
@@ -2064,10 +2095,56 @@ function calculateGoalScore(goal: Goal) {
 function playTurn() {
   log("===Playing Turn")
   drawEvents()
-  const randomPile = Math.random() < 0.5 ? pile1 : pile2
-  resolveEvents(randomPile)
-  recordEventHistory(randomPile)
+  let chosenPile; 
+  if (STRATEGY) {
+    let pile1Votes = 0;
+    let pile2Votes = 0;
+    // for every goal and every event, add up how likely that goal wants that event to be passed
+    const playersDesires = players.map(player => ({
+      pile1: pile1.reduce((acc, event) => acc + calculateEventVoteDesire(event, player), 0),
+      pile2: pile2.reduce((acc, event) => acc + calculateEventVoteDesire(event, player), 0)
+    }))
+    // for each goal, see which pile they vote on and tally up the votes
+    for (const player of playersDesires) {
+      if (player.pile1 > player.pile2) {
+        pile1Votes++
+      }
+      else if (player.pile2 > player.pile1) {
+        pile2Votes++
+      }
+    }
+    // flip a coin if the votes are equal
+    chosenPile = pile1Votes > pile2Votes ? pile1 : pile2Votes > pile1Votes ? pile2 : Math.random() < 0.5 ? pile1 : pile2
+  }
+  else {
+    // we're not using strategy, just pick a pile randomly
+    chosenPile = Math.random() < 0.5 ? pile1 : pile2
+  }
+  resolveEvents(chosenPile)
+  recordEventHistory(chosenPile)
   discardEvents()
+}
+
+// determine how much this goal likes/dislikes this event
+function calculateEventVoteDesire(event: GameEvent, goal: Goal) {
+  const goalPlus = goal.plus;
+  const goalMinus = goal.minus;
+  // list all potential plus entities in this event
+  const eventPlus = new Set(event.effects.map(effect => effect.plus).flat());
+  // list all potential minus entities in this event
+  const eventMinus = new Set(event.effects.map(effect => effect.plus).flat());
+  // for now ignore allies/enemies
+  // calculate how well the event's plus/minus lines up with the goal's plus/minus
+  let score = 0;
+  for (const entity of goalPlus) {
+    if (eventPlus.has(entity)) score++;
+    if (eventMinus.has(entity)) score--;
+  }
+  for (const entity of goalMinus) {
+    if (eventPlus.has(entity)) score--;
+    if (eventMinus.has(entity)) score++;
+  }
+  return score;
 }
 
 function playGame() {
