@@ -286,14 +286,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Runoff from the city infects many lakes and shores",
+    name: "Runoff from the city temples infects many lakes and shores",
     effects: [
       {
         plus: [],
         minus: ["Animals", "Trees", "Water"],
         attachTo: ["Water"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Priests"]
       }
     ]
   },
@@ -426,7 +426,7 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Scientists"]
       }
     ]
   },
@@ -620,14 +620,14 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "The sky god spreads wisdom through the city, but at a cost",
+    name: "The sky god spreads wisdom through the city, but discovers heretical texts",
     effects: [
       {
         plus: ["Scientists", "Priests", "Philosophers"],
         minus: [],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Priests"]
       }
     ]
   },
@@ -921,7 +921,7 @@ log("==Creating new deck")
         plus: ["Scientists", "Animals", "Priests", "Philosophers"],
         minus: [],
         attachTo: ["Scientists"],
-        ally: ["Animals", "Priests", "Philosophers"],
+        ally: ["Animals"],
         enemy: []
       },
       {
@@ -1015,21 +1015,21 @@ log("==Creating new deck")
       {
         plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
         minus: [],
-        attachTo: ["Dwarves", "Animals", "Priests"],
-        ally: ["Dwarves", "Animals", "Priests"],
+        attachTo: ["Animals", "Priests"],
+        ally: ["Animals", "Priests"],
         enemy: []
       }
     ]
   },
   {
-    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control.",
+    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, upsetting the natural shepherds.",
     effects: [
       {
         plus: ["Wizards"],
         minus: [],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Druids", "Dragons"]
+        enemy: ["Druids"]
       }
     ]
   },
@@ -1058,13 +1058,13 @@ log("==Creating new deck")
     ]
   },
   {
-    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards.",
+    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards. The more they read, the richer the soil gets.",
     effects: [
       {
         plus: ["Druids"],
         minus: ["Wizards"],
         attachTo: ["Druids"],
-        ally: ["Sky", "Fire", "Water", "Earth"],
+        ally: ["Earth"],
         enemy: []
       }
     ]
@@ -1355,7 +1355,7 @@ log("==Creating new deck")
         minus: ["Wizards", "Dragons", "Sky"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Wizards", "Dragons"]
+        enemy: ["Wizards"]
       }
     ]
   },
@@ -1414,7 +1414,7 @@ log("==Creating new deck")
         plus: ["Philosophers", "Scientists"],
         minus: [],
         attachTo: ["Sky"],
-        ally: ["Philosophers", "Scientists"],
+        ally: ["Scientists"],
         enemy: []
       }
     ]
@@ -1427,7 +1427,7 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Dwarves", "Dragons"]
+        enemy: ["Dwarves"]
       }
     ]
   },
@@ -1499,7 +1499,7 @@ log("==Creating new deck")
         minus: ["Dragons", "Dwarves", "Wizards"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Dragons", "Dwarves", "Wizards"]
+        enemy: ["Dragons"]
       }
     ]
   },
