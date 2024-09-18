@@ -7,6 +7,7 @@ function log (message:string) {
 }
 
 export type Entity = "Scientists" | "Priests" | "Philosophers" | "Trees" | "Animals" | "Druids" | "Wizards" | "Dragons" | "Dwarves" | "Water" | "Fire" | "Earth" | "Sky"
+export type SpecialEntity = "Armed Guards" | "Devout Cultists" | "Invasive Plateaus" | "Dripping Temple" | "Sad Scholars" | "Ruin and Destruction" | "Deep Roots" | "Erosive Tears" | "Sun Spirits" | "Shadow Beings" | "Inconsiderate Monarchy" | "Living Wind" | "Star Wedding" | "Friendship Ban" | "Wings For All" | "Living Crystals" | "Ecstacy Crystals" | "Humanity's Secret Weapon" | "Rebels" | "Drunk Animals" | "Miniature Kingdom" | "Scientific Silence"
 
 type GameEvent = {
   name: string,
@@ -19,13 +20,15 @@ type EventEffect = {
   minus: (Entity | Entity[])[],
   attachTo: Entity[],
   ally: Entity[],
-  enemy: Entity[]
+  enemy: Entity[],
+  specialEntity?: SpecialEntity
 }
 
 type Goal = {
   name: string,
   plus: Entity[],
   minus: Entity[],
+  specialEntity: SpecialEntity,
   special?: () => number
 }
 
@@ -72,64 +75,7 @@ const goalHistory: GoalHistoryType = {}
 let boardHistory: BoardHistoryType = {} as BoardHistoryType
 let eventHistory: string[] = []
 
-// example of board
-/*
-{
- Scientists: {
-  value: 0,
-  allies: ["Trees"],
-  enemies: []
- }
-}
-*/
-
-// example event
-/*
-{
-  name: "Event Name",
-  effects: [{ //most events have 1 effect without a condition. however if it does have a condition, you check that before applying it. if that condition fails, go to the next effect. otherwise, dont go to the next effect(s)
-  condition?: () => {},
-  plus: ["Animal", ["Scientist", "Philosopher", "Priest"], "Animal"], //an array within the array means pick 1 randomly
-  minus: ["Tree"],
-  attachTo: ["Tree"], //can have multiple to pick randomly
-  ally: null,
-  enemy: ["Animal"] // can have multiple here, will be selected randomly but remove whoever its attached to
-}]
-}
-*/
-
-// example goal
-/*
-{
-  name: "Goal Name",
-  plus: ["Animal", "Fire", "Scientist"],
-  minus: ["Tree", "Druid"],
-}
-*/
-
-// example goal history
-/*
-'Goal Name': {
-  name: "Goal Name",
-  // This tells us the average score for this goal
-  played: 0,
-  points: 0,
-  events: {
-    // This tells us the average score for this goal when this particular event passes
-    'Event Name': {
-      name: "Event Name",
-      seenPassed: 0,
-      scoreFromGamesWhenPassed: 0
-    },
-    // Do this for all events, then we can rank these to find the "most beneficial" events for this goal
-    ...
-  }
-}
-*/
-
-// no need to have goals vote. just pick a winner randomly.
 // we'll see whether goals gang up too easily based on the preferred events for each goal afterwards
-// this also gets rid of bias that prevents us from seeing the true power/preferedness of each event
 
 
 // ==================== Event Deck ====================
@@ -139,7 +85,7 @@ log("==Creating new deck")
   // These DO NOT include the effects of special entities or special events (mainly the wierd wizard ones)
  deck = [
   {
-    name: "Dwarven mining is fruiful, but causes rock slides that punnel the forest",
+    name: "Dwarven mining is fruiful, but causes rock slides that pummel the forest",
     effects: [
       {
         plus: ["Dwarves"],
@@ -182,7 +128,8 @@ log("==Creating new deck")
         minus: ["Water"],
         attachTo: ["Trees"],
         ally: ["Animals"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Deep Roots"
       }
     ]
   },
@@ -261,7 +208,8 @@ log("==Creating new deck")
         minus: ["Sky"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Living Wind"
       },
       {
         condition: () => board["Wizards"].value <= board["Sky"].value,
@@ -269,7 +217,8 @@ log("==Creating new deck")
         minus: ["Wizards"],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        specialEntity: "Living Wind"
       }
     ]
   },
@@ -293,7 +242,8 @@ log("==Creating new deck")
         minus: ["Animals", "Trees", "Water"],
         attachTo: ["Water"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Drunk Animals"
       }
     ]
   },
@@ -305,7 +255,8 @@ log("==Creating new deck")
         minus: ["Priests"],
         attachTo: ["Priests"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        specialEntity: "Scientific Silence"
       }
     ]
   },
@@ -394,7 +345,8 @@ log("==Creating new deck")
         minus: ["Sky"],
         attachTo: ["Water"],
         ally: ["Sky"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Erosive Tears"
       }
     ]
   },
@@ -419,14 +371,16 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Scientists", "Priests", "Philosophers"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Friendship Ban"
       },
       {
         plus: ["Dwarves", ["Scientists", "Priests", "Philosophers"]],
         minus: [],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        specialEntity: "Friendship Ban"
       }
     ]
   },
@@ -451,14 +405,16 @@ log("==Creating new deck")
         minus: ["Earth"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Erosive Tears"
       },
       {
         plus: [],
         minus: ["Dwarves", "Earth"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Erosive Tears"
       }
     ]
   },
@@ -495,7 +451,8 @@ log("==Creating new deck")
         minus: ["Philosophers"],
         attachTo: ["Philosophers"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Sad Scholars"
       }
     ]
   },
@@ -519,7 +476,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Animals"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Shadow Beings"
       }
     ]
   },
@@ -531,7 +489,8 @@ log("==Creating new deck")
         minus: ["Water", "Fire", "Earth"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        specialEntity: "Star Wedding"
       }
     ]
   },
@@ -659,7 +618,8 @@ log("==Creating new deck")
         minus: ["Druids", "Water"],
         attachTo: ["Druids"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Inconsiderate Monarchy"
       }
     ]
   },
@@ -671,7 +631,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Scientists"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Humanity's Secret Weapon"
       }
     ]
   },
@@ -683,7 +644,8 @@ log("==Creating new deck")
         minus: ["Dwarves"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Inconsiderate Monarchy"
       }
     ]
   },
@@ -695,7 +657,8 @@ log("==Creating new deck")
         minus: ["Scientists"],
         attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Sun Spirits"
       }
     ]
   },
@@ -707,7 +670,8 @@ log("==Creating new deck")
         minus: ["Scientists"],
         attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Philosophers"]
+        enemy: ["Philosophers"],
+        specialEntity: "Rebels"
       }
     ]
   },
@@ -719,7 +683,8 @@ log("==Creating new deck")
         minus: ["Trees"],
         attachTo: ["Sky"],
         ally: ["Earth"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Star Wedding"
       },
       {
         condition: () => board["Sky"].value > 0,
@@ -759,7 +724,8 @@ log("==Creating new deck")
         minus: ["Fire", "Animals"],
         attachTo: ["Animals"],
         ally: [],
-        enemy: ["Trees"]
+        enemy: ["Trees"],
+        specialEntity: "Shadow Beings"
       }
     ]
   },
@@ -771,7 +737,8 @@ log("==Creating new deck")
         minus: ["Scientists", "Animals"],
         attachTo: ["Fire"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Sad Scholars"
       }
     ]
   },
@@ -784,14 +751,16 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Dwarves"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Devout Cultists"
       },
       {
         plus: [],
         minus: ["Dwarves"],
         attachTo: ["Dwarves"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Devout Cultists"
       }
     ]
   },
@@ -827,7 +796,8 @@ log("==Creating new deck")
         minus: ["Trees", "Dwarves"],
         attachTo: ["Trees", "Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Invasive Plateaus"
       }
     ]
   },
@@ -876,7 +846,8 @@ log("==Creating new deck")
         minus: ["Philosophers", "Scientists"],
         attachTo: ["Philosophers", "Scientists"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Armed Guards"
       }
     ]
   },
@@ -922,14 +893,16 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Scientists"],
         ally: ["Animals"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Wings For All"
       },
       {
         plus: ["Scientists", "Scientists"],
         minus: ["Animals", "Priests", "Philosophers"],
         attachTo: ["Animals", "Priests", "Philosophers"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        specialEntity: "Wings For All"
       }
     ]
   },
@@ -941,12 +914,13 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Sky"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Living Wind"
       }
     ]
   },
   {
-    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship. ",
+    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship.",
     effects: [
       {
         plus: [],
@@ -965,7 +939,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Wizards"],
         ally: ["Dwarves"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Living Crystals"
       }
     ]
   },
@@ -977,7 +952,8 @@ log("==Creating new deck")
         minus: ["Priests", "Philosophers", "Scientists"],
         attachTo: ["Priests", "Philosophers", "Scientists"],
         ally: [],
-        enemy: ["Animals"]
+        enemy: ["Animals"],
+        specialEntity: "Rebels"
       }
     ]
   },
@@ -990,7 +966,8 @@ log("==Creating new deck")
         minus: ["Fire", "Dragons"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        specialEntity: "Ruin and Destruction"
       },
       {
         condition: () => board["Fire"].value > board["Sky"].value,
@@ -998,14 +975,16 @@ log("==Creating new deck")
         minus: ["Sky", "Trees"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Ruin and Destruction"
       },
       {
         plus: [],
         minus: ["Sky", "Fire"],
         attachTo: ["Sky", "Fire"],
         ally: [],
-        enemy: ["Sky", "Fire"]
+        enemy: ["Sky", "Fire"],
+        specialEntity: "Ruin and Destruction"
       }
     ]
   },
@@ -1017,7 +996,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Animals", "Priests"],
         ally: ["Animals", "Priests"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Ecstacy Crystals"
       }
     ]
   },
@@ -1029,7 +1009,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        specialEntity: "Living Crystals"
       }
     ]
   },
@@ -1041,7 +1022,7 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Druids"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
       }
     ]
   },
@@ -1053,7 +1034,8 @@ log("==Creating new deck")
         minus: ["Earth"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        specialEntity: "Dripping Temple"
       }
     ]
   },
@@ -1065,7 +1047,8 @@ log("==Creating new deck")
         minus: ["Wizards"],
         attachTo: ["Druids"],
         ally: ["Earth"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Devout Cultists"
       }
     ]
   },
@@ -1106,7 +1089,8 @@ log("==Creating new deck")
         minus: ["Dragons"],
         attachTo: ["Priests", "Wizards", "Druids"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Armed Guards"
       }
     ]
   },
@@ -1164,7 +1148,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Dragons", "Wizards"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Friendship Ban"
       },
       {
         condition: () => board["Dragons"].value > board["Wizards"].value && board["Dragons"].value > board["Dwarves"].value,
@@ -1172,7 +1157,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Wizards", "Dwarves"],
         ally: [],
-        enemy: ["Dragons"]
+        enemy: ["Dragons"],
+        specialEntity: "Friendship Ban"
       },
       {
         condition: () => board["Wizards"].value > board["Dragons"].value && board["Wizards"].value > board["Dwarves"].value,
@@ -1180,14 +1166,16 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Dwarves", "Dragons"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Friendship Ban"
       },
       {
         plus: [],
         minus: ["Dragons", "Wizards", "Dwarves"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        specialEntity: "Friendship Ban"
       }
     ]
   },
@@ -1211,7 +1199,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Wizards", "Dragons"],
         ally: ["Wizards", "Dragons"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Wings For All"
       }
     ]
   },
@@ -1247,7 +1236,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Priests", "Wizards"],
         ally: ["Priests", "Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Humanity's Secret Weapon"
       }
     ]
   },
@@ -1283,7 +1273,8 @@ log("==Creating new deck")
         minus: ["Fire"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Invasive Plateaus"
       }
     ]
   },
@@ -1295,7 +1286,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Wizards"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Sun Spirits"
       }
     ]
   },
@@ -1307,7 +1299,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Earth", "Trees"],
         ally: ["Philosophers"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Deep Roots"
       }
     ]
   },
@@ -1331,7 +1324,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Water"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Dripping Temple"
       }
     ]
   },
@@ -1367,7 +1361,8 @@ log("==Creating new deck")
         minus: ["Trees", "Druids"],
         attachTo: ["Trees", "Druids"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Ruin and Destruction"
       }
     ]
   },
@@ -1391,7 +1386,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Trees"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Drunk Animals"
       }
     ]
   },
@@ -1415,7 +1411,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Sky"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Scientific Silence"
       }
     ]
   },
@@ -1427,7 +1424,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Miniature Kingdom"
       }
     ]
   },
@@ -1439,7 +1437,8 @@ log("==Creating new deck")
         minus: [],
         attachTo: ["Earth"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Ecstacy Crystals"
       }
     ]
   },
@@ -1475,7 +1474,8 @@ log("==Creating new deck")
         minus: ["Wizards"],
         attachTo: ["Wizards"],
         ally: ["Animals"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Miniature Kingdom"
       }
     ]
   },
@@ -1531,27 +1531,32 @@ function createGoalDeck() {
     {
       name: "Mists and Dew",
       plus: ["Druids", "Water", "Sky", "Trees"],
-      minus: ["Fire"]
+      minus: ["Fire"],
+      specialEntity: "Dripping Temple"
     },
     {
       name: "Forges Forge Forward",
       plus: ["Fire", "Dwarves", "Dragons", "Scientists"],
-      minus: ["Water"]
+      minus: ["Water"],
+      specialEntity: "Sun Spirits"
     },
     {
       name: "They're too powerful, they must be stopped",
       plus: [],
-      minus: ["Wizards", "Dragons", "Water", "Fire", "Earth", "Sky"]
+      minus: ["Wizards", "Dragons", "Water", "Fire", "Earth", "Sky"],
+      specialEntity: "Humanity's Secret Weapon"
     },
     {
       name: "Get High (Physically)",
       plus: ["Sky", "Trees", "Scientists", "Dragons"],
-      minus: []
+      minus: [],
+      specialEntity: "Invasive Plateaus"
     },
     {
       name: "Buldoze and level the land",
       plus: [],
-      minus: ["Trees", "Druids", "Scientists", "Earth"]
+      minus: ["Trees", "Druids", "Scientists", "Earth"],
+      specialEntity: "Invasive Plateaus"
     },
     {
       name: "Maintain the status quo",
@@ -1565,7 +1570,8 @@ function createGoalDeck() {
           else total += 6
         }
         return total
-      }
+      },
+      specialEntity: "Armed Guards"
     },
     {
       name: "Extreme Differences",
@@ -1579,192 +1585,230 @@ function createGoalDeck() {
           if (entity.value < lowest) lowest = entity.value
         }
         return (highest - lowest)/2
-      }
+      },
+      specialEntity: "Devout Cultists"
     },
     {
       name: "Make everyone miserable",
       plus: [],
       minus: ["Druids", "Wizards", "Priests", "Scientists", "Dwarves", "Trees", "Fire", "Water", "Philosophers", "Earth", "Sky", "Animals", "Dragons"],
+      specialEntity: "Friendship Ban"
     },
     {
       name: "Make everyone happy",
       plus: ["Druids", "Wizards", "Priests", "Scientists", "Dwarves", "Trees", "Fire", "Water", "Philosophers", "Earth", "Sky", "Animals", "Dragons"],
       minus: [],
+      specialEntity: "Ecstacy Crystals"
     },
     {
       name: "Revive a forgotten God",
       plus: ["Druids", "Wizards", "Priests", "Scientists", "Dwarves"],
       minus: [],
+      specialEntity: "Devout Cultists"
     },
     {
       name: "Boil the soil and those that hide",
       plus: ["Water", "Fire"],
       minus: ["Dwarves", "Trees", "Earth"],
+      specialEntity: "Erosive Tears"
     },
     {
       name: "Live simply, live slow",
       plus: ["Philosophers", "Earth", "Trees", "Dwarves"],
-      minus: ["Scientists", "Fire", "Dragons"]
+      minus: ["Scientists", "Fire", "Dragons"],
+      specialEntity: "Dripping Temple"
     },
     {
       name: "Silence is golden",
       plus: ["Trees", "Druids", "Philosophers"],
-      minus: ["Priests", "Scientists"]
+      minus: ["Priests", "Scientists"],
+      specialEntity: "Scientific Silence"
     },
     {
       name: "Unrestrained Flames",
       plus: ["Fire"],
-      minus: ["Water", "Druids", "Trees"]
+      minus: ["Water", "Druids", "Trees"],
+      specialEntity: "Sun Spirits"
     },
     {
-      name: "Orgy",
+      name: "All-powerful Orgy",
       plus: ["Earth", "Water", "Sky"],
-      minus: ["Priests", ]
+      minus: ["Priests", ],
+      specialEntity: "Ecstacy Crystals"
     },
     {
       name: "Control everything",
       plus: ["Priests", "Scientists", "Wizards"],
-      minus: ["Animals", "Dragons", "Fire"]
+      minus: ["Animals", "Dragons", "Fire"],
+      specialEntity: "Armed Guards"
     },
     {
       name: "Grow Nature",
       plus: ["Earth", "Animals", "Water", "Trees", "Druids"],
-      minus: ["Fire"]
+      minus: ["Fire"],
+      specialEntity: "Deep Roots"
     },
     {
       name: "Screw the old ways",
       plus: ["Scientists"],
-      minus: ["Dwarves", "Dragons", "Priests", "Animals"]
+      minus: ["Dwarves", "Dragons", "Priests", "Animals"],
+      specialEntity: "Rebels"
     },
     {
       name: "Clouds Cloud Minds",
       plus: [],
-      minus: ["Sky", "Philosophers", "Scientists", "Wizards"]
+      minus: ["Sky", "Philosophers", "Scientists", "Wizards"],
+      specialEntity: "Shadow Beings"
     },
     {
       name: "Overpowering the weak",
       plus: ["Priests", "Dragons"],
-      minus: ["Philosophers","Animals"]
+      minus: ["Philosophers","Animals"],
+      specialEntity: "Inconsiderate Monarchy"
     },
     {
       name: "Be Free",
       plus: ["Philosophers", "Animals"],
-      minus: ["Dwarves", "Priests"]
+      minus: ["Dwarves", "Priests"],
+      specialEntity: "Living Wind"
     },
     {
       name: "Down with hippies and their friends",
       plus: [],
-      minus: ["Philosophers", "Animals", "Druids", "Trees"]
+      minus: ["Philosophers", "Animals", "Druids", "Trees"],
+      specialEntity: "Friendship Ban"
     },
     {
       name: "New Creatures",
       plus: ["Animals", "Wizards", "Scientists", "Druids"],
-      minus: []
+      minus: [],
+      specialEntity: "Living Crystals"
     },
     {
       name: "Dull Darkness",
       plus: ["Dwarves",],
-      minus: ["Sky", "Wizards", "Fire"]
+      minus: ["Sky", "Wizards", "Fire"],
+      specialEntity: "Shadow Beings"
     },
     {
       name: "Old tall ones grow as their friends and distant foes fall",
       plus: ["Trees"],
-      minus: ["Wizards", "Dwarves", "Earth", "Druids"]
+      minus: ["Wizards", "Dwarves", "Earth", "Druids"],
+      specialEntity: "Deep Roots"
     },
     {
-      name: "The hard are chipped by a gnawing, swinging world",
+      name: "The hard are chipped by a gnawing, swinging world and wild wind",
       plus: ["Sky", "Animals", "Dwarves"],
-      minus: ["Dragons", "Trees"]
+      minus: ["Dragons", "Trees"],
+      specialEntity: "Living Wind"
     },
     {
-      name: "Steamy beacors threaten the divine and arcane ",
+      name: "Steamy beakers threaten the arcane",
       plus: ["Scientists", "Fire", "Water"],
-      minus: ["Wizards", "Priests"]
+      minus: ["Wizards", "Priests"],
+      specialEntity: "Scientific Silence"
     },
     {
       name: "Fly into me, away from the core",
       plus: ["Dragons", "Wizards", "Sky"],
-      minus: ["Fire", "Earth"]
+      minus: ["Fire", "Earth"],
+      specialEntity: "Wings For All"
     },
     {
       name: "The squishy and fluid lose to the hard and hardened",
       plus: ["Dwarves", "Dragons", "Earth"],
-      minus: ["Druids", "Water"]
+      minus: ["Druids", "Water"],
+      specialEntity: "Living Crystals"
     },
     {
       name: "All those moral beings can shove it, I'm going to grow you unnatural",
       plus: ["Wizards", "Trees"],
-      minus: ["Druids", "Priests", "Philosophers"]
+      minus: ["Druids", "Priests", "Philosophers"],
+      specialEntity: "Rebels"
     },
     {
       name: "After lots of (great) debate and chaos, two godly parents consume their child flower child",
       plus: ["Wizards", "Philosophers", "Water", "Earth"],
-      minus: ["Trees"]
+      minus: ["Trees"],
+      specialEntity: "Star Wedding"
     },
     {
       name: "The city interferes with a world-wide ritual by powerful beings, coming out on top and striking them down ",
       plus: ["Priests", "Philosophers"],
-      minus: ["Dragons", "Druids", "Sky"]
+      minus: ["Dragons", "Druids", "Sky"],
+      specialEntity: "Humanity's Secret Weapon"
     },
     {
       name: "DONT GIVE ME A SPEACH; DIE!",
       plus: ["Wizards", "Fire"],
-      minus: ["Priests", "Philosophers"]
+      minus: ["Priests", "Philosophers"],
+      specialEntity: "Ruin and Destruction"
     },
     {
       name: "The small triumph over the holier than though",
       plus: ["Dwarves", "Animals"],
-      minus: ["Sky", "Priests"]
+      minus: ["Sky", "Priests"],
+      specialEntity: "Miniature Kingdom"
     },
     {
-      name: "Lovers day and night, forever. At the cost of wild and calm creators",
+      name: "Lovers day and night, forever. At the cost of wild and calm creators suffering",
       plus: ["Sky", "Earth"],
-      minus: ["Wizards", "Dwarves", "Fire", "Scientists"]
+      minus: ["Wizards", "Dwarves", "Fire", "Scientists"],
+      specialEntity: "Star Wedding"
     },
     {
       name: "Run along the ground, wild and free, or fly across the heavens with untold powers. As long as you're not wet",
       plus: ["Wizards", "Sky", "Earth", "Animals"],
-      minus: ["Water"]
+      minus: ["Water"],
+      specialEntity: "Wings For All"
     },
     {
       name: "Just a boy in a sandbox vs ancient ungodly beings, and winning",
       plus: ["Scientists", "Earth"],
-      minus: ["Dragons", "Dwarves", "Druids"]
+      minus: ["Dragons", "Dwarves", "Druids"],
+      specialEntity: "Miniature Kingdom"
     },
     {
       name: "My flock cannot be tamed. We rule the land. Cower low, stand to be burned, and no chanting or praying can help.",
       plus: ["Dragons"],
-      minus: ["Dwarves", "Trees", "Priests"]
+      minus: ["Dwarves", "Trees", "Priests"],
+      specialEntity: "Ruin and Destruction"
     },
     {
-      name: "pray to the wet claws, discard the dirt ",
+      name: "Pray to the wet claws, discard the dirt ",
       plus: ["Water", "Dragons", "Animals", "Priests"],
-      minus: ["Earth"]
+      minus: ["Earth"],
+      specialEntity: "Erosive Tears"
     },
     {
       name: "We pray that the clouds dry up and wither, that picks and thoughts grow dull, yet we stay strong",
       plus: ["Priests"],
-      minus: ["Water", "Dwarves", "Sky", "Philosophers"]
+      minus: ["Water", "Dwarves", "Sky", "Philosophers"],
+      specialEntity: "Inconsiderate Monarchy"
     },
     {
-      name: "lab or wild, the rats go thirsty, but they teach us about meaning of life",
+      name: "Lab or wild, the rats go thirsty, but they teach us about meaning of life",
       plus: ["Philosophers"],
-      minus: ["Animals", "Water", "Scientists"]
+      minus: ["Animals", "Water", "Scientists"],
+      specialEntity: "Sad Scholars"
     },
     {
       name: "Mind and breath grow, spastic beings stumble, just live naturally",
       plus: ["Philosophers", "Dragons", "Druids"],
-      minus: ["Animals", "Wizards"]
+      minus: ["Animals", "Wizards"],
+      specialEntity: "Drunk Animals"
     },
     {
-      name: "you were supposed to protect them you selfish magic hobo",
+      name: "You were supposed to protect them you selfish magic hobo",
       plus: ["Druids"],
-      minus: ["Earth", "Animals", "Trees"]
+      minus: ["Earth", "Animals", "Trees"],
+      specialEntity: "Drunk Animals"
     },
     {
       name: "Sun temples, ruined theses, and heavenly crying",
       plus: ["Fire", "Priests"],
-      minus: ["Scientists", "Sky", "Philosophers"]
+      minus: ["Scientists", "Sky", "Philosophers"],
+      specialEntity: "Sad Scholars"
     },
   ]
 }
