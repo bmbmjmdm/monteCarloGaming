@@ -966,7 +966,7 @@ log("==Creating new deck")
         ally: ["Animals"],
         enemy: [],
         specialEntity: "Wings For All",
-        relationship: ""
+        relationship: "Veterinarian Friends"
       },
       {
         plus: ["Scientists", "Scientists"],
@@ -975,7 +975,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Scientists"],
         specialEntity: "Wings For All",
-        relationship: ""
+        relationship: "Bad Vaccines"
       }
     ]
   },
@@ -989,7 +989,7 @@ log("==Creating new deck")
         ally: ["Wizards"],
         enemy: [],
         specialEntity: "Living Wind",
-        relationship: ""
+        relationship: "Comet Gift"
       }
     ]
   },
@@ -1002,7 +1002,7 @@ log("==Creating new deck")
         attachTo: ["Earth", "Druids"],
         ally: ["Druids", "Earth"],
         enemy: [],
-        relationship: ""
+        relationship: "Grief and Growth"
       }
     ]
   },
@@ -1016,7 +1016,7 @@ log("==Creating new deck")
         ally: ["Dwarves"],
         enemy: [],
         specialEntity: "Living Crystals",
-        relationship: ""
+        relationship: "Magic Plotting"
       }
     ]
   },
@@ -1030,7 +1030,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Animals"],
         specialEntity: "Rebels",
-        relationship: ""
+        relationship: "Culling and Control"
       }
     ]
   },
@@ -1045,7 +1045,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Sky"],
         specialEntity: "Ruin and Destruction",
-        relationship: ""
+        relationship: "Sizzle and Scars"
       },
       {
         condition: () => board["Fire"].value > board["Sky"].value,
@@ -1055,7 +1055,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Fire"],
         specialEntity: "Ruin and Destruction",
-        relationship: ""
+        relationship: "Smoke and Scars"
       },
       {
         plus: [],
@@ -1064,7 +1064,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Sky", "Fire"],
         specialEntity: "Ruin and Destruction",
-        relationship: ""
+        relationship: "Battle Scars"
       }
     ]
   },
@@ -1078,12 +1078,12 @@ log("==Creating new deck")
         ally: ["Animals", "Priests"],
         enemy: [],
         specialEntity: "Ecstacy Crystals",
-        relationship: ""
+        relationship: "Mortal Love"
       }
     ]
   },
   {
-    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, upsetting the natural shepherds.",
+    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, tormenting the natural shepherds.",
     effects: [
       {
         plus: ["Wizards"],
@@ -1092,7 +1092,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Druids"],
         specialEntity: "Living Crystals",
-        relationship: ""
+        relationship: "Unnatural Beings"
       }
     ]
   },
@@ -1105,12 +1105,12 @@ log("==Creating new deck")
         attachTo: ["Druids"],
         ally: ["Wizards"],
         enemy: [],
-        relationship: ""
+        relationship: "Defenders of Nature"
       }
     ]
   },
   {
-    name: "The water god creates a new river, altering the landscape and the flow of trade.",
+    name: "The water god creates a new river, altering the landscape and the creating new flows of trade.",
     effects: [
       {
         plus: ["Water", "Trees", "Animals", "Priests"],
@@ -1119,7 +1119,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Water"],
         specialEntity: "Dripping Temple",
-        relationship: ""
+        relationship: "Scarred Landscape"
       }
     ]
   },
@@ -1133,7 +1133,7 @@ log("==Creating new deck")
         ally: ["Earth"],
         enemy: [],
         specialEntity: "Devout Cultists",
-        relationship: ""
+        relationship: "Ancient Texts"
       }
     ]
   },
@@ -1147,7 +1147,7 @@ log("==Creating new deck")
         attachTo: ["Dragons", "Wizards"],
         ally: [],
         enemy: ["Druids"],
-        relationship: ""
+        relationship: "Spiteful Storm"
       },
       {
         condition: () => board["Wizards"].value > 1,
@@ -1156,7 +1156,7 @@ log("==Creating new deck")
         attachTo: ["Wizards"],
         ally: [],
         enemy: ["Druids"],
-        relationship: ""
+        relationship: "Spiteful Storm"
       },
       {
         condition: () => board["Dragons"].value > 0,
@@ -1165,7 +1165,7 @@ log("==Creating new deck")
         attachTo: ["Dragons"],
         ally: [],
         enemy: ["Druids"],
-        relationship: ""
+        relationship: "Spiteful Storm"
       }
     ]
   },
@@ -1179,7 +1179,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Dwarves"],
         specialEntity: "Armed Guards",
-        relationship: ""
+        relationship: "Scroll Lust"
       }
     ]
   },
@@ -1193,7 +1193,7 @@ log("==Creating new deck")
         attachTo: ["Druids"],
         ally: ["Sky"],
         enemy: [],
-        relationship: ""
+        relationship: "Fair-Weather Friends"
       }
     ]
   },
@@ -1206,7 +1206,7 @@ log("==Creating new deck")
         attachTo: ["Druids", "Philosophers"],
         ally: ["Trees"],
         enemy: [],
-        relationship: ""
+        relationship: "Defenders of Nature"
       }
     ]
   },
@@ -1220,7 +1220,7 @@ log("==Creating new deck")
         attachTo: ["Priests"],
         ally: [],
         enemy: ["Water"],
-        relationship: ""
+        relationship: "Heretics"
       },
       {
         plus: [],
@@ -1228,7 +1228,7 @@ log("==Creating new deck")
         attachTo: ["Water"],
         ally: ["Priests"],
         enemy: [],
-        relationship: ""
+        relationship: "Worshipers"
       }
     ]
   },
@@ -1243,7 +1243,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Dwarves"],
         specialEntity: "Friendship Ban",
-        relationship: ""
+        relationship: "Ore Wars"
       },
       {
         condition: () => board["Dragons"].value > board["Wizards"].value && board["Dragons"].value > board["Dwarves"].value,
@@ -1253,7 +1253,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Dragons"],
         specialEntity: "Friendship Ban",
-        relationship: ""
+        relationship: "Ore Wars"
       },
       {
         condition: () => board["Wizards"].value > board["Dragons"].value && board["Wizards"].value > board["Dwarves"].value,
@@ -1263,7 +1263,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Wizards"],
         specialEntity: "Friendship Ban",
-        relationship: ""
+        relationship: "Ore Wars"
       },
       {
         plus: [],
@@ -1272,7 +1272,7 @@ log("==Creating new deck")
         ally: [],
         enemy: [],
         specialEntity: "Friendship Ban",
-        relationship: ""
+        relationship: "Ore Wars"
       }
     ]
   },
@@ -1285,7 +1285,7 @@ log("==Creating new deck")
         attachTo: ["Scientists"],
         ally: [],
         enemy: ["Animals"],
-        relationship: ""
+        relationship: "Dominate Nature"
       }
     ]
   },
@@ -1299,7 +1299,7 @@ log("==Creating new deck")
         ally: ["Wizards", "Dragons"],
         enemy: [],
         specialEntity: "Wings For All",
-        relationship: ""
+        relationship: "Ancient Ritual"
       }
     ]
   },
@@ -1312,7 +1312,7 @@ log("==Creating new deck")
         attachTo: ["Druids", "Animals"],
         ally: [],
         enemy: ["Wizards"],
-        relationship: ""
+        relationship: "Misguided Grievance"
       }
     ]
   },
@@ -1325,7 +1325,7 @@ log("==Creating new deck")
         attachTo: ["Philosophers"],
         ally: ["Dragons"],
         enemy: [],
-        relationship: ""
+        relationship: "Fiery Favors"
       }
     ]
   },
@@ -1339,7 +1339,7 @@ log("==Creating new deck")
         ally: ["Priests", "Wizards"],
         enemy: [],
         specialEntity: "Humanity's Secret Weapon",
-        relationship: ""
+        relationship: "Grand Ritual"
       }
     ]
   },
