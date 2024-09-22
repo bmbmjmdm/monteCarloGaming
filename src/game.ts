@@ -1352,7 +1352,7 @@ log("==Creating new deck")
         attachTo: ["Trees", "Druids", "Animals"],
         ally: [],
         enemy: ["Dragons"],
-        relationship: ""
+        relationship: "Bloody Invaders"
       }
     ]
   },
@@ -1365,7 +1365,7 @@ log("==Creating new deck")
         attachTo: ["Dragons"],
         ally: [],
         enemy: ["Water"],
-        relationship: ""
+        relationship: "Stolen Treasure"
       }
     ]
   },
@@ -1379,7 +1379,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Fire"],
         specialEntity: "Invasive Plateaus",
-        relationship: ""
+        relationship: "Taste for Fire"
       }
     ]
   },
@@ -1393,7 +1393,7 @@ log("==Creating new deck")
         ally: ["Fire"],
         enemy: [],
         specialEntity: "Sun Spirits",
-        relationship: ""
+        relationship: "Worshipers"
       }
     ]
   },
@@ -1407,7 +1407,7 @@ log("==Creating new deck")
         ally: ["Philosophers"],
         enemy: [],
         specialEntity: "Deep Roots",
-        relationship: ""
+        relationship: "Caretakers"
       }
     ]
   },
@@ -1420,7 +1420,7 @@ log("==Creating new deck")
         attachTo: ["Sky", "Fire"],
         ally: [],
         enemy: ["Dragons"],
-        relationship: ""
+        relationship: "God Slayer"
       }
     ]
   },
@@ -1434,7 +1434,7 @@ log("==Creating new deck")
         ally: ["Priests"],
         enemy: [],
         specialEntity: "Dripping Temple",
-        relationship: ""
+        relationship: "Caretakers"
       }
     ]
   },
@@ -1447,7 +1447,7 @@ log("==Creating new deck")
         attachTo: ["Dwarves", "Trees"],
         ally: [],
         enemy: ["Earth"],
-        relationship: ""
+        relationship: "Unstable Ground"
       }
     ]
   },
@@ -1460,7 +1460,7 @@ log("==Creating new deck")
         attachTo: ["Sky"],
         ally: [],
         enemy: ["Wizards"],
-        relationship: ""
+        relationship: "Scarred Skyscape"
       }
     ]
   },
@@ -1474,7 +1474,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Dwarves"],
         specialEntity: "Ruin and Destruction",
-        relationship: ""
+        relationship: "Bloody Invaders"
       }
     ]
   },
@@ -1487,7 +1487,7 @@ log("==Creating new deck")
         attachTo: ["Fire"],
         ally: [],
         enemy: ["Priests"],
-        relationship: ""
+        relationship: "Heretics"
       }
     ]
   },
@@ -1501,7 +1501,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Wizards"],
         specialEntity: "Drunk Animals",
-        relationship: ""
+        relationship: "Betraying Brews"
       }
     ]
   },
@@ -1514,7 +1514,7 @@ log("==Creating new deck")
         attachTo: ["Dwarves"],
         ally: [],
         enemy: ["Water"],
-        relationship: ""
+        relationship: "Home Wrecker"
       }
     ]
   },
@@ -1528,7 +1528,7 @@ log("==Creating new deck")
         ally: ["Scientists"],
         enemy: [],
         specialEntity: "Scientific Silence",
-        relationship: ""
+        relationship: "Flattering Research"
       }
     ]
   },
@@ -1542,7 +1542,7 @@ log("==Creating new deck")
         ally: [],
         enemy: ["Dwarves"],
         specialEntity: "Miniature Kingdom",
-        relationship: ""
+        relationship: "Scarred Landscape"
       }
     ]
   },
@@ -1556,7 +1556,7 @@ log("==Creating new deck")
         ally: ["Fire"],
         enemy: [],
         specialEntity: "Ecstacy Crystals",
-        relationship: ""
+        relationship: "Lovers"
       }
     ]
   },
@@ -1569,7 +1569,7 @@ log("==Creating new deck")
         attachTo: ["Water"],
         ally: ["Sky"],
         enemy: [],
-        relationship: ""
+        relationship: "Quenching Storms"
       }
     ]
   },
@@ -1582,7 +1582,7 @@ log("==Creating new deck")
         attachTo: ["Fire"],
         ally: [],
         enemy: ["Philosophers"],
-        relationship: ""
+        relationship: "Heretics"
       }
     ]
   },
@@ -1596,7 +1596,7 @@ log("==Creating new deck")
         ally: ["Animals"],
         enemy: [],
         specialEntity: "Miniature Kingdom",
-        relationship: ""
+        relationship: "Curiosity Conjured the Cat"
       }
     ]
   },
@@ -1609,7 +1609,7 @@ log("==Creating new deck")
         attachTo: ["Sky"],
         ally: [],
         enemy: ["Philosophers"],
-        relationship: ""
+        relationship: "Accidental Heretics"
       }
     ]
   },
@@ -1622,7 +1622,7 @@ log("==Creating new deck")
         attachTo: ["Fire"],
         ally: [],
         enemy: ["Dragons"],
-        relationship: ""
+        relationship: "Heretics"
       }
     ]
   },
