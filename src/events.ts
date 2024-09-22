@@ -1,13 +1,16 @@
-const events = [
+import type { GameEvent, BoardEntity, Entity } from "./game";
+
+export const events:GameEvent[] = [
   {
-    name: "Dwarven mining is fruiful, but causes rock slides that punnel the forest",
+    name: "Dwarven mining is fruiful, but causes rock slides that pummel the forest",
     effects: [
       {
         plus: ["Dwarves"],
         minus: ["Trees", "Druids"],
         attachTo: ["Trees"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        relationship: "Bruised Bark"
       }
     ]
   },
@@ -19,7 +22,8 @@ const events = [
         minus: ["Dragons", "Priests"],
         attachTo: ["Dragons"],
         ally: [],
-        enemy: ["Animals"]
+        enemy: ["Animals"],
+        relationship: "Hungry and Hateful"
       },
     ]
   },
@@ -31,7 +35,8 @@ const events = [
         minus: [],
         attachTo: ["Fire"],
         ally: ["Dragons"],
-        enemy: []
+        enemy: [],
+        relationship: "Warm Belly"
       }
     ]
   },
@@ -43,7 +48,9 @@ const events = [
         minus: ["Water"],
         attachTo: ["Trees"],
         ally: ["Animals"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Deep Roots",
+        relationship: "Bare Fruit"
       }
     ]
   },
@@ -51,20 +58,22 @@ const events = [
     name: "Wet soil and happy gods spring forth new, green life",
     effects: [
       {
-        condition: () => board["Earth"].value > 0 && board["Water"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Earth"].value > 0 && board["Water"].value > 0,
         plus: ["Earth", "Water", "Trees"],
         minus: [],
         attachTo: ["Earth", "Water"],
         ally: ["Water", "Earth"],
-        enemy: []
+        enemy: [],
+        relationship: "Lovers"
       },
       {
-        condition: () => board["Earth"].value <= 0 || board["Water"].value <= 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Earth"].value <= 0 || board["Water"].value <= 0,
         plus: [],
         minus: [],
         attachTo: ["Earth", "Water"],
         ally: ["Water", "Earth"],
-        enemy: []
+        enemy: [],
+        relationship: "Lovers"
       }
     ]
   },
@@ -76,7 +85,8 @@ const events = [
         minus: [],
         attachTo: ["Druids", "Dragons"],
         ally: ["Dragons", "Druids"],
-        enemy: []
+        enemy: [],
+        relationship: "Alliance"
       }
     ]
   },
@@ -88,7 +98,8 @@ const events = [
         minus: [["Scientists", "Priests", "Philosophers"]],
         attachTo: ["Scientists", "Priests", "Philosophers"],
         ally: [],
-        enemy: ["Dragons"]
+        enemy: ["Dragons"],
+        relationship: "Burnt Homes"
       }
     ]
   },
@@ -96,20 +107,22 @@ const events = [
     name: "A philosopher tries to help the sky god, but it's risky",
     effects: [
       {
-        condition: () => board["Philosophers"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Philosophers"].value > board["Sky"].value,
         plus: ["Sky", "Philosophers"],
         minus: [],
         attachTo: ["Sky"],
         ally: ["Philosophers"],
-        enemy: []
+        enemy: [],
+        relationship: "Emotional Support"
       },
       {
-        condition: () => board["Philosophers"].value <= board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Philosophers"].value <= board["Sky"].value,
         plus: [],
         minus: ["Sky", "Philosophers"],
         attachTo: ["Sky"],
         ally: ["Philosophers"],
-        enemy: []
+        enemy: [],
+        relationship: "Emotional Support"
       }
     ]
   },
@@ -117,20 +130,24 @@ const events = [
     name: "A wizard challenges the sky, competing with the lightning",
     effects: [
       {
-        condition: () => board["Wizards"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Wizards"].value > board["Sky"].value,
         plus: ["Wizards"],
         minus: ["Sky"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Living Wind",
+        relationship: "Sore Loser"
       },
       {
-        condition: () => board["Wizards"].value <= board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Wizards"].value <= board["Sky"].value,
         plus: ["Sky"],
         minus: ["Wizards"],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        specialEntity: "Living Wind",
+        relationship: "Sore Loser"
       }
     ]
   },
@@ -142,19 +159,22 @@ const events = [
         minus: [],
         attachTo: ["Dwarves"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        relationship: "Godly Forge"
       }
     ]
   },
   {
-    name: "Runoff from the city infects many lakes and shores",
+    name: "Runoff from the city temples infects many lakes and shores",
     effects: [
       {
         plus: [],
         minus: ["Animals", "Trees", "Water"],
         attachTo: ["Water"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Priests"],
+        specialEntity: "Drunk Animals",
+        relationship: "Polluted Grudge"
       }
     ]
   },
@@ -166,7 +186,9 @@ const events = [
         minus: ["Priests"],
         attachTo: ["Priests"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        specialEntity: "Scientific Silence",
+        relationship: "Threats to Faith"
       }
     ]
   },
@@ -178,7 +200,8 @@ const events = [
         minus: ["Wizards"],
         attachTo: ["Earth"],
         ally: ["Dwarves"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       }
     ]
   },
@@ -186,36 +209,40 @@ const events = [
     name: "A priest prays, the most well god responds",
     effects: [
       {
-        condition: () => board["Fire"].value > board["Water"].value && board["Fire"].value > board["Earth"].value && board["Fire"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Fire"].value > board["Water"].value && board["Fire"].value > board["Earth"].value && board["Fire"].value > board["Sky"].value,
         plus: ["Fire"],
         minus: [],
         attachTo: ["Fire"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       },
       {
-        condition: () => board["Water"].value > board["Fire"].value && board["Water"].value > board["Earth"].value && board["Water"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Water"].value > board["Fire"].value && board["Water"].value > board["Earth"].value && board["Water"].value > board["Sky"].value,
         plus: ["Water"],
         minus: [],
         attachTo: ["Water"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       },
       {
-        condition: () => board["Earth"].value > board["Fire"].value && board["Earth"].value > board["Water"].value && board["Earth"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Earth"].value > board["Fire"].value && board["Earth"].value > board["Water"].value && board["Earth"].value > board["Sky"].value,
         plus: ["Earth"],
         minus: [],
         attachTo: ["Earth"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       },
       {
-        condition: () => board["Sky"].value > board["Fire"].value && board["Sky"].value > board["Earth"].value && board["Sky"].value > board["Water"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Sky"].value > board["Fire"].value && board["Sky"].value > board["Earth"].value && board["Sky"].value > board["Water"].value,
         plus: ["Sky"],
         minus: [],
         attachTo: ["Sky"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       }
     ]
   },
@@ -227,23 +254,26 @@ const events = [
         minus: ["Trees", "Water"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       },
       {
-        condition: () => board["Fire"].value > 0 && (board["Water"].value < 1 || board["Druids"].value < 1),
+        condition: (board:Record<Entity, BoardEntity>) => board["Fire"].value > 0 && (board["Water"].value < 1 || board["Druids"].value < 1),
         plus: ["Fire"],
         minus: ["Animals", "Druids"],
         attachTo: ["Druids", "Animals", "Trees"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        relationship: "Worshipers"
       },
       {
-        condition: () => board["Druids"].value > 0 && board["Water"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Druids"].value > 0 && board["Water"].value > 0,
         plus: ["Trees", "Water"],
         minus: [],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       },
     ]
   },
@@ -255,7 +285,9 @@ const events = [
         minus: ["Sky"],
         attachTo: ["Water"],
         ally: ["Sky"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Erosive Liquid",
+        relationship: "Helpful Tears"
       }
     ]
   },
@@ -267,7 +299,8 @@ const events = [
         minus: ["Fire", "Sky"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        relationship: "Hurtful Tears"
       }
     ]
   },
@@ -275,19 +308,23 @@ const events = [
     name: "The dwarves and the city start an exchange program, sharing knowledge but erupting in discrimination",
     effects: [
       {
-        condition: () => Math.random() < 0.5,
+        condition: (board:Record<Entity, BoardEntity>) => Math.random() < 0.5,
         plus: ["Dwarves", ["Scientists", "Priests", "Philosophers"]],
         minus: [],
         attachTo: ["Scientists", "Priests", "Philosophers"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Friendship Ban",
+        relationship: "Discrimination"
       },
       {
         plus: ["Dwarves", ["Scientists", "Priests", "Philosophers"]],
         minus: [],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Scientists"],
+        specialEntity: "Friendship Ban",
+        relationship: "Discrimination"
       }
     ]
   },
@@ -299,7 +336,8 @@ const events = [
         minus: ["Animals"],
         attachTo: ["Animals"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        relationship: "Fearful Subjects"
       }
     ]
   },
@@ -307,19 +345,23 @@ const events = [
     name: "As the Earth turns its back on the Dwarves in their time of need, the dwarves pray to distant gods for new ore and revenge.",
     effects: [
       {
-        condition: () => Math.random() > 0.5,
+        condition: (board:Record<Entity, BoardEntity>) => Math.random() > 0.5,
         plus: ["Dwarves"],
         minus: ["Earth"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Erosive Liquid",
+        relationship: "Rival Meteor Worshiper"
       },
       {
         plus: [],
         minus: ["Dwarves", "Earth"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Erosive Liquid",
+        relationship: "Rival Meteor Worshiper"
       }
     ]
   },
@@ -331,7 +373,8 @@ const events = [
         minus: ["Water", "Fire"],
         attachTo: ["Water", "Fire"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        relationship: "Frostbite"
       },
 
     ]
@@ -344,7 +387,8 @@ const events = [
         minus: [["Scientists", "Priests", "Philosophers"]],
         attachTo: ["Sky", "Water"],
         ally: ["Sky", "Water"],
-        enemy: []
+        enemy: [],
+        relationship: "Lovers"
       }
     ]
   },
@@ -356,7 +400,9 @@ const events = [
         minus: ["Philosophers"],
         attachTo: ["Philosophers"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Sad Scholars",
+        relationship: "Burnt Books"
       }
     ]
   },
@@ -368,7 +414,8 @@ const events = [
         minus: ["Priests"],
         attachTo: ["Priests"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        relationship: "Stolen Treasure"
       }
     ]
   },
@@ -380,7 +427,9 @@ const events = [
         minus: [],
         attachTo: ["Animals"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Shadow Beings",
+        relationship: "Spectral Friends"
       }
     ]
   },
@@ -392,7 +441,9 @@ const events = [
         minus: ["Water", "Fire", "Earth"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        specialEntity: "Star Wedding",
+        relationship: "Heretics"
       }
     ]
   },
@@ -404,15 +455,17 @@ const events = [
         minus: ["Dwarves"],
         attachTo: ["Earth"],
         ally: ["Water"],
-        enemy: []
+        enemy: [],
+        relationship: "Lovers"
       },
       {
-        condition: () => Math.random() < 0.5,
+        condition: (board:Record<Entity, BoardEntity>) => Math.random() < 0.5,
         plus: ["Water"],
         minus: [],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       }
     ]
   },
@@ -424,7 +477,8 @@ const events = [
         minus: ["Sky", "Fire"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        relationship: "Hurtful Tears"
       }
     ]
   },
@@ -436,15 +490,17 @@ const events = [
         minus: ["Animals"],
         attachTo: ["Animals"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        relationship: "Veterinarian Friends"
       },
       {
-        condition: () => board["Animals"].allies.filter(ally => ally === "Scientists").length > 1 || board["Animals"].allies.includes("Priests") || board["Animals"].allies.includes("Philosophers"),
+        condition: (board:Record<Entity, BoardEntity>) => board["Animals"].allies.filter(ally => ally === "Scientists").length > 1 || board["Animals"].allies.includes("Priests") || board["Animals"].allies.includes("Philosophers"),
         plus: [],
         minus: ["Scientists", "Priests", "Philosophers"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       }
     ]
   },
@@ -452,19 +508,21 @@ const events = [
     name: "The water god is weakened by a nightmare of the fire god, causing a drought to plague the city. Sparks lurk",
     effects: [
       {
-        condition: () => board["Fire"].value > 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Fire"].value > 1,
         plus: [],
         minus: ["Water", "Priests", "Philosophers", "Scientists"],
         attachTo: ["Water"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        relationship: "Nightmares"
       },
       {
         plus: [],
         minus: ["Water", ["Priests", "Philosophers", "Scientists"]],
         attachTo: ["Water"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        relationship: "Nightmares"
       }
     ]
   },
@@ -476,19 +534,21 @@ const events = [
         minus: [],
         attachTo: ["Trees", "Philosophers"],
         ally: ["Philosophers", "Trees"],
-        enemy: []
+        enemy: [],
+        relationship: "Brainstorm"
       }
     ]
   },
   {
-    name: "The sky god spreads wisdom through the city, but at a cost",
+    name: "The sky god spreads wisdom through the city, but discovers heretical texts",
     effects: [
       {
         plus: ["Scientists", "Priests", "Philosophers"],
         minus: [],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Scientists", "Priests", "Philosophers"]
+        enemy: ["Priests"],
+        relationship: "Heretics"
       }
     ]
   },
@@ -500,15 +560,17 @@ const events = [
         minus: [],
         attachTo: ["Earth"],
         ally: ["Water"],
-        enemy: []
+        enemy: [],
+        relationship: "Lovers"
       },
       {
-        condition: () => board["Earth"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Earth"].value > 0,
         plus: ["Water"],
         minus: [],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       }
     ]
   },
@@ -520,7 +582,9 @@ const events = [
         minus: ["Druids", "Water"],
         attachTo: ["Druids"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Inconsiderate Monarchy",
+        relationship: "Stolen Treasure"
       }
     ]
   },
@@ -532,7 +596,9 @@ const events = [
         minus: [],
         attachTo: ["Scientists"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Humanity's Secret Weapon",
+        relationship: "Running Hot"
       }
     ]
   },
@@ -544,7 +610,9 @@ const events = [
         minus: ["Dwarves"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Inconsiderate Monarchy",
+        relationship: "Stolen Treasure"
       }
     ]
   },
@@ -556,7 +624,9 @@ const events = [
         minus: ["Scientists"],
         attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Sun Spirits",
+        relationship: "Fried Circuits"
       }
     ]
   },
@@ -568,7 +638,9 @@ const events = [
         minus: ["Scientists"],
         attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Philosophers"]
+        enemy: ["Philosophers"],
+        specialEntity: "Rebels",
+        relationship: "Strict Regulation"
       }
     ]
   },
@@ -580,23 +652,27 @@ const events = [
         minus: ["Trees"],
         attachTo: ["Sky"],
         ally: ["Earth"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Star Wedding",
+        relationship: "Lovers"
       },
       {
-        condition: () => board["Sky"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Sky"].value > 0,
         plus: ["Earth"],
         minus: [],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       },
       {
-        condition: () => board["Sky"].value < 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Sky"].value < 0,
         plus: [],
         minus: ["Earth"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       },
     ]
   },
@@ -608,7 +684,8 @@ const events = [
         minus: ["Earth", "Water"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        relationship: "Scarred Landscape"
       }
     ]
   },
@@ -620,7 +697,9 @@ const events = [
         minus: ["Fire", "Animals"],
         attachTo: ["Animals"],
         ally: [],
-        enemy: ["Trees"]
+        enemy: ["Trees"],
+        specialEntity: "Shadow Beings",
+        relationship: "Standing Menacingly"
       }
     ]
   },
@@ -632,7 +711,9 @@ const events = [
         minus: ["Scientists", "Animals"],
         attachTo: ["Fire"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Sad Scholars",
+        relationship: "Sacrifice"
       }
     ]
   },
@@ -640,19 +721,23 @@ const events = [
     name: "Dwarves unearth a slumbering demon, trying to enslave it before it awakens. They enlist the help of scientists, promising to return the favor.",
     effects: [
       {
-        condition: () => board["Dwarves"].value > 1 || board["Scientists"].value > 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Dwarves"].value > 1 || board["Scientists"].value > 1,
         plus: ["Dwarves"],
         minus: [],
         attachTo: ["Dwarves"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Devout Cultists",
+        relationship: "Demon Help"
       },
       {
         plus: [],
         minus: ["Dwarves"],
         attachTo: ["Dwarves"],
         ally: ["Scientists"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Devout Cultists",
+        relationship: "Demon Help"
       }
     ]
   },
@@ -664,7 +749,8 @@ const events = [
         minus: ["Water", "Earth"],
         attachTo: ["Water", "Earth"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        relationship: "Gluttonous Storms"
       }
     ]
   },
@@ -676,7 +762,8 @@ const events = [
         minus: [],
         attachTo: ["Druids", "Priests"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        relationship: "Worshipers"
       }
     ]
   },
@@ -688,7 +775,9 @@ const events = [
         minus: ["Trees", "Dwarves"],
         attachTo: ["Trees", "Dwarves"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        specialEntity: "Invasive Plateaus",
+        relationship: "Unstable Ground"
       }
     ]
   },
@@ -696,12 +785,13 @@ const events = [
     name: "If dwarves dig deep enough, they'll upset the Earth's belly, and the fire god will see their time to strike, causing it to erupt in volcanoes.",
     effects: [
       {
-        condition: () => board["Dwarves"].value > 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Dwarves"].value > 1,
         plus: ["Fire"],
         minus: ["Trees", "Druids", "Scientists", "Animals", "Priests", "Philosophers", "Earth", "Wizards"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        relationship: "Eruption Scars"
       }
     ]
   },
@@ -713,7 +803,8 @@ const events = [
         minus: ["Scientists", "Priests"],
         attachTo: ["Scientists", "Priests"],
         ally: [],
-        enemy: ["Philosophers"]
+        enemy: ["Philosophers"],
+        relationship: "Democracy"
       }
     ]
   },
@@ -725,7 +816,8 @@ const events = [
         minus: ["Philosophers", "Priests"],
         attachTo: ["Philosophers", "Priests"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        relationship: "Plutocracy"
       }
     ]
   },
@@ -737,7 +829,9 @@ const events = [
         minus: ["Philosophers", "Scientists"],
         attachTo: ["Philosophers", "Scientists"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        specialEntity: "Armed Guards",
+        relationship: "Theocracy"
       }
     ]
   },
@@ -749,15 +843,17 @@ const events = [
         minus: ["Water"],
         attachTo: ["Druids"],
         ally: ["Trees"],
-        enemy: []
+        enemy: [],
+        relationship: "Magical Growth"
       },
       {
-        condition: () => board["Trees"].value > 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Trees"].value > 1,
         plus: [],
         minus: ["Scientists", "Priests", "Dwarves", "Wizards"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        relationship: ""
       }
     ]
   },
@@ -765,12 +861,13 @@ const events = [
     name: "Druids pray to the water god to douse fires and heal the forest with rain.",
     effects: [
       {
-        condition: () => board["Druids"].value > 0 || board["Water"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Druids"].value > 0 || board["Water"].value > 0,
         plus: ["Trees", "Water", "Druids"],
         minus: ["Fire"],
         attachTo: ["Water"],
         ally: ["Trees"],
-        enemy: []
+        enemy: [],
+        relationship: "Cleansing Rain"
       }
     ]
   },
@@ -782,15 +879,19 @@ const events = [
         plus: ["Scientists", "Animals", "Priests", "Philosophers"],
         minus: [],
         attachTo: ["Scientists"],
-        ally: ["Animals", "Priests", "Philosophers"],
-        enemy: []
+        ally: ["Animals"],
+        enemy: [],
+        specialEntity: "Wings For All",
+        relationship: "Veterinarian Friends"
       },
       {
         plus: ["Scientists", "Scientists"],
         minus: ["Animals", "Priests", "Philosophers"],
         attachTo: ["Animals", "Priests", "Philosophers"],
         ally: [],
-        enemy: ["Scientists"]
+        enemy: ["Scientists"],
+        specialEntity: "Wings For All",
+        relationship: "Bad Vaccines"
       }
     ]
   },
@@ -802,19 +903,22 @@ const events = [
         minus: [],
         attachTo: ["Sky"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Living Wind",
+        relationship: "Comet Gift"
       }
     ]
   },
   {
-    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship. ",
+    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship.",
     effects: [
       {
         plus: [],
         minus: ["Trees", "Earth", "Druids"],
         attachTo: ["Earth", "Druids"],
         ally: ["Druids", "Earth"],
-        enemy: []
+        enemy: [],
+        relationship: "Grief and Growth"
       }
     ]
   },
@@ -826,7 +930,9 @@ const events = [
         minus: [],
         attachTo: ["Wizards"],
         ally: ["Dwarves"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Living Crystals",
+        relationship: "Magic Plotting"
       }
     ]
   },
@@ -838,7 +944,9 @@ const events = [
         minus: ["Priests", "Philosophers", "Scientists"],
         attachTo: ["Priests", "Philosophers", "Scientists"],
         ally: [],
-        enemy: ["Animals"]
+        enemy: ["Animals"],
+        specialEntity: "Rebels",
+        relationship: "Culling and Control"
       }
     ]
   },
@@ -846,27 +954,33 @@ const events = [
     name: "The sky god and the fire god clash, causing thunderstorms and wildfires.",
     effects: [
       {
-        condition: () => board["Sky"].value > board["Fire"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Sky"].value > board["Fire"].value,
         plus: ["Sky"],
         minus: ["Fire", "Dragons"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Sky"]
+        enemy: ["Sky"],
+        specialEntity: "Ruin and Destruction",
+        relationship: "Sizzle and Scars"
       },
       {
-        condition: () => board["Fire"].value > board["Sky"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Fire"].value > board["Sky"].value,
         plus: ["Fire"],
         minus: ["Sky", "Trees"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Ruin and Destruction",
+        relationship: "Smoke and Scars"
       },
       {
         plus: [],
         minus: ["Sky", "Fire"],
         attachTo: ["Sky", "Fire"],
         ally: [],
-        enemy: ["Sky", "Fire"]
+        enemy: ["Sky", "Fire"],
+        specialEntity: "Ruin and Destruction",
+        relationship: "Battle Scars"
       }
     ]
   },
@@ -876,21 +990,25 @@ const events = [
       {
         plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
         minus: [],
-        attachTo: ["Dwarves", "Animals", "Priests"],
-        ally: ["Dwarves", "Animals", "Priests"],
-        enemy: []
+        attachTo: ["Animals", "Priests"],
+        ally: ["Animals", "Priests"],
+        enemy: [],
+        specialEntity: "Ecstacy Crystals",
+        relationship: "Mortal Love"
       }
     ]
   },
   {
-    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control.",
+    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, tormenting the natural shepherds.",
     effects: [
       {
         plus: ["Wizards"],
         minus: [],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Druids", "Dragons"]
+        enemy: ["Druids"],
+        specialEntity: "Living Crystals",
+        relationship: "Unnatural Beings"
       }
     ]
   },
@@ -902,31 +1020,36 @@ const events = [
         minus: [],
         attachTo: ["Druids"],
         ally: ["Wizards"],
-        enemy: []
+        enemy: [],
+        relationship: "Defenders of Nature"
       }
     ]
   },
   {
-    name: "The water god creates a new river, altering the landscape and the flow of trade.",
+    name: "The water god creates a new river, altering the landscape and the creating new flows of trade.",
     effects: [
       {
         plus: ["Water", "Trees", "Animals", "Priests"],
         minus: ["Earth"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        specialEntity: "Dripping Temple",
+        relationship: "Scarred Landscape"
       }
     ]
   },
   {
-    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards.",
+    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards. The more they read, the richer the soil gets.",
     effects: [
       {
         plus: ["Druids"],
         minus: ["Wizards"],
         attachTo: ["Druids"],
-        ally: ["Sky", "Fire", "Water", "Earth"],
-        enemy: []
+        ally: ["Earth"],
+        enemy: [],
+        specialEntity: "Devout Cultists",
+        relationship: "Ancient Texts"
       }
     ]
   },
@@ -934,28 +1057,31 @@ const events = [
     name: "A druid conjures a magical storm to engulf the mountain, battering anyone in the sky",
     effects: [
       {
-        condition: () => board["Wizards"].value > 1 && board["Dragons"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Wizards"].value > 1 && board["Dragons"].value > 0,
         plus: [],
         minus: ["Dragons", "Wizards"],
         attachTo: ["Dragons", "Wizards"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        relationship: "Spiteful Storm"
       },
       {
-        condition: () => board["Wizards"].value > 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Wizards"].value > 1,
         plus: [],
         minus: ["Wizards"],
         attachTo: ["Wizards"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        relationship: "Spiteful Storm"
       },
       {
-        condition: () => board["Dragons"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Dragons"].value > 0,
         plus: [],
         minus: ["Dragons"],
         attachTo: ["Dragons"],
         ally: [],
-        enemy: ["Druids"]
+        enemy: ["Druids"],
+        relationship: "Spiteful Storm"
       }
     ]
   },
@@ -967,7 +1093,9 @@ const events = [
         minus: ["Dragons"],
         attachTo: ["Priests", "Wizards", "Druids"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Armed Guards",
+        relationship: "Scroll Lust"
       }
     ]
   },
@@ -975,12 +1103,13 @@ const events = [
     name: "Druids casts a spell for nice weather if they're strong enough",
     effects: [
       {
-        condition: () => board["Druids"].value > 0,
+        condition: (board:Record<Entity, BoardEntity>) => board["Druids"].value > 0,
         plus: ["Sky", "Druids"],
         minus: ["Fire", "Water"],
         attachTo: ["Druids"],
         ally: ["Sky"],
-        enemy: []
+        enemy: [],
+        relationship: "Fair-Weather Friends"
       }
     ]
   },
@@ -992,7 +1121,8 @@ const events = [
         minus: ["Scientists"],
         attachTo: ["Druids", "Philosophers"],
         ally: ["Trees"],
-        enemy: []
+        enemy: [],
+        relationship: "Defenders of Nature"
       }
     ]
   },
@@ -1000,19 +1130,21 @@ const events = [
     name: "The water god’s rage causes the city to flood; only the priests can quell them ",
     effects: [
       {
-        condition: () => board["Priests"].value < 1,
+        condition: (board:Record<Entity, BoardEntity>) => board["Priests"].value < 1,
         plus: ["Water"],
         minus: ["Priests", "Philosophers", "Scientists"],
         attachTo: ["Priests"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        relationship: "Heretics"
       },
       {
         plus: [],
         minus: [],
         attachTo: ["Water"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        relationship: "Worshipers"
       }
     ]
   },
@@ -1020,35 +1152,43 @@ const events = [
     name: "Dwarves, wizards, and dragons compete to harvest a rare magical ore, leading to conflict and sabotage.",
     effects: [
       {
-        condition: () => board["Dwarves"].value > board["Wizards"].value && board["Dwarves"].value > board["Dragons"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Dwarves"].value > board["Wizards"].value && board["Dwarves"].value > board["Dragons"].value,
         plus: ["Dwarves", "Dwarves"],
         minus: [],
         attachTo: ["Dragons", "Wizards"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Friendship Ban",
+        relationship: "Ore Wars"
       },
       {
-        condition: () => board["Dragons"].value > board["Wizards"].value && board["Dragons"].value > board["Dwarves"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Dragons"].value > board["Wizards"].value && board["Dragons"].value > board["Dwarves"].value,
         plus: ["Dragons", "Dragons"],
         minus: [],
         attachTo: ["Wizards", "Dwarves"],
         ally: [],
-        enemy: ["Dragons"]
+        enemy: ["Dragons"],
+        specialEntity: "Friendship Ban",
+        relationship: "Ore Wars"
       },
       {
-        condition: () => board["Wizards"].value > board["Dragons"].value && board["Wizards"].value > board["Dwarves"].value,
+        condition: (board:Record<Entity, BoardEntity>) => board["Wizards"].value > board["Dragons"].value && board["Wizards"].value > board["Dwarves"].value,
         plus: ["Wizards", "Wizards"],
         minus: [],
         attachTo: ["Dwarves", "Dragons"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Friendship Ban",
+        relationship: "Ore Wars"
       },
       {
         plus: [],
         minus: ["Dragons", "Wizards", "Dwarves"],
         attachTo: [],
         ally: [],
-        enemy: []
+        enemy: [],
+        specialEntity: "Friendship Ban",
+        relationship: "Ore Wars"
       }
     ]
   },
@@ -1060,7 +1200,8 @@ const events = [
         minus: ["Trees"],
         attachTo: ["Scientists"],
         ally: [],
-        enemy: ["Animals"]
+        enemy: ["Animals"],
+        relationship: "Dominate Nature"
       }
     ]
   },
@@ -1072,7 +1213,9 @@ const events = [
         minus: [],
         attachTo: ["Wizards", "Dragons"],
         ally: ["Wizards", "Dragons"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Wings For All",
+        relationship: "Ancient Ritual"
       }
     ]
   },
@@ -1084,7 +1227,8 @@ const events = [
         minus: ["Trees", "Druids", "Animals"],
         attachTo: ["Druids", "Animals"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        relationship: "Misguided Grievance"
       }
     ]
   },
@@ -1096,7 +1240,8 @@ const events = [
         minus: [],
         attachTo: ["Philosophers"],
         ally: ["Dragons"],
-        enemy: []
+        enemy: [],
+        relationship: "Fiery Favors"
       }
     ]
   },
@@ -1108,7 +1253,9 @@ const events = [
         minus: [],
         attachTo: ["Priests", "Wizards"],
         ally: ["Priests", "Wizards"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Humanity's Secret Weapon",
+        relationship: "Grand Ritual"
       }
     ]
   },
@@ -1120,7 +1267,8 @@ const events = [
         minus: ["Trees", "Druids", "Animals"],
         attachTo: ["Trees", "Druids", "Animals"],
         ally: [],
-        enemy: ["Dragons"]
+        enemy: ["Dragons"],
+        relationship: "Bloody Invaders"
       }
     ]
   },
@@ -1132,7 +1280,8 @@ const events = [
         minus: ["Dragons"],
         attachTo: ["Dragons"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        relationship: "Stolen Treasure"
       }
     ]
   },
@@ -1144,7 +1293,9 @@ const events = [
         minus: ["Fire"],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Fire"]
+        enemy: ["Fire"],
+        specialEntity: "Invasive Plateaus",
+        relationship: "Taste for Fire"
       }
     ]
   },
@@ -1156,7 +1307,9 @@ const events = [
         minus: [],
         attachTo: ["Wizards"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Sun Spirits",
+        relationship: "Worshipers"
       }
     ]
   },
@@ -1168,7 +1321,9 @@ const events = [
         minus: [],
         attachTo: ["Earth", "Trees"],
         ally: ["Philosophers"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Deep Roots",
+        relationship: "Caretakers"
       }
     ]
   },
@@ -1180,7 +1335,8 @@ const events = [
         minus: ["Sky", "Fire"],
         attachTo: ["Sky", "Fire"],
         ally: [],
-        enemy: ["Dragons"]
+        enemy: ["Dragons"],
+        relationship: "God Slayer"
       }
     ]
   },
@@ -1192,7 +1348,9 @@ const events = [
         minus: [],
         attachTo: ["Water"],
         ally: ["Priests"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Dripping Temple",
+        relationship: "Caretakers"
       }
     ]
   },
@@ -1204,7 +1362,8 @@ const events = [
         minus: ["Dwarves", "Trees"],
         attachTo: ["Dwarves", "Trees"],
         ally: [],
-        enemy: ["Earth"]
+        enemy: ["Earth"],
+        relationship: "Unstable Ground"
       }
     ]
   },
@@ -1216,7 +1375,8 @@ const events = [
         minus: ["Wizards", "Dragons", "Sky"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Wizards", "Dragons"]
+        enemy: ["Wizards"],
+        relationship: "Scarred Skyscape"
       }
     ]
   },
@@ -1228,7 +1388,9 @@ const events = [
         minus: ["Trees", "Druids"],
         attachTo: ["Trees", "Druids"],
         ally: [],
-        enemy: ["Dwarves"]
+        enemy: ["Dwarves"],
+        specialEntity: "Ruin and Destruction",
+        relationship: "Bloody Invaders"
       }
     ]
   },
@@ -1240,7 +1402,8 @@ const events = [
         minus: ["Fire"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Priests"]
+        enemy: ["Priests"],
+        relationship: "Heretics"
       }
     ]
   },
@@ -1252,7 +1415,9 @@ const events = [
         minus: [],
         attachTo: ["Trees"],
         ally: [],
-        enemy: ["Wizards"]
+        enemy: ["Wizards"],
+        specialEntity: "Drunk Animals",
+        relationship: "Betraying Brews"
       }
     ]
   },
@@ -1264,7 +1429,8 @@ const events = [
         minus: ["Dwarves", "Wizards"],
         attachTo: ["Dwarves"],
         ally: [],
-        enemy: ["Water"]
+        enemy: ["Water"],
+        relationship: "Home Wrecker"
       }
     ]
   },
@@ -1275,8 +1441,10 @@ const events = [
         plus: ["Philosophers", "Scientists"],
         minus: [],
         attachTo: ["Sky"],
-        ally: ["Philosophers", "Scientists"],
-        enemy: []
+        ally: ["Scientists"],
+        enemy: [],
+        specialEntity: "Scientific Silence",
+        relationship: "Flattering Research"
       }
     ]
   },
@@ -1288,7 +1456,9 @@ const events = [
         minus: [],
         attachTo: ["Earth"],
         ally: [],
-        enemy: ["Dwarves", "Dragons"]
+        enemy: ["Dwarves"],
+        specialEntity: "Miniature Kingdom",
+        relationship: "Scarred Landscape"
       }
     ]
   },
@@ -1300,7 +1470,9 @@ const events = [
         minus: [],
         attachTo: ["Earth"],
         ally: ["Fire"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Ecstacy Crystals",
+        relationship: "Lovers"
       }
     ]
   },
@@ -1312,7 +1484,8 @@ const events = [
         minus: ["Wizards"],
         attachTo: ["Water"],
         ally: ["Sky"],
-        enemy: []
+        enemy: [],
+        relationship: "Quenching Storms"
       }
     ]
   },
@@ -1324,7 +1497,8 @@ const events = [
         minus: ["Fire"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Philosophers"]
+        enemy: ["Philosophers"],
+        relationship: "Heretics"
       }
     ]
   },
@@ -1336,7 +1510,9 @@ const events = [
         minus: ["Wizards"],
         attachTo: ["Wizards"],
         ally: ["Animals"],
-        enemy: []
+        enemy: [],
+        specialEntity: "Miniature Kingdom",
+        relationship: "Curiosity Conjured the Cat"
       }
     ]
   },
@@ -1348,7 +1524,8 @@ const events = [
         minus: ["Sky", "Philosophers"],
         attachTo: ["Sky"],
         ally: [],
-        enemy: ["Philosophers"]
+        enemy: ["Philosophers"],
+        relationship: "Accidental Heretics"
       }
     ]
   },
@@ -1360,263 +1537,9 @@ const events = [
         minus: ["Dragons", "Dwarves", "Wizards"],
         attachTo: ["Fire"],
         ally: [],
-        enemy: ["Dragons", "Dwarves", "Wizards"]
+        enemy: ["Dragons"],
+        relationship: "Heretics"
       }
     ]
   },
  ]
-
-const entityTracker = {};
-const makeEntityMap = () => (
-  {
-    Dragons: {total: 0, absolute: 0},
-    Dwarves: {total: 0, absolute: 0},
-    Wizards: {total: 0, absolute: 0},
-    Trees: {total: 0, absolute: 0},
-    Animals: {total: 0, absolute: 0},
-    Priests: {total: 0, absolute: 0},
-    Philosophers: {total: 0, absolute: 0},
-    Scientists: {total: 0, absolute: 0},
-    Sky: {total: 0, absolute: 0},
-    Water: {total: 0, absolute: 0},
-    Fire: {total: 0, absolute: 0},
-    Earth: {total: 0, absolute: 0},
-    Druids: {total: 0, absolute: 0},
-  }
-);
-
-// keep track of how many times each entity appears in plus, minus, attachTo, ally, and enemy across all events/effects
-const processEffectArray = (array, type, factor = 1) => {
-  array.forEach((entity) => {
-    // if theres an array within minus or plus (there wont be one within the others), we have to choose 1 of the entities to apply the effect to, not all of them. because we're simulating the effects of that, we do so by assuming itll hit each entity 1/length times
-    if (Array.isArray(entity)) {
-      entity.forEach((subEntity) => {
-        if (!entityTracker[subEntity]) {
-          entityTracker[subEntity] = { plus: 0, minus: 0, ally: 0, enemy: 0, attachTo:0, map: makeEntityMap() };
-        }
-        entityTracker[subEntity][type] += (1/entity.length) * factor;
-      });
-    } else {
-      if (!entityTracker[entity]) {
-        entityTracker[entity] = { plus: 0, minus: 0, ally: 0, enemy: 0, attachTo: 0, map: makeEntityMap() };
-      }
-      // AttachTo, ally, and enemy only allow a single entity to be chosen, so we need to divide by array length
-      let thereCanOnlyBeOne = 1
-      if (type === "attachTo" || type === "ally" || type === "enemy") {
-        thereCanOnlyBeOne = 1/array.length
-      }
-      entityTracker[entity][type] += thereCanOnlyBeOne * factor;
-    }
-  });
-};
-
-// keep track of how many times each entity appears alongside or on opposing sides of effects for each other entity
-// alongside = both are in plus or both are in minus
-// opposing = one is in plus and the other is in minus
-// alongside = one is in attachTo and the other is in ally (dont double count from previous alongside)
-// opposing = one is in attachTo and the other is in enemy (dont double count from previous opposing)
-const processSynergies = (effect, factor) => {
-  const positiveEntities = new Set();
-  const negativeEntities = new Set();
-  const recordedAlongside = new Set();
-  const recordedOpposed = new Set();
-  // we have to deconstruct any sub arrays within plus and minus 
-  for (const entity of effect.plus) {
-    if (Array.isArray(entity)) {
-      entity.forEach((subEntity) => {
-        positiveEntities.add([subEntity, factor/entity.length]);
-      });
-    } else {
-      positiveEntities.add([entity, factor]);
-    }
-  }
-  for (const entity of effect.minus) {
-    if (Array.isArray(entity)) {
-      entity.forEach((subEntity) => {
-        negativeEntities.add([subEntity, factor/entity.length]);
-      });
-    } else {
-      negativeEntities.add([entity, factor]);
-    }
-  }
-
-  // count up synergies for positive entities in plus/minus
-  for (const [positiveEntity, entFactor] of positiveEntities) {
-    // alongside synergies
-    for (const [otherPositiveEntity, oEntFactor] of positiveEntities) {
-      const trueFactor = Math.min(entFactor, oEntFactor);
-      if (positiveEntity === otherPositiveEntity) continue;
-      else {
-        entityTracker[positiveEntity].map[otherPositiveEntity].total += trueFactor;
-        entityTracker[positiveEntity].map[otherPositiveEntity].absolute += trueFactor;
-        // its ok that this is order-dependent because we're gonna track the opposite order in a later loop
-        recordedAlongside.add(`${positiveEntity}-${otherPositiveEntity}`);
-      }
-    }
-    // opposing synergies
-    for (const [negativeEntity, oEntFactor] of negativeEntities) {
-      const trueFactor = Math.min(entFactor, oEntFactor);
-      if (positiveEntity === negativeEntity) continue;
-      else {
-        entityTracker[positiveEntity].map[negativeEntity].total -= trueFactor;
-        entityTracker[positiveEntity].map[negativeEntity].absolute += trueFactor;
-        // its ok that this is order-dependent because we're gonna track the opposite order in a later loop
-        recordedOpposed.add(`${positiveEntity}-${negativeEntity}`);
-      }
-    }
-  }
-
-  // count up synergies for negative entities in plus/minus
-  for (const [negativeEntity, entFactor] of negativeEntities) {
-    // alongside synergies
-    for (const [otherNegativeEntity, oEntFactor] of negativeEntities) {
-      const trueFactor = Math.min(entFactor, oEntFactor);
-      if (negativeEntity === otherNegativeEntity) continue;
-      else {
-        entityTracker[negativeEntity].map[otherNegativeEntity].total += trueFactor;
-        entityTracker[negativeEntity].map[otherNegativeEntity].absolute += trueFactor;
-        // its ok that this is order-dependent because we're gonna track the opposite order in a later loop
-        recordedAlongside.add(`${negativeEntity}-${otherNegativeEntity}`);
-      }
-    }
-    // opposing synergies
-    for (const [positiveEntity, oEntFactor] of positiveEntities) {
-      const trueFactor = Math.min(entFactor, oEntFactor);
-      if (negativeEntity === positiveEntity) continue;
-      else {
-        entityTracker[negativeEntity].map[positiveEntity].total -= trueFactor;
-        entityTracker[negativeEntity].map[positiveEntity].absolute += trueFactor;
-        // its ok that this is order-dependent because we're gonna track the opposite order in a later loop
-        recordedOpposed.add(`${negativeEntity}-${positiveEntity}`);
-      }
-    }
-  }
-
-  // count up synergies for positive entities in attachTo/ally
-  for (const entity of effect.attachTo) {
-    for (const ally of effect.ally) {
-      // since we only choose 1 ally and 1 attach to, we have to divide by the array length
-      // we give 1 increment of leway to account for when the same entity(s) appears in both arrays
-      const trueFactor = factor / Math.max(1, (effect.attachTo.length - 1 + effect.ally.length - 1));
-      if (entity === ally) continue;
-      if (recordedAlongside.has(`${entity}-${ally}`) || recordedAlongside.has(`${ally}-${entity}`)) continue;
-      else {
-        entityTracker[entity].map[ally].total += trueFactor;
-        entityTracker[entity].map[ally].absolute += trueFactor;
-        entityTracker[ally].map[entity].total += trueFactor;
-        entityTracker[ally].map[entity].absolute += trueFactor;
-      }
-    }
-    for (const enemy of effect.enemy) {
-      // since we only choose 1 enemy and 1 attach to, we have to divide by the array length
-      // we give 1 increment of leway to account for when the same entity(s) appears in both arrays
-      const trueFactor = factor / Math.max(1, (effect.attachTo.length - 1 + effect.enemy.length - 1));
-      if (entity === enemy) continue;
-      if (recordedOpposed.has(`${entity}-${enemy}`) || recordedOpposed.has(`${enemy}-${entity}`)) continue;
-      else {
-        entityTracker[entity].map[enemy].total -= trueFactor;
-        entityTracker[entity].map[enemy].absolute += trueFactor;
-        entityTracker[enemy].map[entity].total -= trueFactor;
-        entityTracker[enemy].map[entity].absolute += trueFactor;
-      }
-    }
-  }
-}
-
-events.forEach((event) => {
-  // resolve all effects
-  let rollingFactor = 1;
-  for (const effect of event.effects) {
-    // if a conditional effect fails, it gets skipped
-    // if a conditional effect passes, no more effects are checked
-    // we can assume a condition has a 50% chance of succeeding
-    // because of that, theres a 50% chance of the current effect happening as well as a 50% chance of the next (and all future) effects happening
-    if (effect.condition) rollingFactor = rollingFactor / 2
-    processEffectArray(effect.plus, 'plus', rollingFactor);
-    processEffectArray(effect.minus, 'minus', rollingFactor);
-    processEffectArray(effect.ally, 'ally', rollingFactor);
-    processEffectArray(effect.enemy, 'enemy', rollingFactor);
-    processEffectArray(effect.attachTo, 'attachTo', rollingFactor);
-    processSynergies(effect, rollingFactor);
-  }
-});
-
-console.log("=============================")
-
-const getTotalScore = (entity) => {
-  const entityData = entityTracker[entity];
-  return entityData.plus - entityData.minus + entityData.ally - entityData.enemy;
-}
-function roundToPointFive(num) {
-  return Math.round(num*2)/2;
-}
-function roundToPointTen(num) {
-  return Math.round(num*10)/10;
-}
-
-function removeKey (keys, key) {
-  return keys.filter((k) => k !== key);
-}
-
-// sort the entities by lowest to highest total score and print stats for each
-Object.keys(entityTracker).sort((a,b) => getTotalScore(a) - getTotalScore(b)).forEach((entity) => {
-  const entityData = entityTracker[entity];
-  const totalScore = getTotalScore(entity);
-  const bestSynergy = Object.keys(entityData.map).sort((a,b) => entityData.map[a].total - entityData.map[b].total).reverse()[0];
-  const worstSynergy = Object.keys(entityData.map).sort((a,b) => entityData.map[a].total - entityData.map[b].total)[0];
-  const mostSynergy = Object.keys(entityData.map).sort((a,b) => entityData.map[a].absolute - entityData.map[b].absolute).reverse()[0];
-  const leastSynergy = removeKey(Object.keys(entityData.map), entity).sort((a,b) => entityData.map[a].absolute - entityData.map[b].absolute)[0];
-  console.log("=============================")
-  console.log(`${entity}:
-  Plus: ${roundToPointTen(entityData.plus)}
-  Minus: ${roundToPointTen(entityData.minus)}
-  Ally: ${roundToPointTen(entityData.ally)}
-  Enemy: ${roundToPointTen(entityData.enemy)}
-  BestSynergy: ${bestSynergy} = ${roundToPointTen(entityData.map[bestSynergy].total)}
-  WorstSynergy: ${worstSynergy} = ${roundToPointTen(entityData.map[worstSynergy].total)}
-  MostSynergy: ${mostSynergy} = ${roundToPointTen(entityData.map[mostSynergy].absolute)}
-  LeastSynergy: ${leastSynergy} = ${roundToPointTen(entityData.map[leastSynergy].absolute)}
-  AttachTo: ${roundToPointTen(entityData.attachTo)}
-  Total Score: ${roundToPointTen(totalScore)}`);
-});
-
-// print the average attachTo score
-const totalAttachTo = Object.keys(entityTracker).reduce((acc, entity) => acc + entityTracker[entity].attachTo, 0);
-console.log("==")
-console.log("==")
-console.log("==")
-console.log("==")
-console.log("==")
-console.log("==")
-console.log("=============================")
-console.log(`Average AttachTo: ${roundToPointTen(totalAttachTo / Object.keys(entityTracker).length)}`)
-
-// print average plus 
-const totalPlus = Object.keys(entityTracker).reduce((acc, entity) => acc + entityTracker[entity].plus, 0);
-console.log("=============================")
-console.log(`Average Plus: ${roundToPointTen(totalPlus / Object.keys(entityTracker).length)}`)
-
-// print average minus
-const totalMinus = Object.keys(entityTracker).reduce((acc, entity) => acc + entityTracker[entity].minus, 0);
-console.log("=============================")
-console.log(`Average Minus: ${roundToPointTen(totalMinus / Object.keys(entityTracker).length)}`)
-
-// print average ally
-const totalAlly = Object.keys(entityTracker).reduce((acc, entity) => acc + entityTracker[entity].ally, 0);
-console.log("=============================")
-console.log(`Average Ally: ${roundToPointTen(totalAlly / Object.keys(entityTracker).length)}`)
-
-// print average enemy
-const totalEnemy = Object.keys(entityTracker).reduce((acc, entity) => acc + entityTracker[entity].enemy, 0);
-console.log("=============================")
-console.log(`Average Enemy: ${roundToPointTen(totalEnemy / Object.keys(entityTracker).length)}`)
-
-// print average totalSynergy
-const totalSynergy = Object.values(entityTracker).reduce((acc, entity) => acc + (Object.values(entity.map).reduce((acc2, entity2) => acc2 + entity2.total, 0)/12), 0);
-console.log("=============================")
-console.log(`Average Total Synergy: ${roundToPointTen(totalSynergy / Object.keys(entityTracker).length)}`)
-
-// print average absoluteSynergy
-const absoluteSynergy = Object.values(entityTracker).reduce((acc, entity) => acc + (Object.values(entity.map).reduce((acc2, entity2) => acc2 + entity2.absolute, 0)/12), 0)
-console.log("=============================")
-console.log(`Average Absolute Synergy: ${roundToPointTen(absoluteSynergy / Object.keys(entityTracker).length)}`)

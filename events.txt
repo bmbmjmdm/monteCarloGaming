@@ -1,0 +1,95 @@
+Dwarven mining is fruiful, but causes rock slides that pummel the forest					Dwarves+, Trees-, Druids-				Trees		Dwarves				Bruised Bark
+When priests try to steal a baby dragon for their ritual, the plan goes awry and a battle ensues. Long after the priests leave, dragons lash out by fiesting on any animal in sight.					Dragons-, Priests-				Dragons		Animals				Hungry and Hateful
+The fire god finds comfort in the bellies of dragons					Fire+				Fire				Dragons		Warm Belly
+Great Oaks bare fruit of wisdom for all forest dwellers, but it takes a lot of water					Animals+, Druids+, Water-, Deep Roots~				Trees				Animals		Bare Fruit
+Wet soil and happy gods spring forth new, green life					Multiple Effects
+Druids broker an alliance with dragons					Druids+, Dragons+				Druids, Dragons				Dragons, Druids		Alliance
+Dragons launch an attack on the city, plundering it					Dragons+, City-				Scientists, Priests, Philosophers		Dragons				Burnt Homes
+A philosopher tries to help the sky god, but it's risky					Multiple Effects
+A wizard challenges the sky, competing with the lightning					Multiple Effects
+The fire god fills dwarven forges					Fire+, Dwarves+				Dwarves				Fire		Godly Forge
+Runoff from the city temples infects many lakes and shores					Animals-, Trees-, Water-, Drunk Animals~				Water		Priests				Polluted Grudge
+Scientists showcase experiments discredeting the church					Scientists+, Priests-, Scientific Silence~				Priests		Scientists				Threats to Faith
+Dwarves pray and give tribute to the Earth, asking it to ground the wizards' magic.					Earth+, Dwarves+, Wizards-				Earth				Dwarves		Worshipers
+A priest prays, the most well god responds					Multiple Effects
+A drought plagues the forest, prompting druids to seek help from the water god. The fire god licks its lips with sparks on dry wood					Multiple Effects
+The sky weeps, filling the sea					Water+, Sky-, Erosive Liquid~				Water				Sky		Helpful Tears
+The sky weeps, watering the city's crops and dousing flames					City+, Fire-, Sky-				Fire		Sky				Hurtful Tears
+The dwarves and the city start an exchange program, sharing knowledge but erupting in discrimination					Multiple Effects
+Mouse scientists capture wild animals to use for experiments					Scientists+, Animals-				Animals		Scientists				Fearful Subjects
+As the Earth turns its back on the Dwarves in their time of need, the dwarves pray to distant gods for new ore and revenge.					Multiple Effects
+During the winter solstice, druids call forth a powerful snow, freezing the lakes and kindling.					Water-, Fire-				Water, Fire		Druids				Frostbite
+The sky and water gods dance, hurricanes batter the city					Sky+, Water+, City-				Sky, Water				Sky, Water		Lovers
+Priests burn heretical philosophy books					Fire+, Philosophers-, Sad Scholars~				Philosophers		Priests				Burnt Books
+The water god swallows ships, eating their treasure					Water+, Priests-				Priests		Water				Stolen Treasure
+Wizards create spectral animals to play and mate with the wild ones					Wizards+, Animals+, Shadow Beings~				Animals				Wizards		Spectral Friends
+The planets align in the sky, demanding all other gods pay tribute. Druids curse it, call it an omen.					Sky+, Water-, Fire-, Earth-, Star Wedding~				Sky		Druids				Heretics
+The water god polishes stones for the earth god, erasing dwarven inscriptions on them					Multiple Effects
+The sky weeps, watering the forest and dousing flames					Trees+, Water+, Sky-, Fire-				Fire		Sky				Hurtful Tears
+A strange disease spreads through the wild animals, threatening the city as well. The scientists try to help					Multiple Effects
+The water god is weakened by a nightmare of the fire god, causing a drought to plague the city. Sparks lurk					Multiple Effects
+A philosopher and a grand oak contemplate the meaning of life					Philosophers+, Trees+				Trees, Philosophers				Philosophers, Trees		Brainstorm
+The sky god spreads wisdom through the city, but discovers heretical texts					Scientists+, Priests+, Philosophers+				Sky		Priests				Heretics
+Tides adorn a beach with treasure, a gift from one god to another					Multiple Effects
+Dogs plunder amber from druids, desecrating their sacred stream in the process.					Priests+, Druids-, Water-, Inconsiderate Monarchy~				Druids		Priests				Stolen Treasure
+Fresh fire fills city machinery					Fire+, Scientists+, Humanity's Secret Weapon~				Scientists				Fire		Running Hot
+Dogs plunder gold from Dwarven caves					Priests+, Dwarves-, Inconsiderate Monarchy~				Dwarves		Priests				Stolen Treasure
+Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge... 					Fire+, Scientists-, Sun Spirits~				Scientists		Fire				Fried Circuits
+Philosophers question the speed of scientific advancement					Philosophers+, Scientists-, Rebels~				Scientists		Philosophers				Strict Regulation
+A mountain comes alive, using trees as brushes to paint the sky a painting					Multiple Effects
+Scientists design an aqueduct carving through the mountain, draining precious water					Scientists+, Earth-, Water-				Earth		Scientists				Scarred Landscape
+A solar eclipse weakens the fire god, frightens animals. They're not so bright, so they think the trees are to blame.					Fire-, Animals-, Shadow Beings~				Animals		Trees				Standing Menacingly
+A scientist's experiment goes wrong and erupts in flames, engulfing them and their animal subjects.					Fire+, Scientists-, Animals-, Sad Scholars~				Fire				Scientists		Sacrifice
+Dwarves unearth a slumbering demon, trying to enslave it before it awakens. They enlist the help of scientists, promising to return the favor.					Multiple Effects
+The sky god drinks sea and eats earth with tornados					Sky+, Water-, Earth-				Water, Earth		Sky				Gluttonous Storms
+Druids and priests pray to to the Earth for a healthy harvest					Druids+, Priests+, Earth+				Druids, Priests		Earth				Worshipers
+The earth has nightmares, causing earthquakes around the world					Trees-, Dwarves-, Invasive Plateaus~				Trees, Dwarves		Earth				Unstable Ground
+If dwarves dig deep enough, they'll upset the Earth's belly, and the fire god will see their time to strike, causing it to erupt in volcanoes.					Fire+, Trees-, Druids-, Scientists-, Animals-, Priests-, Philosophers-, Earth-, Wizards-				Earth		Fire				Eruption Scars
+Philosophers devise a new form of city government, challenging existing power structures.					Philosophers+, Scientists-, Priests-				Scientists, Priests		Philosophers				Democracy
+Scientists' inventions make them extremely wealthy, letting them buy the city government					Scientists+, Philosophers-, Priests-				Philosophers, Priests		Scientists				Plutocracy
+Priests hold a coup with their many followers, taking control of the city government					Priests+, Philosophers-, Scientists-, Armed Guards~				Philosophers, Scientists		Priests				Theocracy
+Druidic rituals empower the forest, causing it to expand into nearby territories, but use up all the water.					Multiple Effects
+Druids pray to the water god to douse fires and heal the forest with rain.					Trees+, Water+, Druids+, Fire-				Water				Trees		Cleansing Rain
+Scientists develop a strange vaccine, seemingly saving the city and many wild animals.					Multiple Effects
+Wizards summon a benign comet, causing the sky to light up with strange colors and mystical energy.					Wizards+, Druids+, Sky+, Living Wind~				Sky				Wizards		Comet Gift
+A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship.					Trees-, Earth-, Druids-				Earth, Druids				Druids, Earth		Grief and Growth
+Dragons hoard mystical artifacts, so wizards lay a plan. They decide to embolden the dwarves, teach them their magics, and see what happens...					Dragons+, Living Crystals~				Wizards				Dwarves		Magic Plotting
+Wild animals form a pack and raid the city, driven by hunger and desperation.					Animals+, Priests-, Philosophers-, Scientists-, Rebels~				Priests, Philosophers, Scientists		Animals				Culling and Control
+The sky god and the fire god clash, causing thunderstorms and wildfires.					Multiple Effects
+Philosophers write a treatise on the interconnectedness of all mortal beings, influencing various societies.					Animals+, Druids+, Wizards+, Dwarves+, Dragons+, Trees+, Priests+, Scientists+, Philosophers+, Ecstacy Crystals~				Animals, Priests				Animals, Priests		Mortal Love
+Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, tormenting the natural shepherds.					Wizards+, Living Crystals~				Wizards		Druids				Unnatural Beings
+Druids and wizards collaborate to create a protective barrier around the forest.					Trees+, Animals+, Druids+				Druids				Wizards		Defenders of Nature
+The water god creates a new river, altering the landscape and the creating new flows of trade.					Water+, Trees+, Animals+, Priests+, Earth-, Dripping Temple~				Earth		Water				Scarred Landscape
+Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards. The more they read, the richer the soil gets.					Druids+, Wizards-, Devout Cultists~				Druids				Earth		Ancient Texts
+A druid conjures a magical storm to engulf the mountain, battering anyone in the sky					Multiple Effects
+Dwarves uncover an ancient relic that can control dragons, attracting the attention of many					Dwarves+, Dragons-, Armed Guards~				Priests, Wizards, Druids		Dwarves				Scroll Lust
+Druids casts a spell for nice weather if they're strong enough					Sky+, Druids+, Fire-, Water-				Druids				Sky		Fair-Weather Friends
+Philosophers and druids form an alliance to protect the forest from industrial expansion by the city.					Philosophers+, Druids+, Scientists-				Druids, Philosophers				Trees		Defenders of Nature
+The water god’s rage causes the city to flood; only the priests can quell them 					Multiple Effects
+Dwarves, wizards, and dragons compete to harvest a rare magical ore, leading to conflict and sabotage.					Multiple Effects
+Scientists chop down oaks to fuel their machines. Propoganda turns the city against nature, animals and all.					Scientists+, Trees-				Scientists		Animals				Dominate Nature
+Wizards discover an ancient ritual binding them with dragons, granting them shared knowledge and power					Wizards+, Dragons+, Wings For All~				Wizards, Dragons				Wizards, Dragons		Ancient Ritual
+Scientists create a new technology that saps the life of nearby groves. They lie and blame the wizards for this, which works.					Scientists+, Trees-, Druids-, Animals-				Druids, Animals		Wizards				Misguided Grievance
+Dragons share ancient wisdom with philosophers, enlightening them with the secrets of fire's destructive and creative forces.					Philosophers+, Fire+				Philosophers				Dragons		Fiery Favors
+Priests and Wizards join forces in a powerful ritual, channeling the divine and arcane together, while curious creatures join.					Priests+, Wizards+, Animals+, Humanity's Secret Weapon~				Priests, Wizards				Priests, Wizards		Grand Ritual
+Dragons, in pursuit of a hidden treasure, invade the forest, clashing with druids and their animal allies.					Dragons+, Trees-, Druids-, Animals-				Trees, Druids, Animals		Dragons				Bloody Invaders
+Aggressive flooding robs the dens of dragons, causing untold riches to wash into the sea.					Water+, Dragons-				Dragons		Water				Stolen Treasure
+In a desperate act, priests invoke the Earth to swollow the flames of the world whole, causing devastation but saving the priest's temples, and giving the Earth a taste for fire.					Priests+, Earth+, Fire-, Invasive Plateaus~				Earth		Fire				Taste for Fire
+Wizards conduct a dangerous ritual to harness the power of the fire god, enhancing their spells with fiery potency.					Wizards+, Fire+, Sun Spirits~				Wizards				Fire		Worshipers
+Philosophers restore ancient, sacred groves, bringing new life to the earth.					Earth+, Trees+, Deep Roots~				Earth, Trees				Philosophers		Caretakers
+Dragons fly into the heart of a tempest, eating the raging elements of sky and fire.					Dragons+, Sky-, Fire-				Sky, Fire		Dragons				God Slayer
+Priests assemble their congregation to clean the polluted waters, restoring balance to the seas.					Water+, Dripping Temple~				Water				Priests		Caretakers
+The earth churns in its sleep, uprooting trees and dwarven tunnels					Dwarves-, Trees-				Dwarves, Trees		Earth				Unstable Ground
+A fierce battle erupts between wizards and dragons in the sky, scarring the ozone.					Wizards-, Dragons-, Sky-				Sky		Wizards				Scarred Skyscape
+Dwarves grow bold and venture out of the mountains, clearing vast swaths of forest and their druid protectors					Dwarves+, Trees-, Druids-, Ruin and Destruction~				Trees, Druids		Dwarves				Bloody Invaders
+Priests chant down the fire god, protecting the forest from a consuming blaze.					Priests+, Trees+, Fire-				Fire		Priests				Heretics
+Wizards create brews in the bellies of great oaks, fueling their spells with primal energy. The trees grow massive and wicked, skewering the wizards in time.					Wizards+, Trees+, Drunk Animals~				Trees		Wizards				Betraying Brews
+The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home. Wizards are caught in the crossfire.					Water+, Dwarves-, Wizards-				Dwarves		Water				Home Wrecker
+Philosophers and Scientists collaborate on a study of the stars, unlocking new knowledge and flattering the sky. 					Philosophers+, Scientists+, Scientific Silence~				Sky				Scientists		Flattering Research
+After years of conflict, dwarves and dragons agree to a truce, carving up the mountain’s resources.					Dwarves+, Dragons+, Miniature Kingdom~				Earth		Dwarves				Scarred Landscape
+The fire and earth gods churn the planet's core, making hot and hard love					Fire+, Earth+, Ecstacy Crystals~				Earth				Fire		Lovers
+A torrential storm washes over the world, filling the rivers, lakes, and clouds. Many wizards' homes are washed away on the cliff sides.					Sky+, Water+, Wizards-				Water				Sky		Quenching Storms
+Philosophers hold a grand debate on the ethics of using fire’s destructive power					Philosophers+, Fire-				Fire		Philosophers				Heretics
+Wizards imbue wild animals with magical abilities, but they can't be controlled. For some reason the wizards keep doing it...					Animals+, Wizards-, Miniature Kingdom~				Wizards				Animals		Curiosity Conjured the Cat
+As a catastrophic storm approaches, philosophers sacrifice themselves to quell the sky's madness. But priests sabatoge the effort for their own gain, tricking the sky into seeing the sacrifice as an insult.					Priests+, Sky-, Philosophers-				Sky		Philosophers				Accidental Heretics
+The mountain residents grow restless in the sweltering heat, curse the sun, and erupt in aimless violence					Dragons-, Dwarves-, Wizards-				Fire		Dragons				Heretics
