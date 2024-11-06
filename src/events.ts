@@ -329,7 +329,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Mouse scientists capture wild animals to use for experiments",
+    name: "Scientists capture wild animals to use for experiments",
     effects: [
       {
         plus: ["Scientists"],
@@ -575,7 +575,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Dogs plunder amber from druids, desecrating their sacred stream in the process.",
+    name: "Priests plunder amber from druids, desecrating their sacred stream in the process.",
     effects: [
       {
         plus: ["Priests"],
@@ -603,7 +603,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Dogs plunder gold from Dwarven caves",
+    name: "Priests plunder gold from Dwarven caves",
     effects: [
       {
         plus: ["Priests"],
