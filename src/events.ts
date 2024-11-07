@@ -6,432 +6,6 @@ find 30 that are roughly well-rounded and that we can fill out with allies/enemi
 
 export const events:GameEvent[] = [
   {
-    name: "As a catastrophic storm approaches, philosophers sacrifice themselves to quell the sky's madness. But priests sabatoge the effort for their own gain, tricking the sky into seeing the sacrifice as an insult.",
-    effects: [
-      {
-        plus: ["Priests"],
-        minus: ["Sky", "Philosophers"],
-        attachTo: ["Sky"],
-        ally: [],
-        enemy: ["Philosophers"],
-        relationship: "Accidental Heretics"
-      }
-    ]
-  },
-  {
-    name: "The mountain residents grow restless in the sweltering heat, curse the sun, and erupt in aimless violence",
-    effects: [
-      {
-        plus: [],
-        minus: ["Dragons", "Dwarves", "Wizards"],
-        attachTo: ["Fire"],
-        ally: [],
-        enemy: ["Dragons"],
-        relationship: "Heretics"
-      }
-    ]
-  },
-  {
-    name: "A torrential storm washes over the world, filling the rivers, lakes, and clouds. Many wizards' homes are washed away on the cliff sides.",
-    effects: [
-      {
-        plus: ["Sky", "Water"],
-        minus: ["Wizards"],
-        attachTo: ["Water"],
-        ally: ["Sky"],
-        enemy: [],
-        relationship: "Quenching Storms"
-      }
-    ]
-  },
-  {
-    name: "The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home. Wizards are caught in the crossfire.",
-    effects: [
-      {
-        plus: ["Water"],
-        minus: ["Dwarves", "Wizards"],
-        attachTo: ["Dwarves"],
-        ally: [],
-        enemy: ["Water"],
-        relationship: "Home Wrecker"
-      }
-    ]
-  },
-  {
-    name: "A fierce battle erupts between wizards and dragons in the sky, scarring the ozone.",
-    effects: [
-      {
-        plus: [],
-        minus: ["Wizards", "Dragons", "Sky"],
-        attachTo: ["Sky"],
-        ally: [],
-        enemy: ["Wizards"],
-        relationship: "Scarred Skyscape"
-      }
-    ]
-  },
-  {
-    name: "Dwarves grow bold and venture out of the mountains, clearing vast swaths of forest and their druid protectors",
-    effects: [
-      {
-        plus: ["Dwarves"],
-        minus: ["Trees", "Druids"],
-        attachTo: ["Trees", "Druids"],
-        ally: [],
-        enemy: ["Dwarves"],
-        specialEntity: "Ruin and Destruction",
-        relationship: "Bloody Invaders"
-      }
-    ]
-  },
-  {
-    name: "Priests chant down the fire god, protecting the forest from a consuming blaze.",
-    effects: [
-      {
-        plus: ["Priests", "Trees"],
-        minus: ["Fire"],
-        attachTo: ["Fire"],
-        ally: [],
-        enemy: ["Priests"],
-        relationship: "Heretics"
-      }
-    ]
-  },
-  {
-    name: "Dragons fly into the heart of a tempest, eating the raging elements of sky and fire.",
-    effects: [
-      {
-        plus: ["Dragons"],
-        minus: ["Sky", "Fire"],
-        attachTo: ["Sky", "Fire"],
-        ally: [],
-        enemy: ["Dragons"],
-        relationship: "God Slayer"
-      }
-    ]
-  },
-  {
-    name: "Priests and Wizards join forces in a powerful ritual, channeling the divine and arcane together, while curious creatures join.",
-    effects: [
-      {
-        plus: ["Priests", "Wizards", "Animals"],
-        minus: [],
-        attachTo: ["Priests", "Wizards"],
-        ally: ["Priests", "Wizards"],
-        enemy: [],
-        specialEntity: "Humanity's Secret Weapon",
-        relationship: "Grand Ritual"
-      }
-    ]
-  },
-  {
-    name: "Dragons, in pursuit of a hidden treasure, invade the forest, clashing with druids and their animal allies.",
-    effects: [
-      {
-        plus: ["Dragons"],
-        minus: ["Trees", "Druids", "Animals"],
-        attachTo: ["Trees", "Druids", "Animals"],
-        ally: [],
-        enemy: ["Dragons"],
-        relationship: "Bloody Invaders"
-      }
-    ]
-  },
-  {
-    name: "Scientists create a new technology that saps the life of nearby groves. They lie and blame the wizards for this, which works.",
-    effects: [
-      {
-        plus: ["Scientists"],
-        minus: ["Trees", "Druids", "Animals"],
-        attachTo: ["Druids", "Animals"],
-        ally: [],
-        enemy: ["Wizards"],
-        relationship: "Misguided Grievance"
-      }
-    ]
-  },
-  {
-    name: "Philosophers and druids form an alliance to protect the forest from industrial expansion by the city.",
-    effects: [
-      {
-        plus: ["Philosophers", "Druids"],
-        minus: ["Scientists"],
-        attachTo: ["Druids", "Philosophers"],
-        ally: ["Trees"],
-        enemy: [],
-        relationship: "Defenders of Nature"
-      }
-    ]
-  },
-  {
-    name: "Wild animals form a pack and raid the city, driven by hunger and desperation.",
-    effects: [
-      {
-        plus: ["Animals"],
-        minus: ["Priests", "Philosophers", "Scientists"],
-        attachTo: ["Priests", "Philosophers", "Scientists"],
-        ally: [],
-        enemy: ["Animals"],
-        specialEntity: "Rebels",
-        relationship: "Culling and Control"
-      }
-    ]
-  },
-  {
-    name: "Wizards summon a benign comet, causing the sky to light up with strange colors and mystical energy.",
-    effects: [
-      {
-        plus: ["Wizards", "Druids", "Sky"],
-        minus: [],
-        attachTo: ["Sky"],
-        ally: ["Wizards"],
-        enemy: [],
-        specialEntity: "Living Wind",
-        relationship: "Comet Gift"
-      }
-    ]
-  },
-  {
-    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship.",
-    effects: [
-      {
-        plus: [],
-        minus: ["Trees", "Earth", "Druids"],
-        attachTo: ["Earth", "Druids"],
-        ally: ["Druids", "Earth"],
-        enemy: [],
-        relationship: "Grief and Growth"
-      }
-    ]
-  },
-  {
-    name: "Philosophers devise a new form of city government, challenging existing power structures.",
-    effects: [
-      {
-        plus: ["Philosophers"],
-        minus: ["Scientists", "Priests"],
-        attachTo: ["Scientists", "Priests"],
-        ally: [],
-        enemy: ["Philosophers"],
-        relationship: "Democracy"
-      }
-    ]
-  },
-  {
-    name: "Scientists' inventions make them extremely wealthy, letting them buy the city government",
-    effects: [
-      {
-        plus: ["Scientists"],
-        minus: ["Philosophers", "Priests"],
-        attachTo: ["Philosophers", "Priests"],
-        ally: [],
-        enemy: ["Scientists"],
-        relationship: "Plutocracy"
-      }
-    ]
-  },
-  {
-    name: "Priests hold a coup with their many followers, taking control of the city government",
-    effects: [
-      {
-        plus: ["Priests"],
-        minus: ["Philosophers", "Scientists"],
-        attachTo: ["Philosophers", "Scientists"],
-        ally: [],
-        enemy: ["Priests"],
-        specialEntity: "Armed Guards",
-        relationship: "Theocracy"
-      }
-    ]
-  },
-  {
-    name: "The sky god drinks sea and eats earth with tornados",
-    effects: [
-      {
-        plus: ["Sky"],
-        minus: ["Water", "Earth"],
-        attachTo: ["Water", "Earth"],
-        ally: [],
-        enemy: ["Sky"],
-        relationship: "Gluttonous Storms"
-      }
-    ]
-  },
-  {
-    name: "Druids and priests pray to to the Earth for a healthy harvest",
-    effects: [
-      {
-        plus: ["Druids", "Priests", "Earth"],
-        minus: [],
-        attachTo: ["Druids", "Priests"],
-        ally: [],
-        enemy: ["Earth"],
-        relationship: "Worshipers"
-      }
-    ]
-  },
-  {
-    name: "A scientist's experiment goes wrong and erupts in flames, engulfing them and their animal subjects.",
-    effects: [
-      {
-        plus: ["Fire"],
-        minus: ["Scientists", "Animals"],
-        attachTo: ["Fire"],
-        ally: ["Scientists"],
-        enemy: [],
-        specialEntity: "Sad Scholars",
-        relationship: "Sacrifice"
-      }
-    ]
-  },
-  {
-    name: "Scientists design an aqueduct carving through the mountain, draining precious water",
-    effects: [
-      {
-        plus: ["Scientists"],
-        minus: ["Earth", "Water"],
-        attachTo: ["Earth"],
-        ally: [],
-        enemy: ["Scientists"],
-        relationship: "Scarred Landscape"
-      }
-    ]
-  },
-  {
-    name: "Priests plunder amber from druids, desecrating their sacred stream in the process.",
-    effects: [
-      {
-        plus: ["Priests"],
-        minus: ["Druids", "Water"],
-        attachTo: ["Druids"],
-        ally: [],
-        enemy: ["Priests"],
-        specialEntity: "Inconsiderate Monarchy",
-        relationship: "Stolen Treasure"
-      }
-    ]
-  },
-  {
-    name: "The sky god spreads wisdom through the city, but discovers heretical texts",
-    effects: [
-      {
-        plus: ["Scientists", "Priests", "Philosophers"],
-        minus: [],
-        attachTo: ["Sky"],
-        ally: [],
-        enemy: ["Priests"],
-        relationship: "Heretics"
-      }
-    ]
-  },
-  {
-    name: "The sky weeps, watering the forest and dousing flames",
-    effects: [
-      {
-        plus: ["Trees", "Water"],
-        minus: ["Sky", "Fire"],
-        attachTo: ["Fire"],
-        ally: [],
-        enemy: ["Sky"],
-        relationship: "Hurtful Tears"
-      }
-    ]
-  },
-  {
-    name: "The planets align in the sky, demanding all other gods pay tribute. Druids curse it, call it an omen.",
-    effects: [
-      {
-        plus: ["Sky"],
-        minus: ["Water", "Fire", "Earth"],
-        attachTo: ["Sky"],
-        ally: [],
-        enemy: ["Druids"],
-        specialEntity: "Star Wedding",
-        relationship: "Heretics"
-      }
-    ]
-  },
-  {
-    name: "The sky and water gods dance, hurricanes batter the city",
-    effects: [
-      {
-        plus: ["Sky", "Water"],
-        minus: [["Scientists", "Priests", "Philosophers"]],
-        attachTo: ["Sky", "Water"],
-        ally: ["Sky", "Water"],
-        enemy: [],
-        relationship: "Lovers"
-      }
-    ]
-  },
-  {
-    name: "The sky weeps, watering the city's crops and dousing flames",
-    effects: [
-      {
-        plus: [["Priests", "Philosophers", "Scientists"]],
-        minus: ["Fire", "Sky"],
-        attachTo: ["Fire"],
-        ally: [],
-        enemy: ["Sky"],
-        relationship: "Hurtful Tears"
-      }
-    ]
-  },
-  {
-    name: "Dwarves pray and give tribute to the Earth, asking it to ground the wizards' magic.",
-    effects: [
-      {
-        plus: ["Earth", "Dwarves"],
-        minus: ["Wizards"],
-        attachTo: ["Earth"],
-        ally: ["Dwarves"],
-        enemy: [],
-        relationship: "Worshipers"
-      }
-    ]
-  },
-  {
-    name: "Runoff from the city temples infects many lakes and shores",
-    effects: [
-      {
-        plus: [],
-        minus: ["Animals", "Trees", "Water"],
-        attachTo: ["Water"],
-        ally: [],
-        enemy: ["Priests"],
-        specialEntity: "Drunk Animals",
-        relationship: "Polluted Grudge"
-      }
-    ]
-  },
-  {
-    name: "Dwarven mining is fruiful, but causes rock slides that pummel the forest",
-    effects: [
-      {
-        plus: ["Dwarves"],
-        minus: ["Trees", "Druids"],
-        attachTo: ["Trees"],
-        ally: [],
-        enemy: ["Dwarves"],
-        relationship: "Bruised Bark"
-      }
-    ]
-  },
-  {
-    name: "Great Oaks bare fruit of wisdom for all forest dwellers, but it takes a lot of water",
-    effects: [
-      {
-        plus: ["Animals", "Druids"],
-        minus: ["Water"],
-        attachTo: ["Trees"],
-        ally: ["Animals"],
-        enemy: [],
-        specialEntity: "Deep Roots",
-        relationship: "Bare Fruit"
-      }
-    ]
-  },
-  {
     name: "When priests try to steal a baby dragon for their ritual, the plan goes awry and a battle ensues. Long after the priests leave, dragons lash out by fiesting on any animal in sight.",
     effects: [
       {
@@ -991,6 +565,450 @@ export const events:GameEvent[] = [
       }
     ]
   },
+
+
+
+
+// === 3+ entity events === //
+  
+  
+  
+    
+  {
+    name: "As a catastrophic storm approaches, philosophers sacrifice themselves to quell the sky's madness. But priests sabatoge the effort for their own gain, tricking the sky into seeing the sacrifice as an insult.",
+    effects: [
+      {
+        plus: ["Priests"],
+        minus: ["Sky", "Philosophers"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Philosophers"],
+        relationship: "Accidental Heretics"
+      }
+    ]
+  },
+  {
+    name: "The mountain residents grow restless in the sweltering heat, curse the sun, and erupt in aimless violence",
+    effects: [
+      {
+        plus: [],
+        minus: ["Dragons", "Dwarves", "Wizards"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Dragons"],
+        relationship: "Heretics"
+      }
+    ]
+  },
+  {
+    name: "A torrential storm washes over the world, filling the rivers, lakes, and clouds. Many wizards' homes are washed away on the cliff sides.",
+    effects: [
+      {
+        plus: ["Sky", "Water"],
+        minus: ["Wizards"],
+        attachTo: ["Water"],
+        ally: ["Sky"],
+        enemy: [],
+        relationship: "Quenching Storms"
+      }
+    ]
+  },
+  {
+    name: "The water god sends a deluge to punish the dwarves for their greed, flooding their mountain home. Wizards are caught in the crossfire.",
+    effects: [
+      {
+        plus: ["Water"],
+        minus: ["Dwarves", "Wizards"],
+        attachTo: ["Dwarves"],
+        ally: [],
+        enemy: ["Water"],
+        relationship: "Home Wrecker"
+      }
+    ]
+  },
+  {
+    name: "A fierce battle erupts between wizards and dragons in the sky, scarring the ozone.",
+    effects: [
+      {
+        plus: [],
+        minus: ["Wizards", "Dragons", "Sky"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Wizards"],
+        relationship: "Scarred Skyscape"
+      }
+    ]
+  },
+  {
+    name: "Dwarves grow bold and venture out of the mountains, clearing vast swaths of forest and their druid protectors",
+    effects: [
+      {
+        plus: ["Dwarves"],
+        minus: ["Trees", "Druids"],
+        attachTo: ["Trees", "Druids"],
+        ally: [],
+        enemy: ["Dwarves"],
+        specialEntity: "Ruin and Destruction",
+        relationship: "Bloody Invaders"
+      }
+    ]
+  },
+  {
+    name: "Priests chant down the fire god, protecting the forest from a consuming blaze.",
+    effects: [
+      {
+        plus: ["Priests", "Trees"],
+        minus: ["Fire"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Priests"],
+        relationship: "Heretics"
+      }
+    ]
+  },
+  {
+    name: "Dragons fly into the heart of a tempest, eating the raging elements of sky and fire.",
+    effects: [
+      {
+        plus: ["Dragons"],
+        minus: ["Sky", "Fire"],
+        attachTo: ["Sky", "Fire"],
+        ally: [],
+        enemy: ["Dragons"],
+        relationship: "God Slayer"
+      }
+    ]
+  },
+  {
+    name: "Priests and Wizards join forces in a powerful ritual, channeling the divine and arcane together, while curious creatures join.",
+    effects: [
+      {
+        plus: ["Priests", "Wizards", "Animals"],
+        minus: [],
+        attachTo: ["Priests", "Wizards"],
+        ally: ["Priests", "Wizards"],
+        enemy: [],
+        specialEntity: "Humanity's Secret Weapon",
+        relationship: "Grand Ritual"
+      }
+    ]
+  },
+  {
+    name: "Dragons, in pursuit of a hidden treasure, invade the forest, clashing with druids and their animal allies.",
+    effects: [
+      {
+        plus: ["Dragons"],
+        minus: ["Trees", "Druids", "Animals"],
+        attachTo: ["Trees", "Druids", "Animals"],
+        ally: [],
+        enemy: ["Dragons"],
+        relationship: "Bloody Invaders"
+      }
+    ]
+  },
+  {
+    name: "Scientists create a new technology that saps the life of nearby groves. They lie and blame the wizards for this, which works.",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Trees", "Druids", "Animals"],
+        attachTo: ["Druids", "Animals"],
+        ally: [],
+        enemy: ["Wizards"],
+        relationship: "Misguided Grievance"
+      }
+    ]
+  },
+  {
+    name: "Philosophers and druids form an alliance to protect the forest from industrial expansion by the city.",
+    effects: [
+      {
+        plus: ["Philosophers", "Druids"],
+        minus: ["Scientists"],
+        attachTo: ["Druids", "Philosophers"],
+        ally: ["Trees"],
+        enemy: [],
+        relationship: "Defenders of Nature"
+      }
+    ]
+  },
+  {
+    name: "Wild animals form a pack and raid the city, driven by hunger and desperation.",
+    effects: [
+      {
+        plus: ["Animals"],
+        minus: ["Priests", "Philosophers", "Scientists"],
+        attachTo: ["Priests", "Philosophers", "Scientists"],
+        ally: [],
+        enemy: ["Animals"],
+        specialEntity: "Rebels",
+        relationship: "Culling and Control"
+      }
+    ]
+  },
+  {
+    name: "Wizards summon a benign comet, causing the sky to light up with strange colors and mystical energy.",
+    effects: [
+      {
+        plus: ["Wizards", "Druids", "Sky"],
+        minus: [],
+        attachTo: ["Sky"],
+        ally: ["Wizards"],
+        enemy: [],
+        specialEntity: "Living Wind",
+        relationship: "Comet Gift"
+      }
+    ]
+  },
+  {
+    name: "A grand oak falls, causing the druids to mourn and the earth to tremble. Though in dire times, they find companionship.",
+    effects: [
+      {
+        plus: [],
+        minus: ["Trees", "Earth", "Druids"],
+        attachTo: ["Earth", "Druids"],
+        ally: ["Druids", "Earth"],
+        enemy: [],
+        relationship: "Grief and Growth"
+      }
+    ]
+  },
+  {
+    name: "Philosophers devise a new form of city government, challenging existing power structures.",
+    effects: [
+      {
+        plus: ["Philosophers"],
+        minus: ["Scientists", "Priests"],
+        attachTo: ["Scientists", "Priests"],
+        ally: [],
+        enemy: ["Philosophers"],
+        relationship: "Democracy"
+      }
+    ]
+  },
+  {
+    name: "Scientists' inventions make them extremely wealthy, letting them buy the city government",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Philosophers", "Priests"],
+        attachTo: ["Philosophers", "Priests"],
+        ally: [],
+        enemy: ["Scientists"],
+        relationship: "Plutocracy"
+      }
+    ]
+  },
+  {
+    name: "Priests hold a coup with their many followers, taking control of the city government",
+    effects: [
+      {
+        plus: ["Priests"],
+        minus: ["Philosophers", "Scientists"],
+        attachTo: ["Philosophers", "Scientists"],
+        ally: [],
+        enemy: ["Priests"],
+        specialEntity: "Armed Guards",
+        relationship: "Theocracy"
+      }
+    ]
+  },
+  {
+    name: "The sky god drinks sea and eats earth with tornados",
+    effects: [
+      {
+        plus: ["Sky"],
+        minus: ["Water", "Earth"],
+        attachTo: ["Water", "Earth"],
+        ally: [],
+        enemy: ["Sky"],
+        relationship: "Gluttonous Storms"
+      }
+    ]
+  },
+  {
+    name: "Druids and priests pray to to the Earth for a healthy harvest",
+    effects: [
+      {
+        plus: ["Druids", "Priests", "Earth"],
+        minus: [],
+        attachTo: ["Druids", "Priests"],
+        ally: [],
+        enemy: ["Earth"],
+        relationship: "Worshipers"
+      }
+    ]
+  },
+  {
+    name: "A scientist's experiment goes wrong and erupts in flames, engulfing them and their animal subjects.",
+    effects: [
+      {
+        plus: ["Fire"],
+        minus: ["Scientists", "Animals"],
+        attachTo: ["Fire"],
+        ally: ["Scientists"],
+        enemy: [],
+        specialEntity: "Sad Scholars",
+        relationship: "Sacrifice"
+      }
+    ]
+  },
+  {
+    name: "Scientists design an aqueduct carving through the mountain, draining precious water",
+    effects: [
+      {
+        plus: ["Scientists"],
+        minus: ["Earth", "Water"],
+        attachTo: ["Earth"],
+        ally: [],
+        enemy: ["Scientists"],
+        relationship: "Scarred Landscape"
+      }
+    ]
+  },
+  {
+    name: "Priests plunder amber from druids, desecrating their sacred stream in the process.",
+    effects: [
+      {
+        plus: ["Priests"],
+        minus: ["Druids", "Water"],
+        attachTo: ["Druids"],
+        ally: [],
+        enemy: ["Priests"],
+        specialEntity: "Inconsiderate Monarchy",
+        relationship: "Stolen Treasure"
+      }
+    ]
+  },
+  {
+    name: "The sky god spreads wisdom through the city, but discovers heretical texts",
+    effects: [
+      {
+        plus: ["Scientists", "Priests", "Philosophers"],
+        minus: [],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Priests"],
+        relationship: "Heretics"
+      }
+    ]
+  },
+  {
+    name: "The sky weeps, watering the forest and dousing flames",
+    effects: [
+      {
+        plus: ["Trees", "Water"],
+        minus: ["Sky", "Fire"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Sky"],
+        relationship: "Hurtful Tears"
+      }
+    ]
+  },
+  {
+    name: "The planets align in the sky, demanding all other gods pay tribute. Druids curse it, call it an omen.",
+    effects: [
+      {
+        plus: ["Sky"],
+        minus: ["Water", "Fire", "Earth"],
+        attachTo: ["Sky"],
+        ally: [],
+        enemy: ["Druids"],
+        specialEntity: "Star Wedding",
+        relationship: "Heretics"
+      }
+    ]
+  },
+  {
+    name: "The sky and water gods dance, hurricanes batter the city",
+    effects: [
+      {
+        plus: ["Sky", "Water"],
+        minus: [["Scientists", "Priests", "Philosophers"]],
+        attachTo: ["Sky", "Water"],
+        ally: ["Sky", "Water"],
+        enemy: [],
+        relationship: "Lovers"
+      }
+    ]
+  },
+  {
+    name: "The sky weeps, watering the city's crops and dousing flames",
+    effects: [
+      {
+        plus: [["Priests", "Philosophers", "Scientists"]],
+        minus: ["Fire", "Sky"],
+        attachTo: ["Fire"],
+        ally: [],
+        enemy: ["Sky"],
+        relationship: "Hurtful Tears"
+      }
+    ]
+  },
+  {
+    name: "Dwarves pray and give tribute to the Earth, asking it to ground the wizards' magic.",
+    effects: [
+      {
+        plus: ["Earth", "Dwarves"],
+        minus: ["Wizards"],
+        attachTo: ["Earth"],
+        ally: ["Dwarves"],
+        enemy: [],
+        relationship: "Worshipers"
+      }
+    ]
+  },
+  {
+    name: "Runoff from the city temples infects many lakes and shores",
+    effects: [
+      {
+        plus: [],
+        minus: ["Animals", "Trees", "Water"],
+        attachTo: ["Water"],
+        ally: [],
+        enemy: ["Priests"],
+        specialEntity: "Drunk Animals",
+        relationship: "Polluted Grudge"
+      }
+    ]
+  },
+  {
+    name: "Dwarven mining is fruiful, but causes rock slides that pummel the forest",
+    effects: [
+      {
+        plus: ["Dwarves"],
+        minus: ["Trees", "Druids"],
+        attachTo: ["Trees"],
+        ally: [],
+        enemy: ["Dwarves"],
+        relationship: "Bruised Bark"
+      }
+    ]
+  },
+  {
+    name: "Great Oaks bare fruit of wisdom for all forest dwellers, but it takes a lot of water",
+    effects: [
+      {
+        plus: ["Animals", "Druids"],
+        minus: ["Water"],
+        attachTo: ["Trees"],
+        ally: ["Animals"],
+        enemy: [],
+        specialEntity: "Deep Roots",
+        relationship: "Bare Fruit"
+      }
+    ]
+  },
+
+
+
+  
+// === conditional events === //
+
+
+
+
   {
     name: "Tides adorn a beach with treasure, a gift from one god to another",
     effects: [
