@@ -1,7 +1,170 @@
 import type { GameEvent, BoardEntity, Entity } from "./game";
 
 /*
-find 30 that are roughly well-rounded and that we can fill out with allies/enemies/3-plus-minus while still being well-rounded
+maybe find events to round out the synergy/antisynergy/scores, then fill in the allies/enemies and add 3rd entities to the ones that dont have them while maintaining that balance?
+-we cant just add allies/enemies to the 3-entity events because its impossible to balance them without adding more entities
+-we also cant just balance the 2-entity events by adding more because then theyll be unbalanced when added back together with the other ones 
+-so its best to find a balanced group already and then modify the events to be 3-entity & ally/enemy havers
+
+this is the chart for the events that arent 3-entity or conditional. these would be the most easy to add allies/enemies to and balance within themselves, but if we did that they would be unbalanced when added back in to the rest of the events
+- maybe this is ok for testing purposes? since it gets us testing asap? and balancing things later may not be as hard as im imagining?
+=============================
+Dwarves:
+  Plus: 4
+  Minus: 3
+  Ally: 1
+  Enemy: 2
+  BestSynergy: Trees = 3
+  WorstSynergy: Earth = -3
+  MostSynergy: Earth = 3
+  LeastSynergy: Sky = 0
+  AttachTo: 3
+  Total Score: 0
+=============================
+Sky:
+  Plus: 0
+  Minus: 1
+  Ally: 1
+  Enemy: 0
+  BestSynergy: Scientists = 1
+  WorstSynergy: Dragons = 0
+  MostSynergy: Water = 2
+  LeastSynergy: Dragons = 0
+  AttachTo: 1
+  Total Score: 0
+=============================
+Priests:
+  Plus: 4
+  Minus: 3.3
+  Ally: 1.5
+  Enemy: 2
+  BestSynergy: Animals = 2
+  WorstSynergy: Fire = -1
+  MostSynergy: Water = 3
+  LeastSynergy: Sky = 0
+  AttachTo: 3.2
+  Total Score: 0.2
+=============================
+Water:
+  Plus: 5
+  Minus: 1
+  Ally: 0
+  Enemy: 3
+  BestSynergy: Fire = 1
+  WorstSynergy: Dragons = -1
+  MostSynergy: Priests = 3
+  LeastSynergy: Dwarves = 0
+  AttachTo: 2.5
+  Total Score: 1
+=============================
+Earth:
+  Plus: 3
+  Minus: 1
+  Ally: 1
+  Enemy: 2
+  BestSynergy: Druids = 1
+  WorstSynergy: Dwarves = -3
+  MostSynergy: Trees = 4
+  LeastSynergy: Dragons = 0
+  AttachTo: 4.5
+  Total Score: 1
+=============================
+Animals:
+  Plus: 5
+  Minus: 2
+  Ally: 1.5
+  Enemy: 2
+  BestSynergy: Druids = 2
+  WorstSynergy: Scientists = -1
+  MostSynergy: Trees = 4
+  LeastSynergy: Sky = 0
+  AttachTo: 3.5
+  Total Score: 2.5
+=============================
+Druids:
+  Plus: 4
+  Minus: 0
+  Ally: 0.5
+  Enemy: 2
+  BestSynergy: Animals = 2
+  WorstSynergy: Water = -1
+  MostSynergy: Wizards = 4
+  LeastSynergy: Sky = 0
+  AttachTo: 2.8
+  Total Score: 2.5
+=============================
+Trees:
+  Plus: 6
+  Minus: 3
+  Ally: 0.5
+  Enemy: 1
+  BestSynergy: Philosophers = 3
+  WorstSynergy: Earth = -2
+  MostSynergy: Earth = 4
+  LeastSynergy: Sky = 0
+  AttachTo: 3
+  Total Score: 2.5
+=============================
+Scientists:
+  Plus: 6
+  Minus: 2.3
+  Ally: 1
+  Enemy: 2
+  BestSynergy: Philosophers = 1.3
+  WorstSynergy: Animals = -1
+  MostSynergy: Philosophers = 3.3
+  LeastSynergy: Water = 0
+  AttachTo: 4.3
+  Total Score: 2.7
+=============================
+Philosophers:
+  Plus: 6
+  Minus: 1.3
+  Ally: 1.5
+  Enemy: 2
+  BestSynergy: Trees = 3
+  WorstSynergy: Fire = -1
+  MostSynergy: Scientists = 3.3
+  LeastSynergy: Sky = 0
+  AttachTo: 2.8
+  Total Score: 4.2
+=============================
+Dragons:
+  Plus: 6
+  Minus: 3
+  Ally: 3
+  Enemy: 1
+  BestSynergy: Druids = 2
+  WorstSynergy: Water = -1
+  MostSynergy: Dwarves = 3
+  LeastSynergy: Sky = 0
+  AttachTo: 3
+  Total Score: 5
+=============================
+Wizards:
+  Plus: 6
+  Minus: 2
+  Ally: 2.5
+  Enemy: 1
+  BestSynergy: Animals = 2
+  WorstSynergy: Wizards = 0
+  MostSynergy: Druids = 4
+  LeastSynergy: Sky = 0
+  AttachTo: 4.8
+  Total Score: 5.5
+=============================
+Fire:
+  Plus: 8
+  Minus: 4
+  Ally: 4
+  Enemy: 2
+  BestSynergy: Water = 1
+  WorstSynergy: Priests = -1
+  MostSynergy: Philosophers = 3
+  LeastSynergy: Trees = 0
+  AttachTo: 2.5
+  Total Score: 6
+==
 */
 
 export const events:GameEvent[] = [
