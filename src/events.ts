@@ -1,170 +1,179 @@
 import type { GameEvent, BoardEntity, Entity } from "./game";
 
 /*
-TODO also i should chnge the ai for playing the game to have a random amount of info on each event: from 25% of the effects known when making the decision (plus, minus, ally, enemy) to 100%. This would be a more representative model
+Once I have the first 30 with allies & enemies and affecting 2-3 on average (currently affecting 2), I can testplay with the first 30 cards. It'll be unbalanced but thats also kinda what can happen with the deck anyway. But itll be usable for testing
+
+
+TODO also i should change the ai for playing the game to have a random amount of info on each event: from 25% of the effects known when making the decision (plus, minus, ally, enemy) to 100%. This would be a more representative model
+TODO make the output of running things be in markdown format so i can decipher it easier
+- make a little factory for it that you feed in the titles of the sections, etc
+
+get rid of random selectors (random 1 of 3 hitting city, random 1 of 2 for alliance, etc)
+each event should affected 2-3 entities
+Turn some druids against trees they are way unabalanced
+also animals against trees
 
 This is the distribution for all 88ish events
 We will focus on the first 30, acknowledging that we'll be throwing the "total score" out of balance due to plus/minus ally/enemy changes,
 but instead we'll focus on improving the synergies for now 
 
-get rid of random selectors (random 1 of 3 hitting city, random 1 of 2 for alliance, etc)
-
-============================
+=============================
 Priests:
   Plus: 12.2
-  Minus: 9.8
+  Minus: 9.5
   Ally: 3.4
-  Enemy: 7
-  BestSynergy: Philosophers = 4.5
-  WorstSynergy: Sky = -2.6
-  MostSynergy: Scientists = 12.5
-  LeastSynergy: Dragons = 2.3
-  AttachTo: 6.3
-  Total Score: -1.2
-=============================
-Druids:
-  Plus: 9
-  Minus: 7
-  Ally: 1
-  Enemy: 3.9
-  BestSynergy: Trees = 10
-  WorstSynergy: Fire = -3
-  MostSynergy: Trees = 10
-  LeastSynergy: Philosophers = 2.5
-  AttachTo: 8.3
-  Total Score: -0.9
+  Enemy: 8
+  BestSynergy: Philosophers = 4.2
+  WorstSynergy: Fire = -2.3
+  MostSynergy: Scientists = 13.2
+  LeastSynergy: Dragons = 2
+  AttachTo: 6
+  Total Score: -1.9
 =============================
 Dwarves:
   Plus: 10
   Minus: 7.6
   Ally: 2
-  Enemy: 5
+  Enemy: 6
   BestSynergy: Wizards = 2.5
-  WorstSynergy: Earth = -3.5
-  MostSynergy: Wizards = 6.8
-  LeastSynergy: Sky = 0
+  WorstSynergy: Earth = -2.5
+  MostSynergy: Earth = 7.5
+  LeastSynergy: Animals = 1
   AttachTo: 6.7
-  Total Score: -0.6
+  Total Score: -1.6
 =============================
-Fire:
-  Plus: 10.8
-  Minus: 10.8
-  Ally: 4
-  Enemy: 4.4
-  BestSynergy: Dwarves = 1
-  WorstSynergy: Trees = -3.5
-  MostSynergy: Sky = 7.8
-  LeastSynergy: Dwarves = 1
-  AttachTo: 9.1
-  Total Score: -0.4
-=============================
-Sky:
-  Plus: 7.8
-  Minus: 7.3
-  Ally: 3
-  Enemy: 3.9
-  BestSynergy: Druids = 0.5
-  WorstSynergy: Priests = -2.6
-  MostSynergy: Fire = 7.8
-  LeastSynergy: Dwarves = 0
-  AttachTo: 9.7
-  Total Score: -0.3
-=============================
-Water:
-  Plus: 12
-  Minus: 10.5
-  Ally: 2.9
-  Enemy: 4.5
-  BestSynergy: Earth = 4.8
-  WorstSynergy: Wizards = -2
-  MostSynergy: Sky = 7.5
-  LeastSynergy: Dragons = 1
-  AttachTo: 8.1
-  Total Score: -0.1
-=============================
-Animals:
-  Plus: 8.5
-  Minus: 8.5
-  Ally: 3
-  Enemy: 3
-  BestSynergy: Trees = 6.5
-  WorstSynergy: Dragons = -1
-  MostSynergy: Scientists = 9
-  LeastSynergy: Sky = 0
-  AttachTo: 5.7
-  Total Score: 0
-=============================
-Wizards:
-  Plus: 8.8
-  Minus: 9.1
-  Ally: 4
-  Enemy: 3.6
-  BestSynergy: Dragons = 4.3
-  WorstSynergy: Water = -2
-  MostSynergy: Druids = 7.3
-  LeastSynergy: Philosophers = 1.5
-  AttachTo: 6.5
-  Total Score: 0
-=============================
-Earth:
-  Plus: 8.1
-  Minus: 6.8
-  Ally: 2.9
-  Enemy: 4
-  BestSynergy: Water = 4.8
-  WorstSynergy: Dwarves = -3.5
-  MostSynergy: Water = 6.8
-  LeastSynergy: Dragons = 0
-  AttachTo: 10.5
-  Total Score: 0.3
-=============================
-Philosophers:
-  Plus: 10.7
-  Minus: 8.6
-  Ally: 2.3
-  Enemy: 4
-  BestSynergy: Priests = 4.5
-  WorstSynergy: Fire = -1.8
-  MostSynergy: Scientists = 14
-  LeastSynergy: Wizards = 1.5
-  AttachTo: 5
-  Total Score: 0.3
+Druids:
+  Plus: 9
+  Minus: 7
+  Ally: 1.5
+  Enemy: 4.9
+  BestSynergy: Trees = 9
+  WorstSynergy: Fire = -2
+  MostSynergy: Trees = 11
+  LeastSynergy: Fire = 2
+  AttachTo: 7.8
+  Total Score: -1.4
 =============================
 Trees:
   Plus: 10.3
   Minus: 11.8
-  Ally: 3
-  Enemy: 1
-  BestSynergy: Druids = 10
+  Ally: 2.5
+  Enemy: 2
+  BestSynergy: Druids = 9
   WorstSynergy: Fire = -3.5
-  MostSynergy: Druids = 10
+  MostSynergy: Druids = 11
   LeastSynergy: Dragons = 2
-  AttachTo: 6
-  Total Score: 0.5
+  AttachTo: 6.5
+  Total Score: -1
 =============================
 Scientists:
   Plus: 12.2
-  Minus: 10.3
+  Minus: 11
   Ally: 4
   Enemy: 5
-  BestSynergy: Priests = 4.5
-  WorstSynergy: Water = -1.2
-  MostSynergy: Philosophers = 14
-  LeastSynergy: Dragons = 1.3
-  AttachTo: 6.3
-  Total Score: 0.8
+  BestSynergy: Philosophers = 3.7
+  WorstSynergy: Fire = -0.8
+  MostSynergy: Philosophers = 13.7
+  LeastSynergy: Earth = 1.5
+  AttachTo: 7
+  Total Score: 0.2
+=============================
+Earth:
+  Plus: 8.1
+  Minus: 6.8
+  Ally: 4.9
+  Enemy: 6
+  BestSynergy: Water = 3.8
+  WorstSynergy: Dwarves = -2.5
+  MostSynergy: Water = 7.8
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 10.5
+  Total Score: 0.3
 =============================
 Dragons:
   Plus: 8.5
   Minus: 6.3
-  Ally: 3
+  Ally: 2.5
   Enemy: 4.3
   BestSynergy: Wizards = 4.3
   WorstSynergy: Animals = -1
   MostSynergy: Wizards = 5
-  LeastSynergy: Earth = 0
-  AttachTo: 3.7
+  LeastSynergy: Water = 1
+  AttachTo: 4.2
+  Total Score: 0.5
+=============================
+Fire:
+  Plus: 10.8
+  Minus: 10.8
+  Ally: 5
+  Enemy: 4.4
+  BestSynergy: Earth = 0.5
+  WorstSynergy: Trees = -3.5
+  MostSynergy: Sky = 7.8
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 8.6
+  Total Score: 0.6
+=============================
+Water:
+  Plus: 12
+  Minus: 10.5
+  Ally: 3.9
+  Enemy: 4.5
+  BestSynergy: Trees = 4.3
+  WorstSynergy: Wizards = -2
+  MostSynergy: Earth = 7.8
+  LeastSynergy: Dragons = 1
+  AttachTo: 8.6
+  Total Score: 0.9
+=============================
+Animals:
+  Plus: 8.5
+  Minus: 8.5
+  Ally: 4
+  Enemy: 3
+  BestSynergy: Druids = 6
+  WorstSynergy: Dragons = -1
+  MostSynergy: Scientists = 10
+  LeastSynergy: Dwarves = 1
+  AttachTo: 5.7
   Total Score: 1
+=============================
+Wizards:
+  Plus: 8.8
+  Minus: 9.1
+  Ally: 5
+  Enemy: 3.6
+  BestSynergy: Dragons = 4.3
+  WorstSynergy: Water = -2
+  MostSynergy: Druids = 7.3
+  LeastSynergy: Fire = 1.5
+  AttachTo: 6.5
+  Total Score: 1
+=============================
+Philosophers:
+  Plus: 10.7
+  Minus: 8.3
+  Ally: 2.8
+  Enemy: 4
+  BestSynergy: Trees = 4.5
+  WorstSynergy: Fire = -1.8
+  MostSynergy: Scientists = 13.7
+  LeastSynergy: Water = 1.5
+  AttachTo: 4.2
+  Total Score: 1.2
+=============================
+Sky:
+  Plus: 7.8
+  Minus: 7.3
+  Ally: 6
+  Enemy: 4.9
+  BestSynergy: Animals = 1
+  WorstSynergy: Trees = -1.7
+  MostSynergy: Fire = 7.8
+  LeastSynergy: Dwarves = 1
+  AttachTo: 9.7
+  Total Score: 1.7
+=============================
 */
 
 export const events:GameEvent[] = [
@@ -237,7 +246,7 @@ export const events:GameEvent[] = [
     name: "Scientists showcase experiments discredeting the church. Priests pray to the sky for a sign.",
     effects: [
       {
-        plus: ["Scientists"],
+        plus: ["Scientists", "Sky"],
         minus: ["Priests"],
         attachTo: ["Priests"],
         ally: ["Sky"],
@@ -257,7 +266,7 @@ export const events:GameEvent[] = [
         ally: ["Sky"],
         enemy: ["Earth"],
         specialEntity: "Erosive Liquid",
-        relationship: "Torrent of Tears"
+        relationship: "Sea of Tears"
       }
     ]
   },
@@ -275,13 +284,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "During the winter solstice, druids call forth a powerful snow, freezing the lakes and kindling.",
+    name: "During winter solstice, empowered druids call forth the cold, freezing lakes and kindling. An alliance of steam is formed.",
     effects: [
       {
-        plus: [],
+        plus: ["Druids"],
         minus: ["Water", "Fire"],
-        attachTo: ["Water", "Fire"],
-        ally: [],
+        attachTo: ["Water"],
+        ally: ["Fire"],
         enemy: ["Druids"],
         relationship: "Frostbite"
       },
@@ -289,13 +298,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Priests burn heretical philosophy books",
+    name: "Priests burn heretical philosophy books. Wizards offer to help restore them, befriending the scholars.",
     effects: [
       {
         plus: ["Fire"],
         minus: ["Philosophers"],
         attachTo: ["Philosophers"],
-        ally: [],
+        ally: ["Wizards"],
         enemy: ["Priests"],
         specialEntity: "Sad Scholars",
         relationship: "Burnt Books"
@@ -303,67 +312,67 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "The water god swallows ships, eating their treasure",
+    name: "The water god swallows ships, eating their treasure. Priests pray to the sky.",
     effects: [
       {
         plus: ["Water"],
         minus: ["Priests"],
         attachTo: ["Priests"],
-        ally: [],
+        ally: ["Sky"],
         enemy: ["Water"],
         relationship: "Stolen Treasure"
       }
     ]
   },
   {
-    name: "Wizards create spectral animals to play and mate with the wild ones",
+    name: "Wizards create spectral animals to play and mate with the wild ones. Soon, the animals start hanging around the wizards instead of the forest.",
     effects: [
       {
         plus: ["Wizards", "Animals"],
         minus: [],
         attachTo: ["Animals"],
         ally: ["Wizards"],
-        enemy: [],
+        enemy: ["Trees"],
         specialEntity: "Shadow Beings",
         relationship: "Spectral Friends"
       }
     ]
   },
   {
-    name: "A philosopher and a grand oak contemplate the meaning of life",
+    name: "A philosopher and a grand oak contemplate the meaning of life. Druids keep interrupting.",
     effects: [
       {
         plus: ["Philosophers", "Trees"],
         minus: [],
-        attachTo: ["Trees", "Philosophers"],
-        ally: ["Philosophers", "Trees"],
-        enemy: [],
+        attachTo: ["Trees"],
+        ally: ["Philosophers"],
+        enemy: ["Druids"],
         relationship: "Brainstorm"
       }
     ]
   },
   {
-    name: "Fresh fire fills city machinery",
+    name: "Fresh fire fills city machinery, churning out new technology. The temple finds their members straying.",
     effects: [
       {
         plus: ["Fire", "Scientists"],
         minus: [],
         attachTo: ["Scientists"],
         ally: ["Fire"],
-        enemy: [],
+        enemy: ["Priests"],
         specialEntity: "Humanity's Secret Weapon",
         relationship: "Running Hot"
       }
     ]
   },
   {
-    name: "Priests plunder gold from Dwarven caves",
+    name: "Priests plunder gold from Dwarven caves. The small folk pray to the mountain.",
     effects: [
       {
         plus: ["Priests"],
         minus: ["Dwarves"],
         attachTo: ["Dwarves"],
-        ally: [],
+        ally: ["Earth"],
         enemy: ["Priests"],
         specialEntity: "Inconsiderate Monarchy",
         relationship: "Stolen Treasure"
@@ -371,13 +380,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge... ",
+    name: "Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge...and pet their companions.",
     effects: [
       {
         plus: ["Fire"],
         minus: ["Scientists"],
         attachTo: ["Scientists"],
-        ally: [],
+        ally: ["Animals"],
         enemy: ["Fire"],
         specialEntity: "Sun Spirits",
         relationship: "Fried Circuits"
@@ -385,13 +394,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Philosophers question the speed of scientific advancement",
+    name: "Philosophers question the speed of scientific advancement. As their labs are shut down, researchers pray to the almighty ground.",
     effects: [
       {
         plus: ["Philosophers"],
         minus: ["Scientists"],
         attachTo: ["Scientists"],
-        ally: [],
+        ally: ["Earth"],
         enemy: ["Philosophers"],
         specialEntity: "Rebels",
         relationship: "Strict Regulation"
@@ -399,13 +408,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "A solar eclipse weakens the fire god, frightens animals. They're not so bright, so they think the trees are to blame.",
+    name: "A solar eclipse weakens the fire god, frightens animals. They're not so bright, so they think the trees are to blame. And they pray to the god-like beasts flying across the sky...",
     effects: [
       {
         plus: [],
         minus: ["Fire", "Animals"],
         attachTo: ["Animals"],
-        ally: [],
+        ally: ["Dragons"],
         enemy: ["Trees"],
         specialEntity: "Shadow Beings",
         relationship: "Standing Menacingly"
@@ -413,13 +422,13 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "The earth has nightmares, causing earthquakes around the world",
+    name: "The earth has nightmares, causing earthquakes throughout the forest. At least the trees can thank the sun for not igniting them.",
     effects: [
       {
         plus: [],
         minus: ["Trees", "Dwarves"],
-        attachTo: ["Trees", "Dwarves"],
-        ally: [],
+        attachTo: ["Trees"],
+        ally: ["Fire"],
         enemy: ["Earth"],
         specialEntity: "Invasive Plateaus",
         relationship: "Unstable Ground"
@@ -437,20 +446,6 @@ export const events:GameEvent[] = [
         enemy: [],
         specialEntity: "Living Crystals",
         relationship: "Magic Plotting"
-      }
-    ]
-  },
-  {
-    name: "Philosophers write a treatise on the interconnectedness of all mortal beings, influencing various societies.",
-    effects: [
-      {
-        plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
-        minus: [],
-        attachTo: ["Animals", "Priests"],
-        ally: ["Animals", "Priests"],
-        enemy: [],
-        specialEntity: "Ecstacy Crystals",
-        relationship: "Mortal Love"
       }
     ]
   },
@@ -577,20 +572,6 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "In a desperate act, priests invoke the Earth to swollow the flames of the world whole, causing devastation but saving the priest's temples, and giving the Earth a taste for fire.",
-    effects: [
-      {
-        plus: ["Priests", "Earth"],
-        minus: ["Fire"],
-        attachTo: ["Earth"],
-        ally: [],
-        enemy: ["Fire"],
-        specialEntity: "Invasive Plateaus",
-        relationship: "Taste for Fire"
-      }
-    ]
-  },
-  {
     name: "Wizards conduct a dangerous ritual to harness the power of the fire god, enhancing their spells with fiery potency.",
     effects: [
       {
@@ -601,6 +582,41 @@ export const events:GameEvent[] = [
         enemy: [],
         specialEntity: "Sun Spirits",
         relationship: "Worshipers"
+      }
+    ]
+  },
+
+
+  /* ==== 30 above ==== */
+
+
+
+
+  {
+    name: "Philosophers write a treatise on the interconnectedness of all mortal beings, influencing various societies.",
+    effects: [
+      {
+        plus: ["Animals", "Druids", "Wizards", "Dwarves", "Dragons", "Trees", "Priests", "Scientists", "Philosophers"],
+        minus: [],
+        attachTo: ["Animals", "Priests"],
+        ally: ["Animals", "Priests"],
+        enemy: [],
+        specialEntity: "Ecstacy Crystals",
+        relationship: "Mortal Love"
+      }
+    ]
+  },
+  {
+    name: "In a desperate act, priests invoke the Earth to swollow the flames of the world whole, causing devastation but saving the priest's temples, and giving the Earth a taste for fire.",
+    effects: [
+      {
+        plus: ["Priests", "Earth"],
+        minus: ["Fire"],
+        attachTo: ["Earth"],
+        ally: [],
+        enemy: ["Fire"],
+        specialEntity: "Invasive Plateaus",
+        relationship: "Taste for Fire"
       }
     ]
   },
