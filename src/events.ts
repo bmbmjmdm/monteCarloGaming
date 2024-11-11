@@ -1,246 +1,246 @@
 import type { GameEvent, BoardEntity, Entity } from "./game";
 
 /*
-maybe find events to round out the synergy/antisynergy/scores, then fill in the allies/enemies and add 3rd entities to the ones that dont have them while maintaining that balance?
--we cant just add allies/enemies to the 3-entity events because its impossible to balance them without adding more entities
--we also cant just balance the 2-entity events by adding more because then theyll be unbalanced when added back together with the other ones 
--so its best to find a balanced group already and then modify the events to be 3-entity & ally/enemy havers
+TODO also i should chnge the ai for playing the game to have a random amount of info on each event: from 25% of the effects known when making the decision (plus, minus, ally, enemy) to 100%. This would be a more representative model
 
-this is the chart for the events that arent 3-entity or conditional. these would be the most easy to add allies/enemies to and balance within themselves, but if we did that they would be unbalanced when added back in to the rest of the events
-- maybe this is ok for testing purposes? since it gets us testing asap? and balancing things later may not be as hard as im imagining?
-=============================
-Dwarves:
-  Plus: 4
-  Minus: 3
-  Ally: 1
-  Enemy: 2
-  BestSynergy: Trees = 3
-  WorstSynergy: Earth = -3
-  MostSynergy: Earth = 3
-  LeastSynergy: Sky = 0
-  AttachTo: 3
-  Total Score: 0
-=============================
-Sky:
-  Plus: 0
-  Minus: 1
-  Ally: 1
-  Enemy: 0
-  BestSynergy: Scientists = 1
-  WorstSynergy: Dragons = 0
-  MostSynergy: Water = 2
-  LeastSynergy: Dragons = 0
-  AttachTo: 1
-  Total Score: 0
-=============================
+This is the distribution for all 88ish events
+We will focus on the first 30, acknowledging that we'll be throwing the "total score" out of balance due to plus/minus ally/enemy changes,
+but instead we'll focus on improving the synergies for now 
+
+get rid of random selectors (random 1 of 3 hitting city, random 1 of 2 for alliance, etc)
+
+============================
 Priests:
-  Plus: 4
-  Minus: 3.3
-  Ally: 1.5
-  Enemy: 2
-  BestSynergy: Animals = 2
-  WorstSynergy: Fire = -1
-  MostSynergy: Water = 3
-  LeastSynergy: Sky = 0
-  AttachTo: 3.2
-  Total Score: 0.2
-=============================
-Water:
-  Plus: 5
-  Minus: 1
-  Ally: 0
-  Enemy: 3
-  BestSynergy: Fire = 1
-  WorstSynergy: Dragons = -1
-  MostSynergy: Priests = 3
-  LeastSynergy: Dwarves = 0
-  AttachTo: 2.5
-  Total Score: 1
-=============================
-Earth:
-  Plus: 3
-  Minus: 1
-  Ally: 1
-  Enemy: 2
-  BestSynergy: Druids = 1
-  WorstSynergy: Dwarves = -3
-  MostSynergy: Trees = 4
-  LeastSynergy: Dragons = 0
-  AttachTo: 4.5
-  Total Score: 1
-=============================
-Animals:
-  Plus: 5
-  Minus: 2
-  Ally: 1.5
-  Enemy: 2
-  BestSynergy: Druids = 2
-  WorstSynergy: Scientists = -1
-  MostSynergy: Trees = 4
-  LeastSynergy: Sky = 0
-  AttachTo: 3.5
-  Total Score: 2.5
+  Plus: 12.2
+  Minus: 9.8
+  Ally: 3.4
+  Enemy: 7
+  BestSynergy: Philosophers = 4.5
+  WorstSynergy: Sky = -2.6
+  MostSynergy: Scientists = 12.5
+  LeastSynergy: Dragons = 2.3
+  AttachTo: 6.3
+  Total Score: -1.2
 =============================
 Druids:
-  Plus: 4
-  Minus: 0
-  Ally: 0.5
-  Enemy: 2
-  BestSynergy: Animals = 2
-  WorstSynergy: Water = -1
-  MostSynergy: Wizards = 4
-  LeastSynergy: Sky = 0
-  AttachTo: 2.8
-  Total Score: 2.5
-=============================
-Trees:
-  Plus: 6
-  Minus: 3
-  Ally: 0.5
-  Enemy: 1
-  BestSynergy: Philosophers = 3
-  WorstSynergy: Earth = -2
-  MostSynergy: Earth = 4
-  LeastSynergy: Sky = 0
-  AttachTo: 3
-  Total Score: 2.5
-=============================
-Scientists:
-  Plus: 6
-  Minus: 2.3
+  Plus: 9
+  Minus: 7
   Ally: 1
-  Enemy: 2
-  BestSynergy: Philosophers = 1.3
-  WorstSynergy: Animals = -1
-  MostSynergy: Philosophers = 3.3
-  LeastSynergy: Water = 0
-  AttachTo: 4.3
-  Total Score: 2.7
+  Enemy: 3.9
+  BestSynergy: Trees = 10
+  WorstSynergy: Fire = -3
+  MostSynergy: Trees = 10
+  LeastSynergy: Philosophers = 2.5
+  AttachTo: 8.3
+  Total Score: -0.9
 =============================
-Philosophers:
-  Plus: 6
-  Minus: 1.3
-  Ally: 1.5
-  Enemy: 2
-  BestSynergy: Trees = 3
-  WorstSynergy: Fire = -1
-  MostSynergy: Scientists = 3.3
+Dwarves:
+  Plus: 10
+  Minus: 7.6
+  Ally: 2
+  Enemy: 5
+  BestSynergy: Wizards = 2.5
+  WorstSynergy: Earth = -3.5
+  MostSynergy: Wizards = 6.8
   LeastSynergy: Sky = 0
-  AttachTo: 2.8
-  Total Score: 4.2
-=============================
-Dragons:
-  Plus: 6
-  Minus: 3
-  Ally: 3
-  Enemy: 1
-  BestSynergy: Druids = 2
-  WorstSynergy: Water = -1
-  MostSynergy: Dwarves = 3
-  LeastSynergy: Sky = 0
-  AttachTo: 3
-  Total Score: 5
-=============================
-Wizards:
-  Plus: 6
-  Minus: 2
-  Ally: 2.5
-  Enemy: 1
-  BestSynergy: Animals = 2
-  WorstSynergy: Wizards = 0
-  MostSynergy: Druids = 4
-  LeastSynergy: Sky = 0
-  AttachTo: 4.8
-  Total Score: 5.5
+  AttachTo: 6.7
+  Total Score: -0.6
 =============================
 Fire:
-  Plus: 8
-  Minus: 4
+  Plus: 10.8
+  Minus: 10.8
   Ally: 4
-  Enemy: 2
-  BestSynergy: Water = 1
-  WorstSynergy: Priests = -1
-  MostSynergy: Philosophers = 3
-  LeastSynergy: Trees = 0
-  AttachTo: 2.5
-  Total Score: 6
-==
+  Enemy: 4.4
+  BestSynergy: Dwarves = 1
+  WorstSynergy: Trees = -3.5
+  MostSynergy: Sky = 7.8
+  LeastSynergy: Dwarves = 1
+  AttachTo: 9.1
+  Total Score: -0.4
+=============================
+Sky:
+  Plus: 7.8
+  Minus: 7.3
+  Ally: 3
+  Enemy: 3.9
+  BestSynergy: Druids = 0.5
+  WorstSynergy: Priests = -2.6
+  MostSynergy: Fire = 7.8
+  LeastSynergy: Dwarves = 0
+  AttachTo: 9.7
+  Total Score: -0.3
+=============================
+Water:
+  Plus: 12
+  Minus: 10.5
+  Ally: 2.9
+  Enemy: 4.5
+  BestSynergy: Earth = 4.8
+  WorstSynergy: Wizards = -2
+  MostSynergy: Sky = 7.5
+  LeastSynergy: Dragons = 1
+  AttachTo: 8.1
+  Total Score: -0.1
+=============================
+Animals:
+  Plus: 8.5
+  Minus: 8.5
+  Ally: 3
+  Enemy: 3
+  BestSynergy: Trees = 6.5
+  WorstSynergy: Dragons = -1
+  MostSynergy: Scientists = 9
+  LeastSynergy: Sky = 0
+  AttachTo: 5.7
+  Total Score: 0
+=============================
+Wizards:
+  Plus: 8.8
+  Minus: 9.1
+  Ally: 4
+  Enemy: 3.6
+  BestSynergy: Dragons = 4.3
+  WorstSynergy: Water = -2
+  MostSynergy: Druids = 7.3
+  LeastSynergy: Philosophers = 1.5
+  AttachTo: 6.5
+  Total Score: 0
+=============================
+Earth:
+  Plus: 8.1
+  Minus: 6.8
+  Ally: 2.9
+  Enemy: 4
+  BestSynergy: Water = 4.8
+  WorstSynergy: Dwarves = -3.5
+  MostSynergy: Water = 6.8
+  LeastSynergy: Dragons = 0
+  AttachTo: 10.5
+  Total Score: 0.3
+=============================
+Philosophers:
+  Plus: 10.7
+  Minus: 8.6
+  Ally: 2.3
+  Enemy: 4
+  BestSynergy: Priests = 4.5
+  WorstSynergy: Fire = -1.8
+  MostSynergy: Scientists = 14
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 5
+  Total Score: 0.3
+=============================
+Trees:
+  Plus: 10.3
+  Minus: 11.8
+  Ally: 3
+  Enemy: 1
+  BestSynergy: Druids = 10
+  WorstSynergy: Fire = -3.5
+  MostSynergy: Druids = 10
+  LeastSynergy: Dragons = 2
+  AttachTo: 6
+  Total Score: 0.5
+=============================
+Scientists:
+  Plus: 12.2
+  Minus: 10.3
+  Ally: 4
+  Enemy: 5
+  BestSynergy: Priests = 4.5
+  WorstSynergy: Water = -1.2
+  MostSynergy: Philosophers = 14
+  LeastSynergy: Dragons = 1.3
+  AttachTo: 6.3
+  Total Score: 0.8
+=============================
+Dragons:
+  Plus: 8.5
+  Minus: 6.3
+  Ally: 3
+  Enemy: 4.3
+  BestSynergy: Wizards = 4.3
+  WorstSynergy: Animals = -1
+  MostSynergy: Wizards = 5
+  LeastSynergy: Earth = 0
+  AttachTo: 3.7
+  Total Score: 1
 */
 
 export const events:GameEvent[] = [
   {
-    name: "When priests try to steal a baby dragon for their ritual, the plan goes awry and a battle ensues. Long after the priests leave, dragons lash out by fiesting on any animal in sight.",
+    name: "When priests try to steal a baby dragon for their ritual, the plan goes awry and a battle ensues. Long after the priests leave, dragons lash out by fiesting on any animal in sight, trusting their babies deep within caves and earth's embrace.",
     effects: [
       {
         plus: [],
         minus: ["Dragons", "Priests"],
         attachTo: ["Dragons"],
-        ally: [],
+        ally: ["Earth"],
         enemy: ["Animals"],
-        relationship: "Hungry and Hateful"
+        relationship: "Caves and Craves"
       },
     ]
   },
   {
-    name: "The fire god finds comfort in the bellies of dragons",
+    name: "The fire god is betrayed by dwarves, but when they find comfort in the bellies of dragons, the flames grow stronger than ever.",
     effects: [
       {
         plus: ["Fire"],
         minus: [],
         attachTo: ["Fire"],
         ally: ["Dragons"],
-        enemy: [],
+        enemy: ["Dwarves"],
         relationship: "Warm Belly"
       }
     ]
   },
   {
-    name: "Druids broker an alliance with dragons",
+    name: "Druids broker an alliance with dragons. The earth god pleads for their druidic worshipers to reconsider, but this only infuriates the dragons.",
     effects: [
       {
         plus: ["Druids", "Dragons"],
         minus: [],
-        attachTo: ["Druids", "Dragons"],
-        ally: ["Dragons", "Druids"],
-        enemy: [],
+        attachTo: ["Dragons"],
+        ally: ["Druids"],
+        enemy: ["Earth"],
         relationship: "Alliance"
       }
     ]
   },
   {
-    name: "Dragons launch an attack on the city, plundering it",
+    name: "Dragons launch an attack on the city, scorching its engineering marvels to ash. Those engineers convert to worshiping the water god.",
     effects: [
       {
         plus: ["Dragons"],
-        minus: [["Scientists", "Priests", "Philosophers"]],
-        attachTo: ["Scientists", "Priests", "Philosophers"],
-        ally: [],
+        minus: ["Scientists"],
+        attachTo: ["Scientists"],
+        ally: ["Water"],
         enemy: ["Dragons"],
-        relationship: "Burnt Homes"
+        relationship: "Burnt Wonders"
       }
     ]
   },
   {
-    name: "The fire god fills dwarven forges",
+    name: "The fire god fills dwarven forges. When the sky fills with dark clouds and ill omens, the dwarves take the sky's warning as a threat.",
     effects: [
       {
         plus: ["Fire", "Dwarves"],
         minus: [],
         attachTo: ["Dwarves"],
         ally: ["Fire"],
-        enemy: [],
+        enemy: ["Sky"],
         relationship: "Godly Forge"
       }
     ]
   },
   {
-    name: "Scientists showcase experiments discredeting the church",
+    name: "Scientists showcase experiments discredeting the church. Priests pray to the sky for a sign.",
     effects: [
       {
         plus: ["Scientists"],
         minus: ["Priests"],
         attachTo: ["Priests"],
-        ally: [],
+        ally: ["Sky"],
         enemy: ["Scientists"],
         specialEntity: "Scientific Silence",
         relationship: "Threats to Faith"
@@ -248,27 +248,27 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "The sky weeps, filling the sea",
+    name: "The sky weeps, filling the sea. When the sea goes searching for who hurt them, a lone island is found in the shape of a crude gesture.",
     effects: [
       {
         plus: ["Water"],
         minus: ["Sky"],
         attachTo: ["Water"],
         ally: ["Sky"],
-        enemy: [],
+        enemy: ["Earth"],
         specialEntity: "Erosive Liquid",
-        relationship: "Helpful Tears"
+        relationship: "Torrent of Tears"
       }
     ]
   },
   {
-    name: "Scientists capture wild animals to use for experiments",
+    name: "Scientists capture wild animals to use for experiments. As the behavior continues, the sky begins sending them omens to warn when the humans are coming.",
     effects: [
       {
         plus: ["Scientists"],
         minus: ["Animals"],
         attachTo: ["Animals"],
-        ally: [],
+        ally: ["Sky"],
         enemy: ["Scientists"],
         relationship: "Fearful Subjects"
       }
