@@ -26,45 +26,81 @@ Priests:
   BestSynergy: Philosophers = 4.2
   WorstSynergy: Fire = -2.3
   MostSynergy: Scientists = 13.2
-  LeastSynergy: Dragons = 2
-  AttachTo: 6
+  LeastSynergy: Trees = 2.5
+  AttachTo: 6.7
   Total Score: -1.9
 =============================
-Dwarves:
-  Plus: 10
-  Minus: 7.6
-  Ally: 2
-  Enemy: 6
-  BestSynergy: Wizards = 2.5
-  WorstSynergy: Earth = -2.5
-  MostSynergy: Earth = 7.5
-  LeastSynergy: Animals = 1
-  AttachTo: 6.7
-  Total Score: -1.6
+Wizards:
+  Plus: 7.8
+  Minus: 9.1
+  Ally: 4.5
+  Enemy: 4.6
+  BestSynergy: Dwarves = 3
+  WorstSynergy: Water = -2
+  MostSynergy: Animals = 7.5
+  LeastSynergy: Fire = 1.5
+  AttachTo: 5.6
+  Total Score: -1.5
 =============================
-Druids:
-  Plus: 9
-  Minus: 7
-  Ally: 1.5
-  Enemy: 4.9
-  BestSynergy: Trees = 9
-  WorstSynergy: Fire = -2
-  MostSynergy: Trees = 11
-  LeastSynergy: Fire = 2
-  AttachTo: 7.8
-  Total Score: -1.4
+Water:
+  Plus: 12
+  Minus: 10.5
+  Ally: 3.9
+  Enemy: 6.5
+  BestSynergy: Earth = 3.8
+  WorstSynergy: Wizards = -2
+  MostSynergy: Earth = 7.8
+  LeastSynergy: Dragons = 1
+  AttachTo: 8.6
+  Total Score: -1.1
 =============================
 Trees:
   Plus: 10.3
   Minus: 11.8
-  Ally: 2.5
-  Enemy: 2
-  BestSynergy: Druids = 9
-  WorstSynergy: Fire = -3.5
+  Ally: 4.5
+  Enemy: 4
+  BestSynergy: Druids = 7
+  WorstSynergy: Fire = -2.5
   MostSynergy: Druids = 11
-  LeastSynergy: Dragons = 2
-  AttachTo: 6.5
+  LeastSynergy: Sky = 2.3
+  AttachTo: 7
   Total Score: -1
+=============================
+Druids:
+  Plus: 9
+  Minus: 7
+  Ally: 2.5
+  Enemy: 4.9
+  BestSynergy: Trees = 7
+  WorstSynergy: Fire = -3
+  MostSynergy: Trees = 11
+  LeastSynergy: Philosophers = 2.5
+  AttachTo: 7.5
+  Total Score: -0.4
+=============================
+Dragons:
+  Plus: 7.5
+  Minus: 6.3
+  Ally: 4
+  Enemy: 5.3
+  BestSynergy: Priests = 3
+  WorstSynergy: Water = -1
+  MostSynergy: Wizards = 5
+  LeastSynergy: Water = 1
+  AttachTo: 3.7
+  Total Score: 0
+=============================
+Animals:
+  Plus: 9.5
+  Minus: 9.5
+  Ally: 4
+  Enemy: 4
+  BestSynergy: Trees = 5.5
+  WorstSynergy: Fire = -2
+  MostSynergy: Trees = 9.5
+  LeastSynergy: Sky = 1
+  AttachTo: 5.7
+  Total Score: 0
 =============================
 Scientists:
   Plus: 12.2
@@ -74,81 +110,21 @@ Scientists:
   BestSynergy: Philosophers = 3.7
   WorstSynergy: Fire = -0.8
   MostSynergy: Philosophers = 13.7
-  LeastSynergy: Earth = 1.5
+  LeastSynergy: Dragons = 2
   AttachTo: 7
   Total Score: 0.2
 =============================
-Earth:
-  Plus: 8.1
-  Minus: 6.8
-  Ally: 4.9
-  Enemy: 6
-  BestSynergy: Water = 3.8
-  WorstSynergy: Dwarves = -2.5
-  MostSynergy: Water = 7.8
-  LeastSynergy: Wizards = 1.5
-  AttachTo: 10.5
-  Total Score: 0.3
-=============================
-Dragons:
-  Plus: 8.5
-  Minus: 6.3
-  Ally: 2.5
-  Enemy: 4.3
-  BestSynergy: Wizards = 4.3
-  WorstSynergy: Animals = -1
-  MostSynergy: Wizards = 5
+Dwarves:
+  Plus: 10
+  Minus: 7.6
+  Ally: 3
+  Enemy: 5
+  BestSynergy: Wizards = 3
+  WorstSynergy: Water = -1
+  MostSynergy: Earth = 7.5
   LeastSynergy: Water = 1
-  AttachTo: 4.2
-  Total Score: 0.5
-=============================
-Fire:
-  Plus: 10.8
-  Minus: 10.8
-  Ally: 5
-  Enemy: 4.4
-  BestSynergy: Earth = 0.5
-  WorstSynergy: Trees = -3.5
-  MostSynergy: Sky = 7.8
-  LeastSynergy: Wizards = 1.5
-  AttachTo: 8.6
-  Total Score: 0.6
-=============================
-Water:
-  Plus: 12
-  Minus: 10.5
-  Ally: 3.9
-  Enemy: 4.5
-  BestSynergy: Trees = 4.3
-  WorstSynergy: Wizards = -2
-  MostSynergy: Earth = 7.8
-  LeastSynergy: Dragons = 1
-  AttachTo: 8.6
-  Total Score: 0.9
-=============================
-Animals:
-  Plus: 8.5
-  Minus: 8.5
-  Ally: 4
-  Enemy: 3
-  BestSynergy: Druids = 6
-  WorstSynergy: Dragons = -1
-  MostSynergy: Scientists = 10
-  LeastSynergy: Dwarves = 1
-  AttachTo: 5.7
-  Total Score: 1
-=============================
-Wizards:
-  Plus: 8.8
-  Minus: 9.1
-  Ally: 5
-  Enemy: 3.6
-  BestSynergy: Dragons = 4.3
-  WorstSynergy: Water = -2
-  MostSynergy: Druids = 7.3
-  LeastSynergy: Fire = 1.5
-  AttachTo: 6.5
-  Total Score: 1
+  AttachTo: 7.2
+  Total Score: 0.4
 =============================
 Philosophers:
   Plus: 10.7
@@ -158,21 +134,45 @@ Philosophers:
   BestSynergy: Trees = 4.5
   WorstSynergy: Fire = -1.8
   MostSynergy: Scientists = 13.7
-  LeastSynergy: Water = 1.5
+  LeastSynergy: Earth = 1.5
   AttachTo: 4.2
   Total Score: 1.2
 =============================
-Sky:
-  Plus: 7.8
-  Minus: 7.3
+Earth:
+  Plus: 8.1
+  Minus: 6.8
+  Ally: 5.9
+  Enemy: 6
+  BestSynergy: Water = 3.8
+  WorstSynergy: Sky = -1
+  MostSynergy: Water = 7.8
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 10.5
+  Total Score: 1.3
+=============================
+Fire:
+  Plus: 10.8
+  Minus: 10.8
   Ally: 6
+  Enemy: 4.4
+  BestSynergy: Earth = 0.5
+  WorstSynergy: Druids = -3
+  MostSynergy: Sky = 7.8
+  LeastSynergy: Wizards = 1.5
+  AttachTo: 8.6
+  Total Score: 1.6
+=============================
+Sky:
+  Plus: 8.8
+  Minus: 7.3
+  Ally: 7
   Enemy: 4.9
-  BestSynergy: Animals = 1
+  BestSynergy: Scientists = 1.3
   WorstSynergy: Trees = -1.7
   MostSynergy: Fire = 7.8
-  LeastSynergy: Dwarves = 1
+  LeastSynergy: Animals = 1
   AttachTo: 9.7
-  Total Score: 1.7
+  Total Score: 3.7
 =============================
 */
 
@@ -443,20 +443,20 @@ export const events:GameEvent[] = [
         minus: [],
         attachTo: ["Wizards"],
         ally: ["Dwarves"],
-        enemy: [],
+        enemy: ["Dragons"],
         specialEntity: "Living Crystals",
         relationship: "Magic Plotting"
       }
     ]
   },
   {
-    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, tormenting the natural shepherds.",
+    name: "Wizards open a portal to another dimension, unleashing strange creatures into the world under their control, tormenting the natural shepherds. Though the plantlife seems seems to enjoy them.",
     effects: [
       {
         plus: ["Wizards"],
         minus: [],
         attachTo: ["Wizards"],
-        ally: [],
+        ally: ["Trees"],
         enemy: ["Druids"],
         specialEntity: "Living Crystals",
         relationship: "Unnatural Beings"
@@ -464,26 +464,26 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Druids and wizards collaborate to create a protective barrier around the forest.",
+    name: "Druids and wizards collaborate to create a protective barrier around the forest, though it drains some waterfalls the druids rely on.",
     effects: [
       {
-        plus: ["Trees", "Animals", "Druids"],
+        plus: ["Trees", "Animals"],
         minus: [],
         attachTo: ["Druids"],
         ally: ["Wizards"],
-        enemy: [],
+        enemy: ["Water"],
         relationship: "Defenders of Nature"
       }
     ]
   },
   {
-    name: "The water god creates a new river, altering the landscape and the creating new flows of trade.",
+    name: "The water god creates a new river, scarring the landscape, but creating new watering holes and flows of trade, influence. The dwarves promise to patch it up.",
     effects: [
       {
-        plus: ["Water", "Trees", "Animals", "Priests"],
+        plus: ["Water", "Animals", "Priests"],
         minus: ["Earth"],
         attachTo: ["Earth"],
-        ally: [],
+        ally: ["Dwarves"],
         enemy: ["Water"],
         specialEntity: "Dripping Temple",
         relationship: "Scarred Landscape"
@@ -491,97 +491,97 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards. The more they read, the richer the soil gets.",
+    name: "Druids discover ancient texts in the forest, revealing secret knowledge about the gods previously exclusive to wizards. The more they read, the richer the soil gets, but the fewer trees grow...",
     effects: [
       {
         plus: ["Druids"],
         minus: ["Wizards"],
         attachTo: ["Druids"],
         ally: ["Earth"],
-        enemy: [],
+        enemy: ["Trees"],
         specialEntity: "Devout Cultists",
         relationship: "Ancient Texts"
       }
     ]
   },
   {
-    name: "Dwarves uncover an ancient relic that can control dragons, attracting the attention of many",
+    name: "Dwarves uncover an ancient relic that can control dragons. The sky god courts them for favor, but the relic emits unholy energy that keeps animals awake at night.",
     effects: [
       {
         plus: ["Dwarves"],
         minus: ["Dragons"],
-        attachTo: ["Priests", "Wizards", "Druids"],
-        ally: [],
-        enemy: ["Dwarves"],
+        attachTo: ["Dwarves"],
+        ally: ["Sky"],
+        enemy: ["Animals"],
         specialEntity: "Armed Guards",
-        relationship: "Scroll Lust"
+        relationship: "Relic Lust"
       }
     ]
   },
   {
-    name: "Scientists chop down oaks to fuel their machines. Propoganda turns the city against nature, animals and all.",
+    name: "Scientists chop down oaks to fuel their machines. They even trick Druids into helping them, paying them handsomely.",
     effects: [
       {
         plus: ["Scientists"],
         minus: ["Trees"],
         attachTo: ["Scientists"],
-        ally: [],
-        enemy: ["Animals"],
+        ally: ["Druids"],
+        enemy: ["Trees"],
         relationship: "Dominate Nature"
       }
     ]
   },
   {
-    name: "Wizards discover an ancient ritual binding them with dragons, granting them shared knowledge and power",
+    name: "Some dragons give reperations to the forest and its creatures, attracting praise from priests and dismay from wizards.",
     effects: [
       {
-        plus: ["Wizards", "Dragons"],
+        plus: ["Trees", "Animals"],
         minus: [],
-        attachTo: ["Wizards", "Dragons"],
-        ally: ["Wizards", "Dragons"],
-        enemy: [],
+        attachTo: ["Priests"],
+        ally: ["Dragons"],
+        enemy: ["Wizards"],
         specialEntity: "Wings For All",
-        relationship: "Ancient Ritual"
+        relationship: "Reperations"
       }
     ]
   },
   {
-    name: "Dragons share ancient wisdom with philosophers, enlightening them with the secrets of fire's destructive and creative forces.",
+    name: "Dragons share ancient wisdom with philosophers, enlightening them with the secrets of fire's destructive and creative forces. The water god is none too pleased.",
     effects: [
       {
         plus: ["Philosophers", "Fire"],
         minus: [],
         attachTo: ["Philosophers"],
         ally: ["Dragons"],
-        enemy: [],
+        enemy: ["Water"],
         relationship: "Fiery Favors"
       }
     ]
   },
   {
-    name: "Aggressive flooding robs the dens of dragons, causing untold riches to wash into the sea.",
+    name: "Aggressive flooding robs the dens of dragons, causing untold riches to wash into the sea. Dragons aid the growing of trees to act as a barrier.",
     effects: [
       {
         plus: ["Water"],
         minus: ["Dragons"],
         attachTo: ["Dragons"],
-        ally: [],
+        ally: ["Trees"],
         enemy: ["Water"],
         relationship: "Stolen Treasure"
       }
     ]
   },
   {
-    name: "Wizards conduct a dangerous ritual to harness the power of the fire god, enhancing their spells with fiery potency.",
+    name: "Wizards conduct a dangerous ritual with the blood of innocent animals, enhancing their spells with fiery potential.",
     effects: [
       {
         plus: ["Wizards", "Fire"],
-        minus: [],
+        minus: ["Animals"],
         attachTo: ["Wizards"],
         ally: ["Fire"],
-        enemy: [],
+        enemy: ["Animals"],
         specialEntity: "Sun Spirits",
-        relationship: "Worshipers"
+        relationship: "Blood Worship"
       }
     ]
   },
