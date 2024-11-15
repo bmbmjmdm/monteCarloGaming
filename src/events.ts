@@ -380,7 +380,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge...and pet their companions.",
+    name: "Solar flares stoke many flames, disrupt electronics. The nerds plot their revenge... and pet their companions.",
     effects: [
       {
         plus: ["Fire"],
@@ -422,7 +422,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "The earth has nightmares, causing earthquakes throughout the forest. At least the trees can thank the sun for not igniting them.",
+    name: "The earth has nightmares, causing earthquakes throughout the forest and mountain. At least the trees can thank the sun for not igniting them.",
     effects: [
       {
         plus: [],
