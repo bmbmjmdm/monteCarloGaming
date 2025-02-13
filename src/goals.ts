@@ -26,7 +26,7 @@ export const goals: Goal[] = [
     specialEntity: "Invasive Plateaus"
   },
   {
-    name: "Buldoze and level the land",
+    name: "Buldoze and level the land, its protectors, and its architects",
     plus: [],
     minus: ["Trees", "Druids", "Scientists", "Earth"],
     specialEntity: "Invasive Plateaus"
@@ -74,7 +74,7 @@ export const goals: Goal[] = [
     specialEntity: "Ecstacy Crystals"
   },
   {
-    name: "Revive a forgotten God",
+    name: "Go beyond yourself, beyond your body, to command the greatest powers",
     plus: ["Druids", "Wizards", "Priests", "Scientists", "Dwarves"],
     minus: [],
     specialEntity: "Devout Cultists"
@@ -86,7 +86,7 @@ export const goals: Goal[] = [
     specialEntity: "Erosive Liquid"
   },
   {
-    name: "Live simply, live slow",
+    name: "Live simply, live slow, live peaceful",
     plus: ["Philosophers", "Earth", "Trees", "Dwarves"],
     minus: ["Scientists", "Fire", "Dragons"],
     specialEntity: "Dripping Temple"
@@ -110,7 +110,7 @@ export const goals: Goal[] = [
     specialEntity: "Ecstacy Crystals"
   },
   {
-    name: "Control everything",
+    name: "Become the great and powerful tamers!",
     plus: ["Priests", "Scientists", "Wizards"],
     minus: ["Animals", "Dragons", "Fire"],
     specialEntity: "Armed Guards"
@@ -122,7 +122,7 @@ export const goals: Goal[] = [
     specialEntity: "Deep Roots"
   },
   {
-    name: "Screw the old ways",
+    name: "Screw the old residents and tradition; innovate!",
     plus: ["Scientists"],
     minus: ["Dwarves", "Dragons", "Priests", "Animals"],
     specialEntity: "Rebels"
@@ -134,13 +134,13 @@ export const goals: Goal[] = [
     specialEntity: "Shadow Beings"
   },
   {
-    name: "Overpowering the weak",
+    name: "Overpowering the weak; I am you but chosen through divine genetics!",
     plus: ["Priests", "Dragons"],
     minus: ["Philosophers","Animals"],
     specialEntity: "Inconsiderate Monarchy"
   },
   {
-    name: "Be Free",
+    name: "Be free, be simple. Reject those who live in their own prisons.",
     plus: ["Philosophers", "Animals"],
     minus: ["Dwarves", "Priests"],
     specialEntity: "Living Wind"
@@ -152,31 +152,31 @@ export const goals: Goal[] = [
     specialEntity: "Friendship Ban"
   },
   {
-    name: "New Creatures",
+    name: "Everyone's competing to create new beasts",
     plus: ["Animals", "Wizards", "Scientists", "Druids"],
     minus: [],
     specialEntity: "Living Crystals"
   },
   {
-    name: "Dull Darkness",
+    name: "The dull will prevail: the dark night will come",
     plus: ["Dwarves",],
     minus: ["Sky", "Wizards", "Fire"],
     specialEntity: "Shadow Beings"
   },
   {
-    name: "Old tall ones grow as their friends and distant foes fall",
+    name: "Old tall ones grow as their close friends and faraway acquaintances fall.",
     plus: ["Trees"],
     minus: ["Wizards", "Dwarves", "Earth", "Druids"],
     specialEntity: "Deep Roots"
   },
   {
-    name: "The hard are chipped by a gnawing, swinging world and wild wind",
+    name: "The great armored ones are broken by gnaws, chips, and the chill",
     plus: ["Sky", "Animals", "Dwarves"],
     minus: ["Dragons", "Trees"],
     specialEntity: "Living Wind"
   },
   {
-    name: "Steamy beakers threaten the arcane",
+    name: "Steamy beakers threaten rituals",
     plus: ["Scientists", "Fire", "Water"],
     minus: ["Wizards", "Priests"],
     specialEntity: "Scientific Silence"
@@ -194,7 +194,7 @@ export const goals: Goal[] = [
     specialEntity: "Living Crystals"
   },
   {
-    name: "All those moral beings can shove it, I'm going to grow you unnatural",
+    name: "Those moral beings think they know better, but I know Everything, and I'm going to grow you myself",
     plus: ["Wizards", "Trees"],
     minus: ["Druids", "Priests", "Philosophers"],
     specialEntity: "Rebels"
@@ -212,7 +212,7 @@ export const goals: Goal[] = [
     specialEntity: "Humanity's Secret Weapon"
   },
   {
-    name: "DONT GIVE ME A SPEACH; DIE!",
+    name: "Don't give me a speech just because I look like you; I will harness the great wrath and kILL YOU!",
     plus: ["Wizards", "Fire"],
     minus: ["Priests", "Philosophers"],
     specialEntity: "Ruin and Destruction"
@@ -224,9 +224,9 @@ export const goals: Goal[] = [
     specialEntity: "Miniature Kingdom"
   },
   {
-    name: "Lovers day and night, forever. At the cost of wild and calm creators suffering",
+    name: "Every day, and every night, they stare at each other constantly. Their love grows, but all forges suffer.",
     plus: ["Sky", "Earth"],
-    minus: ["Wizards", "Dwarves", "Fire", "Scientists"],
+    minus: ["Dwarves", "Fire", "Scientists"],
     specialEntity: "Star Wedding"
   },
   {
@@ -236,7 +236,7 @@ export const goals: Goal[] = [
     specialEntity: "Wings For All"
   },
   {
-    name: "Just a boy in a sandbox vs ancient ungodly beings, and winning",
+    name: "Just an architect in a sandbox vs 3 alliterary threats, and winning",
     plus: ["Scientists", "Earth"],
     minus: ["Dragons", "Dwarves", "Druids"],
     specialEntity: "Miniature Kingdom"
@@ -266,19 +266,19 @@ export const goals: Goal[] = [
     specialEntity: "Sad Scholars"
   },
   {
-    name: "Mind and breath grow, spastic beings stumble, just live naturally",
+    name: "Minds, moss-footed, and great maws grow, while spastic beings stumble.",
     plus: ["Philosophers", "Dragons", "Druids"],
     minus: ["Animals", "Wizards"],
     specialEntity: "Drunk Animals"
   },
   {
-    name: "You were supposed to protect them you selfish magic hobo",
+    name: "What have you done? You were supposed to protect them you unstoppable hippy",
     plus: ["Druids"],
     minus: ["Earth", "Animals", "Trees"],
     specialEntity: "Drunk Animals"
   },
   {
-    name: "Sun temples, ruined theses, and heavenly crying",
+    name: "Temples of Destruction prosper in the wake of ruined theses and heavenly sorrow",
     plus: ["Fire", "Priests"],
     minus: ["Scientists", "Sky", "Philosophers"],
     specialEntity: "Sad Scholars"
