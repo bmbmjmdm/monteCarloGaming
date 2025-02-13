@@ -912,7 +912,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Wild animals form a pack and raid the city, driven by hunger and desperation.",
+    name: "Wild animals form a pack and raid the city.",
     effects: [
       {
         plus: ["Animals"],
