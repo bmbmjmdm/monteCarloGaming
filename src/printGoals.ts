@@ -57,7 +57,7 @@ const getSymbols = (goal) => {
   }
   let symbols = green.join('') + blue.join('') + brown.join('') + purple.join('') + error.join('')
   // this is the special cases for "make everyone happy" and "make everyone miserable"
-  if (symbols.length === 13) return "🔶"
+  if (symbols.length === 26) return "🔶"
   // add a space in between every 2 characters aka every 1 symbol (each symbol is composed of 2 characters)
   // if there are no symbols, return a diamond because its a special effect thats based on all entities
   return symbols.length ? symbols.match(/.{1,2}/g).join(' ') : "🔶"

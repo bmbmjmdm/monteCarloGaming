@@ -128,7 +128,7 @@ export const goals: Goal[] = [
     specialEntity: "Rebels"
   },
   {
-    name: "Clouds Cloud Minds",
+    name: "Bad Clouds Cloud Minds",
     plus: [],
     minus: ["Sky", "Philosophers", "Scientists", "Wizards"],
     specialEntity: "Shadow Beings"
