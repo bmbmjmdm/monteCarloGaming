@@ -464,7 +464,7 @@ export const events:GameEvent[] = [
     ]
   },
   {
-    name: "Druids and wizards collaborate to create a protective barrier around the forest, though it drains some waterfalls the druids rely on.",
+    name: "Druids and wizards collaborate to create a protective barrier around the forest, though it drains some waterfalls.",
     effects: [
       {
         plus: ["Trees", "Animals"],
